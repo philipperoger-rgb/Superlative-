@@ -199,63 +199,63 @@
        HEADER NAVIGATION (Mobile-First, Architectural)
   ========================================================== -->
   <header class="sticky top-0 z-30 backdrop-blur-xl chrome-bar border-b hairline">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 h-16 sm:h-20 flex items-center justify-between gap-3">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 h-16 sm:h-20 flex items-center justify-between gap-2 xl:gap-4">
       <!-- Logo dynamique -->
-      <a href="#top" class="flex items-center gap-3 group min-w-0" aria-label="Accueil La Superlative">
-        <div id="header-logo-container" class="flex items-center gap-2.5 min-w-0">
+      <a href="#top" class="flex items-center gap-2.5 group shrink-0" aria-label="Accueil La Superlative">
+        <div id="header-logo-container" class="flex items-center gap-2.5 shrink-0">
           <!-- Injecté dynamiquement par renderBrandingAndSEO() -->
         </div>
       </a>
 
       <!-- Navigation Desktop -->
-      <nav class="hidden lg:flex items-center gap-7 text-xs font-mono uppercase tracking-[0.16em] text-bone/75">
-        <a href="#manifeste" class="hover:text-accent-dyn transition">Manifeste</a>
-        <a href="#calendrier" class="hover:text-accent-dyn transition">Calendrier</a>
-        <a href="#collectif" class="hover:text-accent-dyn transition">Collectif</a>
-        <a href="#infos-pratiques" class="hover:text-accent-dyn transition">Infos Pratiques</a>
-        <a href="#contact" class="hover:text-accent-dyn transition">Contact</a>
+      <nav class="hidden lg:flex items-center gap-4 xl:gap-7 text-[11px] xl:text-xs font-mono uppercase tracking-[0.1em] xl:tracking-[0.16em] text-bone/75 shrink-0">
+        <a href="#manifeste" class="whitespace-nowrap hover:text-accent-dyn transition">Manifeste</a>
+        <a href="#calendrier" class="whitespace-nowrap hover:text-accent-dyn transition">Calendrier</a>
+        <a href="#collectif" class="whitespace-nowrap hover:text-accent-dyn transition">Collectif</a>
+        <a href="#infos-pratiques" class="whitespace-nowrap hover:text-accent-dyn transition">Infos Pratiques</a>
+        <a href="#contact" class="whitespace-nowrap hover:text-accent-dyn transition">Contact</a>
       </nav>
 
       <!-- Actions Header -->
-      <div class="flex items-center gap-1.5 sm:gap-2.5 shrink-0">
+      <div class="flex items-center gap-1.5 xl:gap-2 shrink-0">
         <!-- Bouton Installer l'app (masqué si déjà lancée en mode app) -->
         <button
           id="header-install-btn"
           onclick="triggerPwaInstall()"
-          class="pwa-install-trigger flex items-center gap-1.5 px-2.5 sm:px-3 py-2.5 rounded-full border hairline bg-surface/80 hover:border-bone/40 text-xs font-mono text-bone/80 transition"
+          class="pwa-install-trigger flex items-center gap-1.5 px-2.5 py-2.5 rounded-full border hairline bg-surface/80 hover:border-bone/40 text-xs font-mono text-bone/80 transition"
           aria-label="Installer l'application sur votre téléphone"
           title="Installer l'application"
         >
           <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" stroke-width="1.9" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3" />
           </svg>
-          <span class="hidden xl:inline uppercase tracking-wider text-[11px]">App</span>
+          <span class="hidden 2xl:inline uppercase tracking-wider text-[11px]">App</span>
         </button>
 
         <!-- Bouton Recherche globale -->
         <button
           onclick="openSearchModal()"
-          class="flex items-center gap-2 px-2.5 sm:px-3 py-2.5 rounded-full border hairline bg-surface/80 hover:border-bone/40 text-xs font-mono text-bone/80 transition"
+          class="flex items-center gap-2 px-2.5 xl:px-3 py-2.5 rounded-full border hairline bg-surface/80 hover:border-bone/40 text-xs font-mono text-bone/80 transition"
           aria-label="Rechercher sur le site"
           title="Rechercher (Ctrl+K)"
         >
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-4.35-4.35m0 0A7.5 7.5 0 1 0 6.05 6.05a7.5 7.5 0 0 0 10.6 10.6Z" />
           </svg>
-          <span class="hidden sm:inline">Rechercher</span>
-          <kbd class="hidden xl:inline-block px-1.5 py-0.5 text-[10px] rounded bg-bone/10 text-bone/60">⌘K</kbd>
+          <span class="hidden sm:inline lg:hidden xl:inline whitespace-nowrap">Rechercher</span>
+          <kbd class="hidden 2xl:inline-block px-1.5 py-0.5 text-[10px] rounded bg-bone/10 text-bone/60">⌘K</kbd>
         </button>
 
         <!-- Bascule Mode Jour / Mode Sombre -->
         <button
           id="theme-toggle-btn"
           onclick="toggleTheme()"
-          class="flex items-center gap-1.5 px-2.5 sm:px-3 py-2.5 rounded-full border hairline bg-surface/80 hover:border-bone/40 text-xs font-mono text-bone/75 transition"
+          class="flex items-center gap-1.5 px-2.5 py-2.5 rounded-full border hairline bg-surface/80 hover:border-bone/40 text-xs font-mono text-bone/75 transition"
           aria-label="Basculer entre le mode jour et le mode sombre"
           title="Mode Jour / Mode Sombre"
         >
           <span id="theme-toggle-icon" class="flex items-center"></span>
-          <span id="theme-toggle-label" class="hidden md:inline uppercase tracking-wider text-[11px]">Sombre</span>
+          <span id="theme-toggle-label" class="hidden md:inline lg:hidden 2xl:inline uppercase tracking-wider text-[11px] whitespace-nowrap">Sombre</span>
         </button>
 
         <!-- Bouton Billetterie principal -->
@@ -264,10 +264,10 @@
           href="https://shotgun.live/fr/venues/lasuperlative"
           target="_blank"
           rel="noopener noreferrer"
-          class="hidden sm:inline-flex items-center gap-2 px-4 py-2.5 rounded-full bg-accent-dyn font-mono text-xs font-bold uppercase tracking-wider hover:brightness-110 transition active:scale-95"
+          class="hidden sm:inline-flex items-center gap-1.5 px-3.5 xl:px-4 py-2.5 rounded-full bg-accent-dyn font-mono text-[11px] xl:text-xs font-bold uppercase tracking-wider whitespace-nowrap hover:brightness-110 transition active:scale-95"
         >
           <span id="header-ticket-label">Billetterie</span>
-          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24">
+          <svg class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" d="M7 17 17 7m0 0H8m9 0v9" />
           </svg>
         </a>
@@ -351,12 +351,12 @@
 
         <!-- Grille Hero Mobile-First -->
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-end">
-          <div class="lg:col-span-7 space-y-7">
+          <div class="lg:col-span-7 min-w-0 space-y-7">
             <!-- Titre éditorial sobre mêlant Syne + Instrument Serif italique -->
             <h1 class="leading-[0.9] tracking-tight">
-              <span id="hero-title-1" class="block font-display font-extrabold text-5xl sm:text-7xl xl:text-[5.5rem] uppercase text-bone">LA</span>
-              <span id="hero-title-italic" class="block font-serif italic font-normal text-6xl sm:text-8xl xl:text-[6.8rem] text-accent-dyn -mt-1 sm:-mt-3">Superlative</span>
-              <span id="hero-title-2" class="block font-display font-semibold text-2xl sm:text-4xl xl:text-5xl uppercase text-bone/65 mt-2">BORDEAUX SOUND LAB</span>
+              <span id="hero-title-1" class="block font-display font-extrabold text-5xl sm:text-7xl lg:text-6xl xl:text-[5.5rem] uppercase text-bone">LA</span>
+              <span id="hero-title-italic" class="block font-serif italic font-normal text-6xl sm:text-8xl lg:text-7xl xl:text-[6.8rem] text-accent-dyn -mt-1 sm:-mt-3">Superlative</span>
+              <span id="hero-title-2" class="block font-display font-semibold text-2xl sm:text-4xl lg:text-3xl xl:text-5xl uppercase text-bone/65 mt-2">BORDEAUX SOUND LAB</span>
             </h1>
 
             <p id="hero-subheadline" class="text-base sm:text-lg text-bone/70 max-w-xl leading-relaxed font-light">
@@ -404,7 +404,7 @@
           </div>
 
           <!-- Carte Visuelle Éditoriale Hero -->
-          <div class="lg:col-span-5">
+          <div class="lg:col-span-5 min-w-0">
             <div class="relative rounded-3xl border hairline bg-surface overflow-hidden">
               <div class="aspect-[4/4] sm:aspect-[16/11] lg:aspect-[4/5] relative overflow-hidden bg-surfaceLight">
                 <img
@@ -446,21 +446,21 @@
     <!-- =========================================================
          SECTION 01 : MANIFESTE / THÈME DE SAISON
     ========================================================== -->
-    <section id="manifeste" class="border-b hairline bg-bone text-obsidian">
+    <section id="manifeste" class="scroll-mt-20 border-b hairline bg-bone text-obsidian">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 py-16 sm:py-24">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
-          <div class="lg:col-span-5">
+          <div class="lg:col-span-5 min-w-0">
             <p id="theme-label" class="font-mono text-xs uppercase tracking-[0.2em] text-obsidian/55 mb-4">
               01 // LE THÈME DE LA SAISON EST :
             </p>
-            <h2 id="theme-title" class="font-serif italic text-5xl sm:text-7xl leading-[0.95] tracking-tight text-obsidian">
+            <h2 id="theme-title" class="font-serif italic text-[clamp(2.5rem,4.4vw,4.5rem)] leading-[0.98] tracking-tight text-obsidian break-words">
               (Éco)Connexion
             </h2>
             <p class="mt-6 font-mono text-[11px] uppercase tracking-[0.16em] text-obsidian/55">
               Éco-conscient · Scène locale · Safe Space
             </p>
           </div>
-          <div class="lg:col-span-7 space-y-6">
+          <div class="lg:col-span-7 min-w-0 space-y-6">
             <p id="theme-text" class="text-lg sm:text-2xl font-light leading-relaxed text-obsidian/90">
               À l'heure où la fête se réinvente, la question n'est plus seulement le son, mais ce qu'il relie. La Superlative explore les passerelles entre culture club exigeante, espaces patrimoniaux bordelais et engagement environnemental concret.
             </p>
@@ -486,7 +486,7 @@
     <!-- =========================================================
          SECTION 02 : CALENDRIER DES ÉVÉNEMENTS ("Calen / DAR")
     ========================================================== -->
-    <section id="calendrier" class="border-b hairline py-16 sm:py-24">
+    <section id="calendrier" class="scroll-mt-20 border-b hairline py-16 sm:py-24">
       <div class="max-w-7xl mx-auto px-4 sm:px-6">
         <!-- En-tête typographique -->
         <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10 pb-8 border-b hairline">
@@ -546,7 +546,7 @@
     <!-- =========================================================
          SECTION 03 : PRÉSENTATION DU COLLECTIF (Histoire, Membres, Partenaires)
     ========================================================== -->
-    <section id="collectif" class="border-b hairline py-16 sm:py-24">
+    <section id="collectif" class="scroll-mt-20 border-b hairline py-16 sm:py-24">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 space-y-20">
 
         <!-- 3A. HISTOIRE & CHRONOLOGIE -->
@@ -632,7 +632,7 @@
     <!-- =========================================================
          SECTION 04 : INFOS PRATIQUES
     ========================================================== -->
-    <section id="infos-pratiques" class="border-b hairline py-16 sm:py-24 bg-surface/50">
+    <section id="infos-pratiques" class="scroll-mt-20 border-b hairline py-16 sm:py-24 bg-surface/50">
       <div class="max-w-7xl mx-auto px-4 sm:px-6">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
           <div class="lg:col-span-4 space-y-4">
@@ -671,7 +671,7 @@
     <!-- =========================================================
          SECTION 05 : CONTACT & RÉSEAUX SOCIAUX
     ========================================================== -->
-    <section id="contact" class="py-16 sm:py-24">
+    <section id="contact" class="scroll-mt-20 py-16 sm:py-24">
       <div class="max-w-7xl mx-auto px-4 sm:px-6">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12">
 
@@ -1937,17 +1937,17 @@
       const logoContainer = document.getElementById('header-logo-container');
       if (branding.logoType === 'image' && branding.logoUrl) {
         logoContainer.innerHTML = `
-          <img src="${escapeHtml(branding.logoUrl)}" alt="${escapeHtml(branding.siteName)}" class="h-9 sm:h-11 w-auto max-w-[170px] object-contain rounded-lg" onerror="this.style.display='none'" />
-          <span class="font-display font-extrabold text-sm sm:text-base uppercase tracking-tight truncate hidden sm:inline">${escapeHtml(branding.siteName)}</span>
+          <img src="${escapeHtml(branding.logoUrl)}" alt="${escapeHtml(branding.siteName)}" class="h-9 sm:h-10 w-auto max-w-[140px] object-contain rounded-lg shrink-0" onerror="this.style.display='none'" />
+          <span class="font-display font-extrabold text-sm uppercase tracking-tight whitespace-nowrap hidden xl:inline">${escapeHtml(branding.siteName)}</span>
         `;
       } else {
         logoContainer.innerHTML = `
           <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-accent-dyn flex items-center justify-center font-display font-extrabold text-sm sm:text-base tracking-tighter shrink-0">
             ${escapeHtml((branding.shortMark || 'LS').slice(0, 3))}
           </div>
-          <div class="leading-tight truncate">
-            <div class="font-display font-extrabold text-sm sm:text-base uppercase tracking-tight truncate">${escapeHtml(branding.siteName)}</div>
-            <div class="font-mono text-[9px] sm:text-[10px] uppercase tracking-[0.18em] text-bone/50 truncate">${escapeHtml(branding.tagline)}</div>
+          <div class="leading-tight hidden sm:block lg:hidden xl:block shrink-0">
+            <div class="font-display font-extrabold text-sm sm:text-base uppercase tracking-tight whitespace-nowrap">${escapeHtml(branding.siteName)}</div>
+            <div class="font-mono text-[9px] sm:text-[10px] uppercase tracking-[0.16em] text-bone/50 whitespace-nowrap hidden 2xl:block">${escapeHtml(branding.tagline)}</div>
           </div>
         `;
       }
