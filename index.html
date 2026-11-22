@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="fr" data-theme="light" class="scroll-smooth">
 <head>
@@ -968,22 +967,22 @@
   ========================================================== -->
   <div id="admin-studio" class="hidden fixed inset-0 z-50 bg-obsidian flex flex-col overflow-hidden" role="dialog" aria-modal="true" aria-label="Studio Administrateur La Superlative">
     <!-- Topbar Admin -->
-    <div class="border-b hairline bg-surface px-4 sm:px-6 py-3.5 flex items-center justify-between gap-3 shrink-0">
+    <div class="border-b hairline bg-surface px-4 sm:px-6 pb-3.5 pt-[max(0.875rem,env(safe-area-inset-top))] flex flex-col sm:flex-row sm:items-center justify-between gap-3 shrink-0">
       <div class="min-w-0">
-        <div class="flex items-center gap-2.5 flex-wrap">
+        <div class="flex items-center gap-2 flex-wrap">
           <h2 class="font-display font-bold text-base sm:text-lg uppercase truncate">La Superlative — Studio CMS</h2>
-          <span id="cloud-sync-pill" class="px-2.5 py-0.5 rounded-full border hairline font-mono text-[10px] uppercase tracking-wider text-bone/70">Mode local</span>
+          <span id="cloud-sync-pill" class="px-2.5 py-0.5 rounded-full border hairline font-mono text-[10px] uppercase tracking-wider text-bone/70 shrink-0">Mode local</span>
         </div>
-        <p id="cloud-sync-subtitle" class="font-mono text-[10px] text-bone/50 uppercase tracking-wider mt-0.5">Modifications appliquées en direct</p>
+        <p id="cloud-sync-subtitle" class="font-mono text-[10px] text-bone/50 uppercase tracking-wider mt-1 truncate">Modifications appliquées en direct</p>
       </div>
-      <div class="flex items-center gap-2 shrink-0">
-        <button id="btn-force-sync" onclick="forceCloudPublish()" class="hidden px-3 py-2 rounded-xl bg-accent-dyn font-mono text-xs font-bold uppercase tracking-wider hover:opacity-90 transition">
+      <div class="flex items-center gap-2 flex-wrap sm:flex-nowrap shrink-0">
+        <button id="btn-force-sync" onclick="forceCloudPublish()" class="hidden px-3 py-2 rounded-xl bg-accent-dyn font-mono text-[11px] sm:text-xs font-bold uppercase tracking-wider hover:opacity-90 transition">
           Publier
         </button>
-        <button onclick="closeAdminStudio()" class="px-3.5 py-2 rounded-xl border hairline bg-obsidian hover:border-bone/40 font-mono text-xs uppercase tracking-wider transition">
+        <button onclick="closeAdminStudio()" class="px-3 py-2 rounded-xl border hairline bg-obsidian hover:border-bone/40 font-mono text-[11px] sm:text-xs uppercase tracking-wider transition">
           Voir le site
         </button>
-        <button onclick="logoutAdmin()" class="px-3 py-2 rounded-xl border hairline text-bone/70 hover:text-bone hover:border-bone/40 font-mono text-xs uppercase tracking-wider transition">
+        <button onclick="logoutAdmin()" class="px-3 py-2 rounded-xl border hairline text-bone/70 hover:text-bone hover:border-bone/40 font-mono text-[11px] sm:text-xs uppercase tracking-wider transition">
           Déconnexion
         </button>
       </div>
@@ -1348,6 +1347,10 @@
     let currentGenreFilter = 'Tous';
     let currentAdminTab = 'general';
     let editingEventId = null;
+    let editingMemberId = null;
+    let editingPartnerId = null;
+    let editingMilestoneId = null;
+    let editingPracticalId = null;
     let confirmCallback = null;
 
     /* États PWA (Installation mobile) */
@@ -2773,7 +2776,7 @@
       const evtToEdit = editingEventId ? siteState.events.find(e => e.id === editingEventId) : null;
 
       root.innerHTML = `
-        <form onsubmit="saveAdminEvent(event)" class="p-6 rounded-3xl border hairline bg-surface space-y-5">
+        <form id="admin-event-form" onsubmit="saveAdminEvent(event)" class="p-6 rounded-3xl border hairline bg-surface space-y-5">
           <div class="flex items-center justify-between gap-2">
             <h3 class="font-display font-bold text-xl uppercase text-accent-dyn">
               ${evtToEdit ? 'Modifier l\'événement' : '+ Créer un nouvel événement'}
@@ -2870,7 +2873,7 @@
                   </div>
                 </div>
                 <div class="flex items-center gap-2 shrink-0">
-                  <button onclick="editingEventId='${escapeHtml(evt.id)}'; renderAdminTab();" class="px-3.5 py-2 rounded-xl border hairline hover:border-accent-dyn font-mono text-xs uppercase">Éditer</button>
+                  <button onclick="startEditEvent('${escapeHtml(evt.id)}')" class="px-3.5 py-2 rounded-xl border hairline hover:border-accent-dyn font-mono text-xs uppercase">Éditer</button>
                   <button onclick="deleteAdminEvent('${escapeHtml(evt.id)}')" class="px-3.5 py-2 rounded-xl btn-danger font-mono text-xs uppercase">Suppr.</button>
                 </div>
               </div>
@@ -2878,6 +2881,13 @@
           </div>
         </div>
       `;
+    }
+
+    function startEditEvent(id) {
+      editingEventId = id;
+      renderAdminTab();
+      const form = document.getElementById('admin-event-form');
+      if (form) form.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 
     async function saveAdminEvent(e) {
@@ -2928,6 +2938,10 @@
 
     function renderAdminCollectiveTab(root) {
       const { history, members, partners } = siteState;
+      const msToEdit = editingMilestoneId ? history.milestones.find(ms => ms.id === editingMilestoneId) : null;
+      const memToEdit = editingMemberId ? members.find(m => m.id === editingMemberId) : null;
+      const parToEdit = editingPartnerId ? partners.find(p => p.id === editingPartnerId) : null;
+
       root.innerHTML = `
         <form onsubmit="saveAdminHistory(event)" class="p-6 rounded-3xl border hairline bg-surface space-y-4">
           <h3 class="font-display font-bold text-xl uppercase text-accent-dyn">Histoire du Collectif</h3>
@@ -2953,54 +2967,105 @@
         </form>
 
         <div class="p-6 rounded-3xl border hairline bg-surface space-y-5">
-          <h3 class="font-display font-bold text-xl uppercase text-accent-dyn">Membres du collectif (${members.length})</h3>
-          <form onsubmit="addAdminMember(event)" class="grid grid-cols-1 sm:grid-cols-2 gap-3 p-4 rounded-2xl bg-obsidian/70 border hairline">
-            <input id="mem-name" required placeholder="Nom / Pseudo DJ *" class="px-3.5 py-2.5 rounded-xl bg-surface border hairline text-sm" />
-            <input id="mem-role" required placeholder="Rôle (ex: DJ Résident, DA...) *" class="px-3.5 py-2.5 rounded-xl bg-surface border hairline text-sm" />
-            <input id="mem-spec" placeholder="Spécialités (ex: Minimal, Scéno)" class="px-3.5 py-2.5 rounded-xl bg-surface border hairline text-sm" />
-            <div class="flex gap-2">
-              <input id="mem-photo" placeholder="URL Photo ou Upload" class="flex-1 px-3.5 py-2.5 rounded-xl bg-surface border hairline text-sm" />
-              <label class="px-3 py-2.5 rounded-xl border hairline bg-surface font-mono text-xs cursor-pointer shrink-0">
-                Upload
-                <input type="file" accept="image/*" class="hidden" onchange="handleLocalImageUpload(this, 'mem-photo')" />
-              </label>
-            </div>
-            <input id="mem-handle" placeholder="@instagram" class="px-3.5 py-2.5 rounded-xl bg-surface border hairline text-sm" />
-            <input id="mem-bio" required placeholder="Courte bio *" class="px-3.5 py-2.5 rounded-xl bg-surface border hairline text-sm" />
-            <button type="submit" class="sm:col-span-2 py-2.5 rounded-xl bg-accent-dyn font-mono text-xs font-bold uppercase">+ Ajouter ce membre</button>
+          <div class="flex items-center justify-between gap-2">
+            <h3 class="font-display font-bold text-xl uppercase text-accent-dyn">Chronologie (${history.milestones.length})</h3>
+            ${msToEdit ? `<button type="button" onclick="editingMilestoneId=null; renderAdminTab();" class="px-3 py-1.5 rounded-xl border hairline text-xs font-mono">Annuler édition</button>` : ''}
+          </div>
+          <form id="admin-milestone-form" onsubmit="saveAdminMilestone(event)" class="grid grid-cols-1 sm:grid-cols-3 gap-3 p-4 rounded-2xl bg-obsidian/70 border hairline">
+            <input id="ms-year" required value="${escapeHtml(msToEdit ? msToEdit.year : '')}" placeholder="Année (ex: 2026) *" class="px-3.5 py-2.5 rounded-xl bg-surface border hairline text-sm" />
+            <input id="ms-title" required value="${escapeHtml(msToEdit ? msToEdit.title : '')}" placeholder="Titre de l'étape *" class="sm:col-span-2 px-3.5 py-2.5 rounded-xl bg-surface border hairline text-sm" />
+            <textarea id="ms-desc" required rows="2" placeholder="Description de l'étape *" class="sm:col-span-3 px-3.5 py-2.5 rounded-xl bg-surface border hairline text-sm">${escapeHtml(msToEdit ? msToEdit.description : '')}</textarea>
+            <button type="submit" class="sm:col-span-3 py-2.5 rounded-xl bg-accent-dyn font-mono text-xs font-bold uppercase">
+              ${msToEdit ? 'Mettre à jour cette étape' : '+ Ajouter une étape'}
+            </button>
           </form>
 
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            ${members.map(m => `
-              <div class="p-3.5 rounded-2xl border hairline bg-obsidian/60 flex items-center justify-between gap-3">
+          <div class="space-y-2.5">
+            ${history.milestones.map(ms => `
+              <div class="p-3.5 rounded-2xl border ${editingMilestoneId === ms.id ? 'border-accent-dyn' : 'hairline'} bg-obsidian/60 flex items-center justify-between gap-3">
                 <div class="min-w-0">
-                  <div class="font-display font-bold text-sm truncate">${escapeHtml(m.name)}</div>
-                  <div class="font-mono text-[10px] text-accent-dyn truncate">${escapeHtml(m.role)}</div>
+                  <div class="font-mono text-[10px] text-accent-dyn uppercase">${escapeHtml(ms.year)}</div>
+                  <div class="font-display font-bold text-sm truncate">${escapeHtml(ms.title)}</div>
                 </div>
-                <button onclick="deleteAdminMember('${escapeHtml(m.id)}')" class="px-3 py-1.5 rounded-xl btn-danger font-mono text-[10px] uppercase shrink-0">Suppr.</button>
+                <div class="flex items-center gap-1.5 shrink-0">
+                  <button onclick="startEditMilestone('${escapeHtml(ms.id)}')" class="px-3 py-1.5 rounded-xl border hairline hover:border-accent-dyn font-mono text-[10px] uppercase">Éditer</button>
+                  <button onclick="deleteAdminMilestone('${escapeHtml(ms.id)}')" class="px-3 py-1.5 rounded-xl btn-danger font-mono text-[10px] uppercase">Suppr.</button>
+                </div>
               </div>
             `).join('')}
           </div>
         </div>
 
         <div class="p-6 rounded-3xl border hairline bg-surface space-y-5">
-          <h3 class="font-display font-bold text-xl uppercase text-accent-dyn">Partenaires (${partners.length})</h3>
-          <form onsubmit="addAdminPartner(event)" class="grid grid-cols-1 sm:grid-cols-2 gap-3 p-4 rounded-2xl bg-obsidian/70 border hairline">
-            <input id="par-name" required placeholder="Nom du partenaire *" class="px-3.5 py-2.5 rounded-xl bg-surface border hairline text-sm" />
-            <input id="par-cat" required placeholder="Catégorie (Lieu, Média, Asso...) *" class="px-3.5 py-2.5 rounded-xl bg-surface border hairline text-sm" />
-            <input id="par-url" type="url" placeholder="https://site-partenaire.fr" class="px-3.5 py-2.5 rounded-xl bg-surface border hairline text-sm" />
-            <input id="par-desc" required placeholder="Description rapide *" class="px-3.5 py-2.5 rounded-xl bg-surface border hairline text-sm" />
-            <button type="submit" class="sm:col-span-2 py-2.5 rounded-xl bg-accent-dyn font-mono text-xs font-bold uppercase">+ Ajouter ce partenaire</button>
+          <div class="flex items-center justify-between gap-2">
+            <h3 class="font-display font-bold text-xl uppercase text-accent-dyn">
+              ${memToEdit ? `Modifier : ${escapeHtml(memToEdit.name)}` : `Membres du collectif (${members.length})`}
+            </h3>
+            ${memToEdit ? `<button type="button" onclick="editingMemberId=null; renderAdminTab();" class="px-3 py-1.5 rounded-xl border hairline text-xs font-mono">Annuler édition</button>` : ''}
+          </div>
+          <form id="admin-member-form" onsubmit="saveAdminMember(event)" class="grid grid-cols-1 sm:grid-cols-2 gap-3 p-4 rounded-2xl bg-obsidian/70 border hairline">
+            <input id="mem-name" required value="${escapeHtml(memToEdit ? memToEdit.name : '')}" placeholder="Nom / Pseudo DJ *" class="px-3.5 py-2.5 rounded-xl bg-surface border hairline text-sm" />
+            <input id="mem-role" required value="${escapeHtml(memToEdit ? memToEdit.role : '')}" placeholder="Rôle (ex: DJ Résident, DA...) *" class="px-3.5 py-2.5 rounded-xl bg-surface border hairline text-sm" />
+            <input id="mem-spec" value="${escapeHtml(memToEdit ? memToEdit.specialty : '')}" placeholder="Spécialités (ex: Minimal, Scéno)" class="px-3.5 py-2.5 rounded-xl bg-surface border hairline text-sm" />
+            <div class="flex gap-2">
+              <input id="mem-photo" value="${escapeHtml(memToEdit ? memToEdit.photoUrl : '')}" placeholder="URL Photo ou Upload" class="flex-1 px-3.5 py-2.5 rounded-xl bg-surface border hairline text-sm" />
+              <label class="px-3 py-2.5 rounded-xl border hairline bg-surface font-mono text-xs cursor-pointer shrink-0">
+                Upload
+                <input type="file" accept="image/*" class="hidden" onchange="handleLocalImageUpload(this, 'mem-photo')" />
+              </label>
+            </div>
+            <input id="mem-handle" value="${escapeHtml(memToEdit ? memToEdit.socialHandle : '')}" placeholder="@instagram" class="px-3.5 py-2.5 rounded-xl bg-surface border hairline text-sm" />
+            <input id="mem-social-url" type="url" value="${escapeHtml(memToEdit ? memToEdit.socialUrl : '')}" placeholder="https://instagram.com/..." class="px-3.5 py-2.5 rounded-xl bg-surface border hairline text-sm" />
+            <textarea id="mem-bio" required rows="2" placeholder="Courte bio *" class="sm:col-span-2 px-3.5 py-2.5 rounded-xl bg-surface border hairline text-sm">${escapeHtml(memToEdit ? memToEdit.bio : '')}</textarea>
+            <button type="submit" class="sm:col-span-2 py-2.5 rounded-xl bg-accent-dyn font-mono text-xs font-bold uppercase">
+              ${memToEdit ? 'Mettre à jour ce membre' : '+ Ajouter ce membre'}
+            </button>
+          </form>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            ${members.map(m => `
+              <div class="p-3.5 rounded-2xl border ${editingMemberId === m.id ? 'border-accent-dyn' : 'hairline'} bg-obsidian/60 flex items-center justify-between gap-3">
+                <div class="min-w-0">
+                  <div class="font-display font-bold text-sm truncate">${escapeHtml(m.name)}</div>
+                  <div class="font-mono text-[10px] text-accent-dyn truncate">${escapeHtml(m.role)}</div>
+                </div>
+                <div class="flex items-center gap-1.5 shrink-0">
+                  <button onclick="startEditMember('${escapeHtml(m.id)}')" class="px-3 py-1.5 rounded-xl border hairline hover:border-accent-dyn font-mono text-[10px] uppercase">Éditer</button>
+                  <button onclick="deleteAdminMember('${escapeHtml(m.id)}')" class="px-3 py-1.5 rounded-xl btn-danger font-mono text-[10px] uppercase">Suppr.</button>
+                </div>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+
+        <div class="p-6 rounded-3xl border hairline bg-surface space-y-5">
+          <div class="flex items-center justify-between gap-2">
+            <h3 class="font-display font-bold text-xl uppercase text-accent-dyn">
+              ${parToEdit ? `Modifier : ${escapeHtml(parToEdit.name)}` : `Partenaires (${partners.length})`}
+            </h3>
+            ${parToEdit ? `<button type="button" onclick="editingPartnerId=null; renderAdminTab();" class="px-3 py-1.5 rounded-xl border hairline text-xs font-mono">Annuler édition</button>` : ''}
+          </div>
+          <form id="admin-partner-form" onsubmit="saveAdminPartner(event)" class="grid grid-cols-1 sm:grid-cols-2 gap-3 p-4 rounded-2xl bg-obsidian/70 border hairline">
+            <input id="par-name" required value="${escapeHtml(parToEdit ? parToEdit.name : '')}" placeholder="Nom du partenaire *" class="px-3.5 py-2.5 rounded-xl bg-surface border hairline text-sm" />
+            <input id="par-cat" required value="${escapeHtml(parToEdit ? parToEdit.category : '')}" placeholder="Catégorie (Lieu, Média, Asso...) *" class="px-3.5 py-2.5 rounded-xl bg-surface border hairline text-sm" />
+            <input id="par-url" type="url" value="${escapeHtml(parToEdit ? parToEdit.url : '')}" placeholder="https://site-partenaire.fr" class="px-3.5 py-2.5 rounded-xl bg-surface border hairline text-sm" />
+            <input id="par-desc" required value="${escapeHtml(parToEdit ? parToEdit.description : '')}" placeholder="Description rapide *" class="px-3.5 py-2.5 rounded-xl bg-surface border hairline text-sm" />
+            <button type="submit" class="sm:col-span-2 py-2.5 rounded-xl bg-accent-dyn font-mono text-xs font-bold uppercase">
+              ${parToEdit ? 'Mettre à jour ce partenaire' : '+ Ajouter ce partenaire'}
+            </button>
           </form>
 
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
             ${partners.map(p => `
-              <div class="p-3.5 rounded-2xl border hairline bg-obsidian/60 flex items-center justify-between gap-3">
+              <div class="p-3.5 rounded-2xl border ${editingPartnerId === p.id ? 'border-accent-dyn' : 'hairline'} bg-obsidian/60 flex items-center justify-between gap-3">
                 <div class="min-w-0">
                   <div class="font-display font-bold text-sm truncate">${escapeHtml(p.name)}</div>
                   <div class="font-mono text-[10px] text-bone/55 truncate">${escapeHtml(p.category)}</div>
                 </div>
-                <button onclick="deleteAdminPartner('${escapeHtml(p.id)}')" class="px-3 py-1.5 rounded-xl btn-danger font-mono text-[10px] uppercase shrink-0">Suppr.</button>
+                <div class="flex items-center gap-1.5 shrink-0">
+                  <button onclick="startEditPartner('${escapeHtml(p.id)}')" class="px-3 py-1.5 rounded-xl border hairline hover:border-accent-dyn font-mono text-[10px] uppercase">Éditer</button>
+                  <button onclick="deleteAdminPartner('${escapeHtml(p.id)}')" class="px-3 py-1.5 rounded-xl btn-danger font-mono text-[10px] uppercase">Suppr.</button>
+                </div>
               </div>
             `).join('')}
           </div>
@@ -3018,52 +3083,123 @@
       await persistSiteStateToCloud('Histoire du collectif mise à jour');
     }
 
-    async function addAdminMember(e) {
+    function startEditMilestone(id) {
+      editingMilestoneId = id;
+      renderAdminTab();
+      const form = document.getElementById('admin-milestone-form');
+      if (form) form.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+
+    async function saveAdminMilestone(e) {
+      e.preventDefault();
+      const payload = {
+        id: editingMilestoneId || ('ms-' + Date.now()),
+        year: document.getElementById('ms-year').value.trim(),
+        title: document.getElementById('ms-title').value.trim(),
+        description: document.getElementById('ms-desc').value.trim()
+      };
+      const isUpdate = Boolean(editingMilestoneId);
+      if (isUpdate) {
+        const idx = siteState.history.milestones.findIndex(ms => ms.id === editingMilestoneId);
+        if (idx !== -1) siteState.history.milestones[idx] = payload;
+      } else {
+        siteState.history.milestones.push(payload);
+      }
+      editingMilestoneId = null;
+      renderAll();
+      renderAdminTab();
+      await persistSiteStateToCloud(isUpdate ? 'Étape de chronologie modifiée' : 'Étape ajoutée à la chronologie');
+    }
+
+    function deleteAdminMilestone(id) {
+      openConfirmModal('Supprimer cette étape ?', 'Cette date clé sera retirée de la chronologie.', async () => {
+        siteState.history.milestones = siteState.history.milestones.filter(ms => ms.id !== id);
+        if (editingMilestoneId === id) editingMilestoneId = null;
+        renderAll();
+        renderAdminTab();
+        await persistSiteStateToCloud('Étape supprimée');
+      });
+    }
+
+    function startEditMember(id) {
+      editingMemberId = id;
+      renderAdminTab();
+      const form = document.getElementById('admin-member-form');
+      if (form) form.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+
+    async function saveAdminMember(e) {
       e.preventDefault();
       const name = document.getElementById('mem-name').value.trim();
-      siteState.members.push({
-        id: 'mem-' + Date.now(),
+      const existing = editingMemberId ? siteState.members.find(m => m.id === editingMemberId) : null;
+      const payload = {
+        id: editingMemberId || ('mem-' + Date.now()),
         name,
         role: document.getElementById('mem-role').value.trim(),
         specialty: document.getElementById('mem-spec').value.trim() || 'Collectif Bordeaux',
         photoUrl: document.getElementById('mem-photo').value.trim() || `https://placehold.co/500x620/141414/E8E8E3?text=${encodeURIComponent(name)}`,
         socialHandle: document.getElementById('mem-handle').value.trim(),
-        socialUrl: siteState.socials.instagram,
+        socialUrl: document.getElementById('mem-social-url').value.trim() || (existing?.socialUrl || siteState.socials.instagram),
         bio: document.getElementById('mem-bio').value.trim(),
-        credit: '© La Superlative'
-      });
+        credit: existing?.credit || '© La Superlative'
+      };
+      const isUpdate = Boolean(editingMemberId);
+      if (isUpdate) {
+        const idx = siteState.members.findIndex(m => m.id === editingMemberId);
+        if (idx !== -1) siteState.members[idx] = payload;
+      } else {
+        siteState.members.push(payload);
+      }
+      editingMemberId = null;
       renderAll();
       renderAdminTab();
-      await persistSiteStateToCloud(`${name} ajouté aux membres`);
+      await persistSiteStateToCloud(isUpdate ? `Fiche de ${name} mise à jour` : `${name} ajouté aux membres`);
     }
 
     function deleteAdminMember(id) {
       openConfirmModal('Retirer ce membre ?', 'Cette fiche membre sera supprimée de la section Collectif.', async () => {
         siteState.members = siteState.members.filter(m => m.id !== id);
+        if (editingMemberId === id) editingMemberId = null;
         renderAll();
         renderAdminTab();
         await persistSiteStateToCloud('Membre retiré');
       });
     }
 
-    async function addAdminPartner(e) {
+    function startEditPartner(id) {
+      editingPartnerId = id;
+      renderAdminTab();
+      const form = document.getElementById('admin-partner-form');
+      if (form) form.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+
+    async function saveAdminPartner(e) {
       e.preventDefault();
       const name = document.getElementById('par-name').value.trim();
-      siteState.partners.push({
-        id: 'par-' + Date.now(),
+      const payload = {
+        id: editingPartnerId || ('par-' + Date.now()),
         name,
         category: document.getElementById('par-cat').value.trim(),
         url: document.getElementById('par-url').value.trim() || '#',
         description: document.getElementById('par-desc').value.trim()
-      });
+      };
+      const isUpdate = Boolean(editingPartnerId);
+      if (isUpdate) {
+        const idx = siteState.partners.findIndex(p => p.id === editingPartnerId);
+        if (idx !== -1) siteState.partners[idx] = payload;
+      } else {
+        siteState.partners.push(payload);
+      }
+      editingPartnerId = null;
       renderAll();
       renderAdminTab();
-      await persistSiteStateToCloud(`Partenaire ${name} ajouté`);
+      await persistSiteStateToCloud(isUpdate ? `Partenaire ${name} mis à jour` : `Partenaire ${name} ajouté`);
     }
 
     function deleteAdminPartner(id) {
       openConfirmModal('Supprimer ce partenaire ?', 'Le partenaire ne sera plus affiché sur le site.', async () => {
         siteState.partners = siteState.partners.filter(p => p.id !== id);
+        if (editingPartnerId === id) editingPartnerId = null;
         renderAll();
         renderAdminTab();
         await persistSiteStateToCloud('Partenaire supprimé');
@@ -3072,6 +3208,8 @@
 
     function renderAdminPracticalTab(root) {
       const { socials, practicalInfo } = siteState;
+      const infoToEdit = editingPracticalId ? practicalInfo.find(i => i.id === editingPracticalId) : null;
+
       root.innerHTML = `
         <form onsubmit="saveAdminSocials(event)" class="p-6 rounded-3xl border hairline bg-surface space-y-4">
           <h3 class="font-display font-bold text-xl uppercase text-accent-dyn">Réseaux Sociaux & Email Officiel</h3>
@@ -3105,23 +3243,33 @@
         </form>
 
         <div class="p-6 rounded-3xl border hairline bg-surface space-y-5">
-          <h3 class="font-display font-bold text-xl uppercase text-accent-dyn">Blocs Infos Pratiques (${practicalInfo.length})</h3>
-          <form onsubmit="addAdminPractical(event)" class="grid grid-cols-1 sm:grid-cols-2 gap-3 p-4 rounded-2xl bg-obsidian/70 border hairline">
-            <input id="inf-cat" required placeholder="Catégorie (ex: Accès, Cashless...)" class="px-3.5 py-2.5 rounded-xl bg-surface border hairline text-sm" />
-            <input id="inf-title" required placeholder="Question / Titre *" class="px-3.5 py-2.5 rounded-xl bg-surface border hairline text-sm" />
-            <textarea id="inf-content" required rows="2" placeholder="Réponse détaillée *" class="sm:col-span-2 px-3.5 py-2.5 rounded-xl bg-surface border hairline text-sm"></textarea>
-            <button type="submit" class="sm:col-span-2 py-2.5 rounded-xl bg-accent-dyn font-mono text-xs font-bold uppercase">+ Ajouter cette info pratique</button>
+          <div class="flex items-center justify-between gap-2">
+            <h3 class="font-display font-bold text-xl uppercase text-accent-dyn">
+              ${infoToEdit ? 'Modifier l\'info pratique' : `Blocs Infos Pratiques (${practicalInfo.length})`}
+            </h3>
+            ${infoToEdit ? `<button type="button" onclick="editingPracticalId=null; renderAdminTab();" class="px-3 py-1.5 rounded-xl border hairline text-xs font-mono">Annuler édition</button>` : ''}
+          </div>
+          <form id="admin-practical-form" onsubmit="saveAdminPractical(event)" class="grid grid-cols-1 sm:grid-cols-2 gap-3 p-4 rounded-2xl bg-obsidian/70 border hairline">
+            <input id="inf-cat" required value="${escapeHtml(infoToEdit ? infoToEdit.category : '')}" placeholder="Catégorie (ex: Accès, Cashless...)" class="px-3.5 py-2.5 rounded-xl bg-surface border hairline text-sm" />
+            <input id="inf-title" required value="${escapeHtml(infoToEdit ? infoToEdit.title : '')}" placeholder="Question / Titre *" class="px-3.5 py-2.5 rounded-xl bg-surface border hairline text-sm" />
+            <textarea id="inf-content" required rows="3" placeholder="Réponse détaillée *" class="sm:col-span-2 px-3.5 py-2.5 rounded-xl bg-surface border hairline text-sm">${escapeHtml(infoToEdit ? infoToEdit.content : '')}</textarea>
+            <button type="submit" class="sm:col-span-2 py-2.5 rounded-xl bg-accent-dyn font-mono text-xs font-bold uppercase">
+              ${infoToEdit ? 'Mettre à jour cette info pratique' : '+ Ajouter cette info pratique'}
+            </button>
           </form>
 
           <div class="space-y-2.5">
             ${practicalInfo.map(item => `
-              <div class="p-4 rounded-2xl border hairline bg-obsidian/60 flex items-start justify-between gap-3">
+              <div class="p-4 rounded-2xl border ${editingPracticalId === item.id ? 'border-accent-dyn' : 'hairline'} bg-obsidian/60 flex flex-col sm:flex-row sm:items-start justify-between gap-3">
                 <div class="min-w-0">
                   <span class="font-mono text-[10px] uppercase text-accent-dyn">${escapeHtml(item.category)}</span>
                   <div class="font-display font-bold text-sm">${escapeHtml(item.title)}</div>
                   <p class="text-xs text-bone/60 mt-1">${escapeHtml(item.content)}</p>
                 </div>
-                <button onclick="deleteAdminPractical('${escapeHtml(item.id)}')" class="px-3 py-1.5 rounded-xl btn-danger font-mono text-[10px] uppercase shrink-0">Suppr.</button>
+                <div class="flex items-center gap-1.5 shrink-0">
+                  <button onclick="startEditPractical('${escapeHtml(item.id)}')" class="px-3 py-1.5 rounded-xl border hairline hover:border-accent-dyn font-mono text-[10px] uppercase">Éditer</button>
+                  <button onclick="deleteAdminPractical('${escapeHtml(item.id)}')" class="px-3 py-1.5 rounded-xl btn-danger font-mono text-[10px] uppercase">Suppr.</button>
+                </div>
               </div>
             `).join('')}
           </div>
@@ -3141,22 +3289,38 @@
       await persistSiteStateToCloud('Réseaux sociaux et adresse mail mis à jour');
     }
 
-    async function addAdminPractical(e) {
+    function startEditPractical(id) {
+      editingPracticalId = id;
+      renderAdminTab();
+      const form = document.getElementById('admin-practical-form');
+      if (form) form.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+
+    async function saveAdminPractical(e) {
       e.preventDefault();
-      siteState.practicalInfo.push({
-        id: 'inf-' + Date.now(),
+      const payload = {
+        id: editingPracticalId || ('inf-' + Date.now()),
         category: document.getElementById('inf-cat').value.trim(),
         title: document.getElementById('inf-title').value.trim(),
         content: document.getElementById('inf-content').value.trim()
-      });
+      };
+      const isUpdate = Boolean(editingPracticalId);
+      if (isUpdate) {
+        const idx = siteState.practicalInfo.findIndex(i => i.id === editingPracticalId);
+        if (idx !== -1) siteState.practicalInfo[idx] = payload;
+      } else {
+        siteState.practicalInfo.push(payload);
+      }
+      editingPracticalId = null;
       renderAll();
       renderAdminTab();
-      await persistSiteStateToCloud('Info pratique ajoutée');
+      await persistSiteStateToCloud(isUpdate ? 'Info pratique mise à jour' : 'Info pratique ajoutée');
     }
 
     function deleteAdminPractical(id) {
       openConfirmModal('Supprimer cette info pratique ?', 'Ce bloc ne sera plus visible dans la section Infos Pratiques.', async () => {
         siteState.practicalInfo = siteState.practicalInfo.filter(i => i.id !== id);
+        if (editingPracticalId === id) editingPracticalId = null;
         renderAll();
         renderAdminTab();
         await persistSiteStateToCloud('Info pratique supprimée');
@@ -3448,4 +3612,3 @@
   </script>
 </body>
 </html>
-```
