@@ -1,0 +1,2845 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="light" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title id="meta-title">La Superlative — Collectif de Musique Électronique · Bordeaux</title>
+  <meta id="meta-description" name="description" content="La Superlative : collectif de musique électronique et laboratoire créatif éco-conscient à Bordeaux. Événements, billetterie Shotgun, lineups et culture club." />
+  <meta id="meta-keywords" name="keywords" content="La Superlative, Bordeaux, musique électronique, collectif, techno, house, italo disco, open air, Shotgun" />
+  <meta id="og-title" property="og:title" content="La Superlative — Collectif Électronique Bordeaux" />
+  <meta id="og-description" property="og:description" content="À la croisée du collectif électronique et du laboratoire créatif à Bordeaux." />
+  <meta id="og-image" property="og:image" content="https://placehold.co/1200x630/0A0A0A/F5F5F2?text=LA+SUPERLATIVE+BORDEAUX" />
+  <link id="dynamic-favicon" rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230A0A0A'/%3E%3Ctext x='50%25' y='56%25' dominant-baseline='middle' text-anchor='middle' font-family='sans-serif' font-weight='700' font-size='28' fill='%23F5F5F2'%3ELS%3C/text%3E%3C/svg%3E" />
+
+  <!-- Polices éditoriales inspirées par l'esthétique Artefact AI Film Festival -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Syne:wght@500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            display: ['Syne', 'sans-serif'],
+            serif: ['Instrument Serif', 'serif'],
+            sans: ['Inter', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          },
+          colors: {
+            obsidian: 'rgb(var(--color-bg) / <alpha-value>)',
+            surface: 'rgb(var(--color-surface) / <alpha-value>)',
+            surfaceLight: 'rgb(var(--color-surface-light) / <alpha-value>)',
+            bone: 'rgb(var(--color-ink) / <alpha-value>)',
+            accent: 'var(--accent-color)',
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    :root {
+      --color-bg: 10 10 10;
+      --color-surface: 18 18 18;
+      --color-surface-light: 26 26 26;
+      --color-ink: 245 245 242;
+      --accent-color: #F5F5F2;
+      --accent-text: #0A0A0A;
+      --border-hairline: rgba(245, 245, 242, 0.12);
+      --border-hairline-hover: rgba(245, 245, 242, 0.32);
+      --scrollbar-track: #0A0A0A;
+      --scrollbar-thumb: #2A2A2A;
+      --danger-text: #FCA5A5;
+      --danger-border: rgba(239, 68, 68, 0.35);
+      --danger-bg-hover: rgba(239, 68, 68, 0.12);
+    }
+
+    html[data-theme="light"] {
+      --color-bg: 247 247 244;
+      --color-surface: 255 255 255;
+      --color-surface-light: 238 238 233;
+      --color-ink: 17 17 17;
+      --border-hairline: rgba(17, 17, 17, 0.11);
+      --border-hairline-hover: rgba(17, 17, 17, 0.3);
+      --scrollbar-track: #F7F7F4;
+      --scrollbar-thumb: #D1D1CB;
+      --danger-text: #B91C1C;
+      --danger-border: rgba(185, 28, 28, 0.3);
+      --danger-bg-hover: rgba(185, 28, 28, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      background-color: rgb(var(--color-bg));
+      color: rgb(var(--color-ink));
+      font-family: 'Inter', sans-serif;
+      overflow-x: clip;
+      -webkit-tap-highlight-color: transparent;
+      transition: background-color 0.25s ease, color 0.25s ease;
+    }
+
+    /* Barres de navigation à fort contraste sur sections claires et sombres */
+    .chrome-bar {
+      background-color: rgb(var(--color-surface) / 0.96);
+      box-shadow: 0 1px 12px rgba(0, 0, 0, 0.08);
+    }
+    .mobile-bottom-nav {
+      background-color: rgb(var(--color-surface) / 0.97);
+      box-shadow: 0 -6px 24px rgba(0, 0, 0, 0.14);
+    }
+
+    /* Filets architecturaux */
+    .hairline {
+      border-color: var(--border-hairline);
+    }
+
+    /* Couleur d'accentuation dynamique */
+    .bg-accent-dyn {
+      background-color: var(--accent-color);
+      color: var(--accent-text);
+    }
+    .text-accent-dyn {
+      color: var(--accent-color);
+    }
+    .border-accent-dyn {
+      border-color: var(--accent-color);
+    }
+
+    /* États d'erreur / suppression lisibles en mode jour et sombre */
+    .text-danger {
+      color: var(--danger-text);
+    }
+    .btn-danger {
+      border: 1px solid var(--danger-border);
+      color: var(--danger-text);
+      transition: background-color 0.2s ease;
+    }
+    .btn-danger:hover {
+      background-color: var(--danger-bg-hover);
+    }
+
+    /* Transitions discrètes au survol */
+    .editorial-card {
+      transition: border-color 0.25s ease, background-color 0.25s ease;
+    }
+    .editorial-card:hover {
+      border-color: var(--border-hairline-hover);
+    }
+
+    /* Scrollbar épurée */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: var(--scrollbar-track);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: var(--scrollbar-thumb);
+      border-radius: 999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--border-hairline-hover);
+    }
+
+    /* Effet de secousse erreur mot de passe */
+    @keyframes shakeX {
+      0%, 100% { transform: translateX(0); }
+      20%, 60% { transform: translateX(-6px); }
+      40%, 80% { transform: translateX(6px); }
+    }
+    .shake {
+      animation: shakeX 0.35s ease;
+    }
+
+    /* Cache la barre de défilement sur les onglets mobiles */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+</head>
+<body class="antialiased selection:bg-[var(--accent-color)] selection:text-[var(--accent-text)] pb-20 md:pb-0">
+  <!-- Bandeau indicateur si une session Admin est ouverte -->
+  <div id="admin-session-banner" class="hidden sticky top-0 z-50 bg-accent-dyn px-4 py-2 text-xs font-mono font-medium tracking-wider uppercase flex items-center justify-between gap-2 border-b border-obsidian/15">
+    <div class="truncate">
+      <span>Session Admin active — Modifications en direct</span>
+    </div>
+    <div class="flex items-center gap-2 shrink-0">
+      <button onclick="openAdminStudio()" class="px-3 py-1 rounded-full bg-obsidian text-bone hover:opacity-90 transition">Ouvrir le Studio</button>
+      <button onclick="logoutAdmin()" class="px-2.5 py-1 rounded-full border border-obsidian/30 hover:bg-obsidian/10 transition">Quitter</button>
+    </div>
+  </div>
+
+  <!-- =========================================================
+       HEADER NAVIGATION (Mobile-First, Glass + Architectural)
+  ========================================================== -->
+  <header class="sticky top-0 z-30 backdrop-blur-xl chrome-bar border-b hairline">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 h-16 sm:h-20 flex items-center justify-between gap-3">
+      <!-- Logo dynamique -->
+      <a href="#top" class="flex items-center gap-3 group min-w-0" aria-label="Accueil La Superlative">
+        <div id="header-logo-container" class="flex items-center gap-2.5 min-w-0">
+          <!-- Injecté dynamiquement par renderBranding() -->
+        </div>
+      </a>
+
+      <!-- Navigation Desktop -->
+      <nav class="hidden lg:flex items-center gap-7 text-xs font-mono uppercase tracking-[0.16em] text-bone/75">
+        <a href="#manifeste" class="hover:text-accent-dyn transition">Manifeste</a>
+        <a href="#calendrier" class="hover:text-accent-dyn transition">Calendrier</a>
+        <a href="#collectif" class="hover:text-accent-dyn transition">Collectif</a>
+        <a href="#infos-pratiques" class="hover:text-accent-dyn transition">Infos Pratiques</a>
+        <a href="#contact" class="hover:text-accent-dyn transition">Contact</a>
+      </nav>
+
+      <!-- Actions Header -->
+      <div class="flex items-center gap-2 sm:gap-3 shrink-0">
+        <!-- Bouton Recherche globale -->
+        <button
+          onclick="openSearchModal()"
+          class="flex items-center gap-2 px-3 py-2.5 rounded-full border hairline bg-surface/80 hover:border-bone/40 text-xs font-mono text-bone/80 transition"
+          aria-label="Rechercher sur le site"
+          title="Rechercher (Ctrl+K)"
+        >
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-4.35-4.35m0 0A7.5 7.5 0 1 0 6.05 6.05a7.5 7.5 0 0 0 10.6 10.6Z" />
+          </svg>
+          <span class="hidden sm:inline">Rechercher</span>
+          <kbd class="hidden xl:inline-block px-1.5 py-0.5 text-[10px] rounded bg-bone/10 text-bone/60">⌘K</kbd>
+        </button>
+
+        <!-- Bascule Mode Jour / Mode Sombre -->
+        <button
+          id="theme-toggle-btn"
+          onclick="toggleTheme()"
+          class="flex items-center gap-1.5 px-3 py-2.5 rounded-full border hairline bg-surface/80 hover:border-bone/40 text-xs font-mono text-bone/75 transition"
+          aria-label="Basculer entre le mode jour et le mode sombre"
+          title="Mode Jour / Mode Sombre"
+        >
+          <span id="theme-toggle-icon" class="flex items-center"></span>
+          <span id="theme-toggle-label" class="hidden md:inline uppercase tracking-wider text-[11px]">Sombre</span>
+        </button>
+
+        <!-- Bouton Billetterie principal -->
+        <a
+          id="header-ticket-btn"
+          href="https://shotgun.live/fr/venues/lasuperlative"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="hidden sm:inline-flex items-center gap-2 px-4 py-2.5 rounded-full bg-accent-dyn font-mono text-xs font-bold uppercase tracking-wider hover:brightness-110 transition active:scale-95"
+        >
+          <span id="header-ticket-label">Billetterie</span>
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M7 17 17 7m0 0H8m9 0v9" />
+          </svg>
+        </a>
+
+        <!-- Accès Admin discret -->
+        <button
+          onclick="handleAdminAccess()"
+          class="p-2.5 rounded-full border hairline bg-surface/70 hover:border-accent-dyn hover:text-accent-dyn text-bone/70 transition"
+          aria-label="Espace administrateur"
+          title="Espace Admin"
+        >
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.9" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z" />
+          </svg>
+        </button>
+
+        <!-- Menu Burger Mobile -->
+        <button
+          onclick="toggleMobileMenu()"
+          class="lg:hidden p-2.5 rounded-full border hairline bg-surface hover:border-bone/40 text-bone transition"
+          aria-label="Ouvrir le menu"
+        >
+          <svg id="burger-icon" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Menu Mobile Déroulant -->
+    <div id="mobile-menu" class="hidden lg:hidden border-t hairline bg-surface shadow-2xl px-4 py-6 space-y-4">
+      <div class="grid grid-cols-1 gap-2 font-display text-2xl font-bold uppercase">
+        <a href="#manifeste" onclick="toggleMobileMenu(false)" class="py-2 border-b hairline flex justify-between items-center hover:text-accent-dyn">
+          <span>Manifeste</span><span class="font-mono text-xs text-bone/40">01</span>
+        </a>
+        <a href="#calendrier" onclick="toggleMobileMenu(false)" class="py-2 border-b hairline flex justify-between items-center hover:text-accent-dyn">
+          <span>Calendrier</span><span class="font-mono text-xs text-bone/40">02</span>
+        </a>
+        <a href="#collectif" onclick="toggleMobileMenu(false)" class="py-2 border-b hairline flex justify-between items-center hover:text-accent-dyn">
+          <span>Collectif & Membres</span><span class="font-mono text-xs text-bone/40">03</span>
+        </a>
+        <a href="#infos-pratiques" onclick="toggleMobileMenu(false)" class="py-2 border-b hairline flex justify-between items-center hover:text-accent-dyn">
+          <span>Infos Pratiques</span><span class="font-mono text-xs text-bone/40">04</span>
+        </a>
+        <a href="#contact" onclick="toggleMobileMenu(false)" class="py-2 border-b hairline flex justify-between items-center hover:text-accent-dyn">
+          <span>Contact & Réseaux</span><span class="font-mono text-xs text-bone/40">05</span>
+        </a>
+      </div>
+      <div class="pt-2 flex flex-col gap-2.5">
+        <button onclick="toggleTheme()" class="w-full py-3 rounded-2xl border hairline text-xs font-mono uppercase tracking-wider text-bone/80 flex items-center justify-center gap-2">
+          <span id="mobile-theme-label">Passer en mode sombre</span>
+        </button>
+        <a id="mobile-menu-ticket-btn" href="https://shotgun.live/fr/venues/lasuperlative" target="_blank" rel="noopener noreferrer" class="w-full py-3.5 rounded-2xl bg-accent-dyn font-mono text-xs font-bold uppercase tracking-wider text-center">
+          Prendre ses billets sur Shotgun ↗
+        </a>
+        <button onclick="toggleMobileMenu(false); handleAdminAccess();" class="w-full py-3 rounded-2xl border hairline text-xs font-mono uppercase tracking-wider text-bone/75">
+          Espace Admin Sécurisé
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- =========================================================
+       MAIN CONTENT (Public Site)
+  ========================================================== -->
+  <main id="top">
+    <!-- HERO SECTION (Sobriété éditoriale, sans ornements superflus) -->
+    <section class="relative border-b hairline">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 pt-10 pb-16 sm:pt-16 sm:pb-24">
+        <!-- Barre méta minimaliste -->
+        <div class="flex flex-wrap items-center justify-between gap-3 pb-5 mb-10 border-b hairline text-[11px] font-mono uppercase tracking-[0.18em] text-bone/50">
+          <span id="hero-edition-badge">SAISON 2026 / 2027 — BORDEAUX</span>
+          <span class="hidden sm:inline">COLLECTIF DE MUSIQUE ÉLECTRONIQUE</span>
+        </div>
+
+        <!-- Grille Hero Mobile-First -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-end">
+          <div class="lg:col-span-7 space-y-7">
+            <!-- Titre éditorial sobre mêlant Syne + Instrument Serif italique -->
+            <h1 class="leading-[0.9] tracking-tight">
+              <span id="hero-title-1" class="block font-display font-extrabold text-5xl sm:text-7xl xl:text-[5.5rem] uppercase text-bone">LA</span>
+              <span id="hero-title-italic" class="block font-serif italic font-normal text-6xl sm:text-8xl xl:text-[6.8rem] text-accent-dyn -mt-1 sm:-mt-3">Superlative</span>
+              <span id="hero-title-2" class="block font-display font-semibold text-2xl sm:text-4xl xl:text-5xl uppercase text-bone/65 mt-2">BORDEAUX SOUND LAB</span>
+            </h1>
+
+            <p id="hero-subheadline" class="text-base sm:text-lg text-bone/70 max-w-xl leading-relaxed font-light">
+              Collectif de musique électronique et laboratoire créatif éco-conscient. House minimale, Italo disco, breakbeat et techno dans des lieux singuliers de la métropole bordelaise.
+            </p>
+
+            <!-- Barre de recherche rapide intégrée dans le Hero -->
+            <div class="max-w-xl">
+              <button
+                onclick="openSearchModal()"
+                class="w-full flex items-center justify-between gap-3 px-4 py-3.5 rounded-2xl border hairline bg-surface hover:border-bone/35 text-left transition group"
+              >
+                <span class="flex items-center gap-3 text-sm text-bone/50 group-hover:text-bone/80 truncate">
+                  <svg class="w-4 h-4 text-bone/60 shrink-0" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-4.35-4.35m0 0A7.5 7.5 0 1 0 6.05 6.05a7.5 7.5 0 0 0 10.6 10.6Z" />
+                  </svg>
+                  <span class="truncate">Rechercher un événement, un artiste, un lieu, une info...</span>
+                </span>
+                <span class="font-mono text-[10px] uppercase tracking-wider text-bone/45 shrink-0">Explorer</span>
+              </button>
+            </div>
+
+            <!-- CTAs Principaux -->
+            <div class="flex flex-col sm:flex-row gap-3 pt-1">
+              <a
+                id="hero-primary-cta"
+                href="https://shotgun.live/fr/venues/lasuperlative"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center justify-center gap-3 px-7 py-4 rounded-2xl bg-accent-dyn font-mono text-xs sm:text-sm font-semibold uppercase tracking-wider hover:opacity-90 transition"
+              >
+                <span id="hero-primary-cta-text">Acheter des billets · Shotgun</span>
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M7 17 17 7m0 0H8m9 0v9" />
+                </svg>
+              </a>
+              <a
+                href="#calendrier"
+                class="inline-flex items-center justify-center gap-2 px-6 py-4 rounded-2xl border hairline bg-transparent hover:border-bone/45 font-mono text-xs sm:text-sm uppercase tracking-wider text-bone/85 transition"
+              >
+                <span>Prochaines dates</span>
+                <span aria-hidden="true">↓</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Carte Visuelle Éditoriale Hero -->
+          <div class="lg:col-span-5">
+            <div class="relative rounded-3xl border hairline bg-surface overflow-hidden">
+              <div class="aspect-[4/4] sm:aspect-[16/11] lg:aspect-[4/5] relative overflow-hidden bg-surfaceLight">
+                <img
+                  id="hero-visual-img"
+                  src=""
+                  alt="Ambiance La Superlative Bordeaux"
+                  class="w-full h-full object-cover grayscale opacity-90 transition duration-700"
+                  onerror="this.style.display='none'; document.getElementById('hero-visual-fallback').style.display='flex';"
+                />
+                <!-- Fallback visuel monochrome sobre -->
+                <div id="hero-visual-fallback" class="hidden absolute inset-0 flex-col justify-between p-6 bg-surfaceLight">
+                  <div class="flex justify-between items-start font-mono text-[10px] uppercase tracking-widest text-bone/45">
+                    <span>LS // 2026</span>
+                    <span>BORDEAUX</span>
+                  </div>
+                  <div class="my-auto text-center">
+                    <span class="font-serif italic text-6xl text-bone/85">LS</span>
+                  </div>
+                  <div class="font-mono text-[10px] uppercase tracking-widest text-bone/45">
+                    MINIMAL · ITALO · BREAKBEAT
+                  </div>
+                </div>
+                <div class="absolute inset-0 bg-gradient-to-t from-obsidian via-obsidian/20 to-transparent"></div>
+
+                <!-- Carte prochain événement épinglée -->
+                <div id="hero-next-event-pill" class="absolute bottom-4 left-4 right-4 p-4 rounded-2xl bg-obsidian/90 backdrop-blur-md border hairline">
+                  <!-- Injecté dynamiquement avec le prochain événement -->
+                </div>
+              </div>
+            </div>
+            <p id="hero-visual-caption" class="mt-2.5 text-[11px] font-mono text-bone/40 text-right uppercase tracking-wider">
+              © La Superlative — Bordeaux
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         SECTION 01 : MANIFESTE / THÈME DE SAISON
+    ========================================================== -->
+    <section id="manifeste" class="border-b hairline bg-bone text-obsidian">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 py-16 sm:py-24">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+          <div class="lg:col-span-5">
+            <p id="theme-label" class="font-mono text-xs uppercase tracking-[0.2em] text-obsidian/55 mb-4">
+              01 // LE THÈME DE LA SAISON EST :
+            </p>
+            <h2 id="theme-title" class="font-serif italic text-5xl sm:text-7xl leading-[0.95] tracking-tight text-obsidian">
+              (Éco)Connexion
+            </h2>
+            <p class="mt-6 font-mono text-[11px] uppercase tracking-[0.16em] text-obsidian/55">
+              Éco-conscient · Scène locale · Safe Space
+            </p>
+          </div>
+          <div class="lg:col-span-7 space-y-6">
+            <p id="theme-text" class="text-lg sm:text-2xl font-light leading-relaxed text-obsidian/90">
+              À l'heure où la fête se réinvente, la question n'est plus seulement le son, mais ce qu'il relie. La Superlative explore les passerelles entre culture club exigeante, espaces patrimoniaux bordelais et engagement environnemental concret.
+            </p>
+            <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 pt-4 border-t border-obsidian/15">
+              <div>
+                <div id="stat-events-count" class="font-display font-extrabold text-3xl sm:text-4xl">06+</div>
+                <div class="font-mono text-[11px] uppercase tracking-wider text-obsidian/60 mt-1">Formats & Éditions</div>
+              </div>
+              <div>
+                <div class="font-display font-extrabold text-3xl sm:text-4xl">100%</div>
+                <div class="font-mono text-[11px] uppercase tracking-wider text-obsidian/60 mt-1">Indépendant Bordeaux</div>
+              </div>
+              <div class="col-span-2 sm:col-span-1">
+                <div class="font-display font-extrabold text-3xl sm:text-4xl">50%</div>
+                <div class="font-mono text-[11px] uppercase tracking-wider text-obsidian/60 mt-1">Bénéfices solidaires*</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         SECTION 02 : CALENDRIER DES ÉVÉNEMENTS ("Calen / DAR")
+    ========================================================== -->
+    <section id="calendrier" class="border-b hairline py-16 sm:py-24">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6">
+        <!-- En-tête typographique -->
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10 pb-8 border-b hairline">
+          <div>
+            <p class="font-mono text-xs uppercase tracking-[0.2em] text-bone/50 mb-2">02 // PROGRAMMATION & BILLETTERIE</p>
+            <h2 class="leading-[0.88]">
+              <span class="font-serif italic text-5xl sm:text-7xl text-bone">Calen</span>
+              <span class="font-display font-extrabold text-5xl sm:text-7xl uppercase text-bone/95">DAR</span>
+            </h2>
+          </div>
+
+          <!-- Filtres Statut (À venir / Passés / Tous) -->
+          <div class="flex flex-wrap items-center gap-2">
+            <button onclick="setEventFilter('upcoming')" data-filter="upcoming" class="event-filter-btn px-4 py-2.5 rounded-full font-mono text-xs uppercase tracking-wider transition">
+              À venir
+            </button>
+            <button onclick="setEventFilter('past')" data-filter="past" class="event-filter-btn px-4 py-2.5 rounded-full font-mono text-xs uppercase tracking-wider transition">
+              Éditions passées
+            </button>
+            <button onclick="setEventFilter('all')" data-filter="all" class="event-filter-btn px-4 py-2.5 rounded-full font-mono text-xs uppercase tracking-wider transition">
+              Tout voir
+            </button>
+          </div>
+        </div>
+
+        <!-- Filtres Genres musicaux -->
+        <div id="genre-filters" class="flex items-center gap-2 overflow-x-auto no-scrollbar pb-4 mb-6">
+          <!-- Généré dynamiquement -->
+        </div>
+
+        <!-- Grille des Événements -->
+        <div id="events-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <!-- Injecté dynamiquement par renderEvents() -->
+        </div>
+
+        <!-- Bandeau CTA Billetterie globale -->
+        <div class="mt-10 p-6 sm:p-8 rounded-3xl border hairline bg-surface flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5">
+          <div>
+            <p class="font-mono text-xs uppercase tracking-widest text-bone/50 mb-1">Alertes & Préventes</p>
+            <h3 class="font-display text-xl sm:text-2xl font-bold">Ne ratez aucune annonce sur Shotgun</h3>
+            <p class="text-sm text-bone/65 mt-1">Abonnez-vous à la page La Superlative pour recevoir les billets Early Bird en avant-première.</p>
+          </div>
+          <a
+            id="calendar-shotgun-cta"
+            href="https://shotgun.live/fr/venues/lasuperlative"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-2xl bg-accent-dyn font-mono text-xs font-semibold uppercase tracking-wider shrink-0 hover:opacity-90 transition"
+          >
+            <span>Suivre sur Shotgun</span>
+            <span>↗</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         SECTION 03 : PRÉSENTATION DU COLLECTIF (Histoire, Membres, Partenaires)
+    ========================================================== -->
+    <section id="collectif" class="border-b hairline py-16 sm:py-24">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 space-y-20">
+
+        <!-- 3A. HISTOIRE & CHRONOLOGIE -->
+        <div>
+          <div class="mb-10">
+            <p class="font-mono text-xs uppercase tracking-[0.2em] text-bone/50 mb-2">03 // IDENTITÉ & HISTOIRE</p>
+            <h2 class="font-display font-extrabold text-4xl sm:text-6xl uppercase tracking-tight">
+              Le <span class="font-serif italic font-normal lowercase text-accent-dyn">Collectif</span>
+            </h2>
+          </div>
+
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
+            <!-- Texte histoire + Citation -->
+            <div class="lg:col-span-5 space-y-6">
+              <h3 id="history-title" class="font-display text-2xl sm:text-3xl font-bold leading-tight">
+                Né à Bordeaux, pensé comme un laboratoire sonore et citoyen.
+              </h3>
+              <p id="history-text" class="text-bone/70 leading-relaxed text-sm sm:text-base">
+                Fondée en 2022 à Bordeaux, La Superlative réunit DJs, scénographes, directeurs artistiques et activistes culturels autour d'une ambition commune : faire vibrer des lieux atypiques tout en défendant une fête plus douce, inclusive et respectueuse de son territoire.
+              </p>
+
+              <!-- Citation éditoriale sobre -->
+              <blockquote class="p-6 rounded-3xl border hairline bg-surface">
+                <p id="history-quote" class="font-serif italic text-xl sm:text-2xl text-bone/95 leading-snug">
+                  Chaque petit geste compte : la musique électronique est un formidable levier de rencontre pour mettre en lumière les lieux méconnus et les causes locales.
+                </p>
+                <footer id="history-quote-author" class="mt-4 font-mono text-xs uppercase tracking-widest text-bone/50">
+                  — L'équipe La Superlative, Bordeaux
+                </footer>
+              </blockquote>
+            </div>
+
+            <!-- Timeline chronologique -->
+            <div class="lg:col-span-7">
+              <div id="history-milestones" class="divide-y hairline border-t border-b hairline">
+                <!-- Généré dynamiquement -->
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3B. LES MEMBRES (Style "The Jury" sur Artefact) -->
+        <div>
+          <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10">
+            <div>
+              <p class="font-mono text-xs uppercase tracking-[0.2em] text-bone/50 mb-2">CREW & RÉSIDENTS</p>
+              <h3 class="font-display font-extrabold text-3xl sm:text-5xl uppercase">
+                Les <span class="font-serif italic font-normal text-accent-dyn">Membres</span>
+              </h3>
+            </div>
+            <p class="text-xs font-mono uppercase tracking-wider text-bone/50 max-w-xs">
+              DJs, direction artistique, production & scénographie à Bordeaux.
+            </p>
+          </div>
+
+          <div id="members-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            <!-- Injecté dynamiquement par renderMembers() -->
+          </div>
+        </div>
+
+        <!-- 3C. PARTENAIRES & LIEUX AMIS -->
+        <div>
+          <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
+            <div>
+              <p class="font-mono text-xs uppercase tracking-[0.2em] text-bone/50 mb-2">ÉCOSYSTÈME & SOUTIENS</p>
+              <h3 class="font-display font-extrabold text-3xl sm:text-5xl uppercase">
+                Nos <span class="font-serif italic font-normal text-accent-dyn">Partenaires</span>
+              </h3>
+            </div>
+            <a href="#contact" class="font-mono text-xs uppercase tracking-wider text-accent-dyn hover:underline">
+              Devenir partenaire ↗
+            </a>
+          </div>
+
+          <div id="partners-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            <!-- Injecté dynamiquement par renderPartners() -->
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- =========================================================
+         SECTION 04 : INFOS PRATIQUES
+    ========================================================== -->
+    <section id="infos-pratiques" class="border-b hairline py-16 sm:py-24 bg-surface/50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
+          <div class="lg:col-span-4 space-y-4">
+            <p class="font-mono text-xs uppercase tracking-[0.2em] text-bone/50">04 // PRÉPARER SA VENUE</p>
+            <h2 class="font-display font-extrabold text-4xl sm:text-5xl uppercase leading-[0.95]">
+              Infos <span class="font-serif italic font-normal text-bone block">Pratiques</span>
+            </h2>
+            <p class="text-sm text-bone/65 leading-relaxed">
+              Transports TBM, politique d'accès, billetterie Shotgun, charte bienveillance et engagements éco-responsables pour profiter sereinement de chaque édition.
+            </p>
+            <div class="p-4 rounded-2xl border hairline bg-obsidian/70 space-y-2 text-xs font-mono">
+              <div class="flex justify-between">
+                <span class="text-bone/45">VILLE</span>
+                <span>Bordeaux Métropole (33)</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-bone/45">BILLETTERIE</span>
+                <span>Shotgun Officiel</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-bone/45">SAFE SPACE</span>
+                <span>Tolérance zéro</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="lg:col-span-8">
+            <div id="practical-accordion" class="space-y-3">
+              <!-- Injecté dynamiquement par renderPracticalInfo() -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         SECTION 05 : CONTACT & RÉSEAUX SOCIAUX
+    ========================================================== -->
+    <section id="contact" class="py-16 sm:py-24">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12">
+
+          <!-- Colonne Gauche : Direct Mail + Réseaux Sociaux -->
+          <div class="lg:col-span-5 space-y-8">
+            <div>
+              <p class="font-mono text-xs uppercase tracking-[0.2em] text-bone/50 mb-2">05 // ÉCRIVEZ-NOUS</p>
+              <h2 class="font-display font-extrabold text-4xl sm:text-6xl uppercase leading-[0.92]">
+                Stay in <span class="font-serif italic font-normal text-accent-dyn">Touch</span>
+              </h2>
+              <p class="mt-4 text-sm sm:text-base text-bone/65">
+                Booking, proposition de lieu, partenariat associatif, presse ou bénévolat : discutons de votre projet.
+              </p>
+            </div>
+
+            <!-- Bloc Email direct + Copie en 1 clic -->
+            <div class="p-5 rounded-3xl border hairline bg-surface space-y-3">
+              <span class="font-mono text-[11px] uppercase tracking-widest text-bone/50">Adresse officielle</span>
+              <div class="flex flex-wrap items-center justify-between gap-3">
+                <a id="contact-email-link" href="mailto:contact@lasuperlative.fr" class="font-display font-bold text-lg sm:text-xl text-bone hover:text-accent-dyn transition break-all">
+                  contact@lasuperlative.fr
+                </a>
+                <button
+                  onclick="copyContactEmail()"
+                  class="px-3.5 py-2 rounded-xl border hairline bg-obsidian hover:border-accent-dyn text-xs font-mono uppercase tracking-wider transition"
+                >
+                  Copier
+                </button>
+              </div>
+            </div>
+
+            <!-- Liens Réseaux Sociaux (Insta, TikTok, YouTube, FB) -->
+            <div class="space-y-3">
+              <p class="font-mono text-[11px] uppercase tracking-widest text-bone/50">Suivre La Superlative</p>
+              <div id="social-links-grid" class="grid grid-cols-2 gap-3">
+                <!-- Injecté dynamiquement par renderSocials() -->
+              </div>
+            </div>
+          </div>
+
+          <!-- Colonne Droite : Formulaire de contact vers contact@lasuperlative.fr -->
+          <div class="lg:col-span-7">
+            <form id="contact-form" onsubmit="handleContactSubmit(event)" class="p-6 sm:p-8 rounded-3xl border hairline bg-surface space-y-5">
+              <div class="flex items-center justify-between border-b hairline pb-4">
+                <h3 class="font-display font-bold text-xl uppercase">Envoyer un message</h3>
+                <span class="font-mono text-[11px] text-bone/50 uppercase">Destinataire : <span id="form-email-target">contact@lasuperlative.fr</span></span>
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label for="contact-name" class="block font-mono text-[11px] uppercase tracking-wider text-bone/65 mb-2">Votre nom / Structure *</label>
+                  <input id="contact-name" type="text" required placeholder="Ex: Camille · Collectif XYZ" class="w-full px-4 py-3.5 rounded-2xl bg-obsidian border hairline text-sm text-bone placeholder:text-bone/30 focus:outline-none focus:border-accent-dyn transition" />
+                </div>
+                <div>
+                  <label for="contact-reply" class="block font-mono text-[11px] uppercase tracking-wider text-bone/65 mb-2">Votre email *</label>
+                  <input id="contact-reply" type="email" required placeholder="vous@exemple.fr" class="w-full px-4 py-3.5 rounded-2xl bg-obsidian border hairline text-sm text-bone placeholder:text-bone/30 focus:outline-none focus:border-accent-dyn transition" />
+                </div>
+              </div>
+
+              <div>
+                <label for="contact-subject" class="block font-mono text-[11px] uppercase tracking-wider text-bone/65 mb-2">Objet de la demande</label>
+                <select id="contact-subject" class="w-full px-4 py-3.5 rounded-2xl bg-obsidian border hairline text-sm text-bone focus:outline-none focus:border-accent-dyn transition">
+                  <option value="Booking / Proposition artistique">Booking / Proposition artistique</option>
+                  <option value="Partenariat / Lieu / Scénographie">Partenariat / Lieu / Scénographie</option>
+                  <option value="Billetterie / Infos événement">Billetterie / Infos événement</option>
+                  <option value="Presse / Médias">Presse / Médias</option>
+                  <option value="Bénévolat / Engagement asso">Bénévolat / Engagement associatif</option>
+                  <option value="Autre demande">Autre demande</option>
+                </select>
+              </div>
+
+              <div>
+                <label for="contact-message" class="block font-mono text-[11px] uppercase tracking-wider text-bone/65 mb-2">Votre message *</label>
+                <textarea id="contact-message" rows="4" required placeholder="Parlez-nous de votre idée, date, lien SoundCloud ou question..." class="w-full px-4 py-3.5 rounded-2xl bg-obsidian border hairline text-sm text-bone placeholder:text-bone/30 focus:outline-none focus:border-accent-dyn transition resize-y"></textarea>
+              </div>
+
+              <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 pt-2">
+                <button type="submit" class="px-7 py-4 rounded-2xl bg-accent-dyn font-mono text-xs font-bold uppercase tracking-wider hover:brightness-110 transition active:scale-[0.98]">
+                  Ouvrir dans ma messagerie ↗
+                </button>
+                <a id="direct-mailto-fallback" href="mailto:contact@lasuperlative.fr" class="text-center sm:text-right font-mono text-xs text-bone/60 hover:text-accent-dyn underline">
+                  Ou envoyer un mail direct
+                </a>
+              </div>
+            </form>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- =========================================================
+       FOOTER ARCHITECTURAL
+  ========================================================== -->
+  <footer class="border-t hairline bg-surface/60">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-12">
+      <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 pb-8 border-b hairline">
+        <div>
+          <div id="footer-brand-name" class="font-display font-extrabold text-2xl sm:text-3xl uppercase tracking-tight">LA SUPERLATIVE</div>
+          <p id="footer-tagline" class="font-mono text-xs text-bone/50 uppercase tracking-widest mt-1">Collectif Électronique · Bordeaux, France</p>
+        </div>
+        <div class="flex flex-wrap gap-4 font-mono text-xs uppercase tracking-wider text-bone/70">
+          <a href="#calendrier" class="hover:text-accent-dyn transition">Calendrier</a>
+          <a href="#collectif" class="hover:text-accent-dyn transition">Collectif</a>
+          <a href="#infos-pratiques" class="hover:text-accent-dyn transition">Infos</a>
+          <a href="#contact" class="hover:text-accent-dyn transition">Contact</a>
+          <button onclick="handleAdminAccess()" class="text-accent-dyn hover:underline">Admin Studio</button>
+        </div>
+      </div>
+      <div class="pt-6 flex flex-col sm:flex-row justify-between items-center gap-3 text-[11px] font-mono text-bone/45">
+        <p>© 2026 <span id="footer-copy-name">La Superlative</span> — Tous droits réservés. Design mobile-first éditorial.</p>
+        <p>Bordeaux · Musique électronique éco-consciente</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- =========================================================
+       BARRE DE NAVIGATION RAPIDE MOBILE (Bottom Sticky Thumb-Friendly)
+  ========================================================== -->
+  <nav class="md:hidden fixed bottom-0 left-0 right-0 z-30 mobile-bottom-nav backdrop-blur-xl border-t hairline px-2 py-2 flex items-center justify-around" aria-label="Navigation rapide mobile">
+    <a href="#calendrier" class="flex flex-col items-center gap-1 px-3 py-1 text-bone/85 hover:text-accent-dyn transition">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5"/></svg>
+      <span class="text-[10px] font-mono uppercase">Dates</span>
+    </a>
+    <button onclick="openSearchModal()" class="flex flex-col items-center gap-1 px-3 py-1 text-bone/85 hover:text-accent-dyn transition">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="m21 21-4.35-4.35m0 0A7.5 7.5 0 1 0 6.05 6.05a7.5 7.5 0 0 0 10.6 10.6Z"/></svg>
+      <span class="text-[10px] font-mono uppercase">Chercher</span>
+    </button>
+    <a id="bottom-bar-ticket" href="https://shotgun.live/fr/venues/lasuperlative" target="_blank" rel="noopener noreferrer" class="flex items-center gap-1.5 px-4 py-2.5 rounded-full bg-accent-dyn font-mono text-[11px] font-bold uppercase tracking-wider shadow-md">
+      <span>Billets</span>
+      <span>↗</span>
+    </a>
+    <a href="#infos-pratiques" class="flex flex-col items-center gap-1 px-3 py-1 text-bone/85 hover:text-accent-dyn transition">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"/></svg>
+      <span class="text-[10px] font-mono uppercase">Infos</span>
+    </a>
+    <button onclick="handleAdminAccess()" class="flex flex-col items-center gap-1 px-3 py-1 text-bone/85 hover:text-accent-dyn transition">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z"/></svg>
+      <span class="text-[10px] font-mono uppercase">Admin</span>
+    </button>
+  </nav>
+
+  <!-- =========================================================
+       MODAL : RECHERCHE GLOBALE INSTANTANÉE
+  ========================================================== -->
+  <div id="search-modal" class="hidden fixed inset-0 z-50 bg-obsidian/85 backdrop-blur-xl p-4 sm:p-6 flex items-start justify-center pt-10 sm:pt-20" role="dialog" aria-modal="true" aria-label="Recherche globale">
+    <div class="w-full max-w-2xl rounded-3xl border hairline bg-surface shadow-2xl overflow-hidden flex flex-col max-h-[82vh]">
+      <div class="p-4 border-b hairline flex items-center gap-3">
+        <svg class="w-5 h-5 text-accent-dyn shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-4.35-4.35m0 0A7.5 7.5 0 1 0 6.05 6.05a7.5 7.5 0 0 0 10.6 10.6Z" />
+        </svg>
+        <input
+          id="global-search-input"
+          type="text"
+          oninput="performGlobalSearch(this.value)"
+          placeholder="Rechercher un événement, DJ, lieu, membre, partenaire, info pratique..."
+          class="w-full bg-transparent text-bone placeholder:text-bone/40 text-sm sm:text-base focus:outline-none"
+          autocomplete="off"
+        />
+        <button onclick="closeSearchModal()" class="px-3 py-1.5 rounded-xl border hairline text-xs font-mono text-bone/70 hover:text-bone">ESC</button>
+      </div>
+      <div id="search-results" class="p-4 overflow-y-auto space-y-2">
+        <!-- Résultats dynamiques -->
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================
+       MODAL : DÉTAIL D'UN ÉVÉNEMENT
+  ========================================================== -->
+  <div id="event-detail-modal" class="hidden fixed inset-0 z-50 bg-obsidian/85 backdrop-blur-xl p-4 sm:p-6 flex items-center justify-center" role="dialog" aria-modal="true">
+    <div id="event-detail-content" class="w-full max-w-2xl rounded-3xl border hairline bg-surface overflow-hidden max-h-[90vh] overflow-y-auto shadow-2xl">
+      <!-- Injecté dynamiquement -->
+    </div>
+  </div>
+
+  <!-- =========================================================
+       MODAL : CONNEXION ESPACE ADMIN SÉCURISÉ
+  ========================================================== -->
+  <div id="admin-login-modal" class="hidden fixed inset-0 z-50 bg-obsidian/90 backdrop-blur-xl p-4 flex items-center justify-center" role="dialog" aria-modal="true">
+    <div id="admin-login-box" class="w-full max-w-md rounded-3xl border hairline bg-surface p-6 sm:p-8 shadow-2xl space-y-6">
+      <div class="flex items-start justify-between gap-4">
+        <div>
+          <span class="inline-block px-2.5 py-1 rounded-full bg-accent-dyn font-mono text-[10px] font-bold uppercase tracking-widest mb-2">Accès restreint</span>
+          <h2 class="font-display font-extrabold text-2xl uppercase">Admin Studio</h2>
+          <p class="text-xs text-bone/60 mt-1">Connectez-vous pour éditer le site La Superlative.</p>
+        </div>
+        <button onclick="closeAdminLoginModal()" class="p-2 rounded-xl border hairline text-bone/60 hover:text-bone">✕</button>
+      </div>
+
+      <form onsubmit="submitAdminLogin(event)" class="space-y-4">
+        <div>
+          <label for="admin-user-input" class="block font-mono text-[11px] uppercase tracking-wider text-bone/65 mb-1.5">Identifiant</label>
+          <input id="admin-user-input" type="text" value="admin" required class="w-full px-4 py-3 rounded-2xl bg-obsidian border hairline text-sm text-bone focus:outline-none focus:border-accent-dyn" />
+        </div>
+        <div>
+          <label for="admin-pass-input" class="block font-mono text-[11px] uppercase tracking-wider text-bone/65 mb-1.5">Mot de passe</label>
+          <div class="relative">
+            <input id="admin-pass-input" type="password" required placeholder="••••••••••••" class="w-full px-4 py-3 pr-16 rounded-2xl bg-obsidian border hairline text-sm text-bone focus:outline-none focus:border-accent-dyn" />
+            <button type="button" onclick="togglePasswordVisibility()" class="absolute right-3 top-1/2 -translate-y-1/2 font-mono text-[10px] uppercase text-bone/60 hover:text-accent-dyn">Voir</button>
+          </div>
+        </div>
+        <p id="admin-login-error" class="hidden text-xs font-mono text-danger">Identifiants incorrects. Veuillez réessayer.</p>
+
+        <button type="submit" class="w-full py-3.5 rounded-2xl bg-accent-dyn font-mono text-xs font-bold uppercase tracking-wider hover:brightness-110 transition">
+          Déverrouiller le Studio →
+        </button>
+      </form>
+
+      <!-- Aide de démonstration (modifiable dans les réglages sécurité) -->
+      <div class="p-3.5 rounded-2xl border hairline bg-obsidian/70 text-[11px] font-mono text-bone/65 space-y-1">
+        <div class="text-accent-dyn uppercase">Accès démo initial :</div>
+        <div>Identifiant : <strong class="text-bone">admin</strong> · Mot de passe : <strong class="text-bone" id="demo-pass-hint">superlative2026</strong></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================
+       STUDIO ADMIN COMPLET (CMS PLEIN ÉCRAN RESPONSIVE)
+  ========================================================== -->
+  <div id="admin-studio" class="hidden fixed inset-0 z-50 bg-obsidian flex flex-col overflow-hidden" role="dialog" aria-modal="true" aria-label="Studio Administrateur La Superlative">
+    <!-- Topbar Admin -->
+    <div class="border-b hairline bg-surface px-4 sm:px-6 py-3.5 flex items-center justify-between gap-3 shrink-0">
+      <div class="min-w-0">
+        <h2 class="font-display font-bold text-base sm:text-lg uppercase truncate">La Superlative — Studio CMS</h2>
+        <p class="font-mono text-[10px] text-bone/50 uppercase tracking-wider">Modifications appliquées en direct</p>
+      </div>
+      <div class="flex items-center gap-2 shrink-0">
+        <button onclick="closeAdminStudio()" class="px-3.5 py-2 rounded-xl border hairline bg-obsidian hover:border-bone/40 font-mono text-xs uppercase tracking-wider transition">
+          Voir le site
+        </button>
+        <button onclick="logoutAdmin()" class="px-3 py-2 rounded-xl border hairline text-bone/70 hover:text-bone hover:border-bone/40 font-mono text-xs uppercase tracking-wider transition">
+          Déconnexion
+        </button>
+      </div>
+    </div>
+
+    <!-- Barre d'onglets Admin (Scrollable sur mobile) -->
+    <div class="border-b hairline bg-obsidian px-4 sm:px-6 py-2.5 flex items-center gap-2 overflow-x-auto no-scrollbar shrink-0">
+      <button onclick="switchAdminTab('general')" data-admin-tab="general" class="admin-tab-btn px-4 py-2 rounded-xl font-mono text-xs uppercase tracking-wider whitespace-nowrap transition">
+        01. Général & Hero
+      </button>
+      <button onclick="switchAdminTab('events')" data-admin-tab="events" class="admin-tab-btn px-4 py-2 rounded-xl font-mono text-xs uppercase tracking-wider whitespace-nowrap transition">
+        02. Événements
+      </button>
+      <button onclick="switchAdminTab('collective')" data-admin-tab="collective" class="admin-tab-btn px-4 py-2 rounded-xl font-mono text-xs uppercase tracking-wider whitespace-nowrap transition">
+        03. Collectif & Membres
+      </button>
+      <button onclick="switchAdminTab('practical')" data-admin-tab="practical" class="admin-tab-btn px-4 py-2 rounded-xl font-mono text-xs uppercase tracking-wider whitespace-nowrap transition">
+        04. Infos & Réseaux
+      </button>
+      <button onclick="switchAdminTab('branding')" data-admin-tab="branding" class="admin-tab-btn px-4 py-2 rounded-xl font-mono text-xs uppercase tracking-wider whitespace-nowrap transition">
+        05. Branding, SEO & Sécurité
+      </button>
+    </div>
+
+    <!-- Contenu de l'onglet Admin actif -->
+    <div id="admin-tab-content" class="flex-1 overflow-y-auto p-4 sm:p-6 max-w-5xl w-full mx-auto space-y-8 pb-24">
+      <!-- Généré dynamiquement par renderAdminTab() -->
+    </div>
+  </div>
+
+  <!-- =========================================================
+       MODAL DE CONFIRMATION PERSONNALISÉE (Jamais de confirm())
+  ========================================================== -->
+  <div id="confirm-modal" class="hidden fixed inset-0 z-[60] bg-obsidian/85 backdrop-blur-md p-4 flex items-center justify-center">
+    <div class="w-full max-w-sm rounded-3xl border hairline bg-surface p-6 space-y-5 shadow-2xl">
+      <h3 id="confirm-modal-title" class="font-display font-bold text-xl">Confirmer l'action</h3>
+      <p id="confirm-modal-msg" class="text-sm text-bone/75">Voulez-vous vraiment continuer ?</p>
+      <div class="flex justify-end gap-2.5">
+        <button onclick="resolveConfirmModal(false)" class="px-4 py-2.5 rounded-xl border hairline font-mono text-xs uppercase text-bone/75 hover:text-bone">Annuler</button>
+        <button onclick="resolveConfirmModal(true)" class="px-4 py-2.5 rounded-xl bg-bone text-obsidian font-mono text-xs font-bold uppercase hover:opacity-90">Supprimer</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================
+       TOAST NOTIFICATION
+  ========================================================== -->
+  <div id="toast-container" class="fixed bottom-24 md:bottom-6 right-4 z-[70] flex flex-col gap-2 pointer-events-none max-w-xs sm:max-w-sm"></div>
+
+  <!-- =========================================================
+       LOGIQUE APPLICATION & CMS COMPLET
+  ========================================================== -->
+  <script>
+    /* =========================================================================
+       1. ÉTAT INITIAL DU SITE (In-Memory CMS State)
+       Données authentiquement ancrées dans la scène électronique bordelaise
+    ========================================================================== */
+    let siteState = {
+      branding: {
+        siteName: 'La Superlative',
+        shortMark: 'LS',
+        tagline: 'Collectif Électronique · Bordeaux',
+        logoType: 'text', // 'text' | 'image'
+        logoUrl: '',
+        faviconType: 'svg', // 'svg' | 'url'
+        faviconUrl: '',
+        theme: 'light', // 'light' (Mode Jour) | 'dark' (Mode Sombre)
+        accentColor: '#111111'
+      },
+      seo: {
+        metaTitle: 'La Superlative — Collectif de Musique Électronique · Bordeaux',
+        metaDescription: 'La Superlative : collectif de musique électronique et laboratoire créatif éco-conscient à Bordeaux. Événements, billetterie Shotgun, lineups et culture club.',
+        keywords: 'La Superlative, Bordeaux, musique électronique, collectif, techno, house, italo disco, open air, Shotgun',
+        ogTitle: 'La Superlative — Collectif Électronique Bordeaux',
+        ogDescription: 'À la croisée du collectif électronique et du laboratoire créatif à Bordeaux.',
+        ogImage: 'https://placehold.co/1200x630/0A0A0A/F5F5F2?text=LA+SUPERLATIVE+BORDEAUX'
+      },
+      hero: {
+        editionBadge: 'SAISON 2026 / 2027 — BORDEAUX',
+        headlinePart1: 'LA',
+        headlineItalic: 'Superlative',
+        headlinePart2: 'BORDEAUX SOUND LAB',
+        subheadline: "Collectif de musique électronique et laboratoire créatif éco-conscient. Minimal house, italo disco, breakbeat et techno dans des lieux singuliers de la métropole bordelaise.",
+        primaryCtaText: 'Acheter des billets · Shotgun',
+        primaryCtaUrl: 'https://shotgun.live/fr/venues/lasuperlative',
+        heroVisualUrl: 'https://placehold.co/900x1100/141414/E8E8E3?text=LA+SUPERLATIVE%0ABORDEAUX+2026',
+        heroVisualCaption: '© La Superlative — Scénographie & Culture Club Bordeaux',
+        themeLabel: '01 // LE THÈME DE LA SAISON EST :',
+        themeTitle: '(Éco)Connexion',
+        themeText: "À l'heure où la nuit se réinvente, la question n'est plus seulement le son, mais ce qu'il relie. La Superlative explore les passerelles entre culture club exigeante, lieux patrimoniaux bordelais et engagement environnemental concret."
+      },
+      events: [
+        {
+          id: 'evt-1',
+          title: 'La Superlative Winter Lab : Modular & Groove',
+          date: '2026-12-12',
+          dateDisplay: 'SAM. 12 DÉC. 2026',
+          time: '22:00 — 04:00',
+          venue: 'Salle des Fêtes Bordeaux Grand Parc',
+          city: 'Bordeaux',
+          genres: ['Breakbeat', 'Techno', 'Electro'],
+          lineup: ['Invite Spéciale (TBA)', 'Alex S.', 'Pastel', 'MomoSet'],
+          price: 'Dès 12€',
+          status: 'upcoming',
+          ticketUrl: 'https://shotgun.live/fr/venues/lasuperlative',
+          ticketLabel: 'Billets Shotgun',
+          ecoNote: 'Partenariat Aux Arbres Citoyens ! · Gobelets consignés & accès Tram C',
+          description: "Retour dans l'écrin brutaliste de la Salle des Fêtes du Grand Parc pour une nuit immersive mêlant scénographie lumineuse basse consommation, sound-system calibré sur mesure et line-up 100% électrisant.",
+          imageUrl: 'https://placehold.co/800x600/141414/E8E8E3?text=WINTER+LAB%0AGRAND+PARC',
+          gradient: 'linear-gradient(135deg, #111111 0%, #1C1C1C 100%)'
+        },
+        {
+          id: 'evt-2',
+          title: 'Italo-Synth Session @ Fabrique Pola',
+          date: '2027-01-23',
+          dateDisplay: 'SAM. 23 JAN. 2027',
+          time: '19:00 — 02:00',
+          venue: 'Fabrique Pola — Quai de Brazza',
+          city: 'Bordeaux Bastide',
+          genres: ['Italo Disco', 'Deep House', 'Synthwave'],
+          lineup: ['Donna Gibson', 'Coffiiz', 'Richard Stan', 'Guest Live'],
+          price: 'Dès 9€',
+          status: 'upcoming',
+          ticketUrl: 'https://shotgun.live/fr/venues/lasuperlative',
+          ticketLabel: 'Préventes Shotgun',
+          ecoNote: 'Format hybride exposition + club · Restauration locale végétarienne',
+          description: "Une traversée chaleureuse entre synthés analogiques, italo disco solaire et deep house face à la Garonne. Installation visuelle interactive par nos artistes résidents dès 19h.",
+          imageUrl: 'https://placehold.co/800x600/181818/E8E8E3?text=ITALO+SYNTH%0AFABRIQUE+POLA',
+          gradient: 'linear-gradient(135deg, #121212 0%, #202020 100%)'
+        },
+        {
+          id: 'evt-3',
+          title: 'Natural Interlude — Printemps Open Air',
+          date: '2027-04-17',
+          dateDisplay: 'SAM. 17 AVR. 2027',
+          time: '14:00 — 23:00',
+          venue: 'Parc des Berges de Garonne',
+          city: 'Bordeaux',
+          genres: ['Minimal House', 'Italo Disco', 'Microhouse'],
+          lineup: ['Line-up Printemps (Annonce bientôt)', 'La Superlative Crew'],
+          price: 'Entrée libre / Soutien',
+          status: 'upcoming',
+          ticketUrl: 'https://shotgun.live/fr/venues/lasuperlative',
+          ticketLabel: 'Réserver sur Shotgun',
+          ecoNote: 'Open Air zéro déchet · Stands sensibilisation climat & biodiversité',
+          description: "Notre format phare en plein air revient au bord de l'eau : sonorités minimal house et grooves printaniers, village associatif et scénographie végétale.",
+          imageUrl: 'https://placehold.co/800x600/151515/E8E8E3?text=NATURAL+INTERLUDE%0AOPEN+AIR',
+          gradient: 'linear-gradient(135deg, #101010 0%, #1E1E1E 100%)'
+        },
+        {
+          id: 'evt-4',
+          title: 'Natural Interlude — Open Air 2026',
+          date: '2026-08-08',
+          dateDisplay: 'SAM. 8 AOÛT 2026',
+          time: '15:00 — 23:30',
+          venue: 'Parc des Berges',
+          city: 'Bordeaux',
+          genres: ['Minimal House', 'Italo Disco'],
+          lineup: ['Pastel', 'Donna Gibson', 'Coffiiz', 'Fruckie'],
+          price: 'Terminé',
+          status: 'past',
+          ticketUrl: 'https://shotgun.live/fr/venues/lasuperlative',
+          ticketLabel: 'Archive Shotgun',
+          ecoNote: 'Édition estivale complète — 100% énergie optimisée',
+          description: "Édition mémorable d'août 2026 au Parc des Berges mêlant minimal house lumineuse, italo disco et sensibilisation écologique au coucher du soleil.",
+          imageUrl: 'https://placehold.co/800x600/161616/9E9E98?text=ARCHIVE+2026%0ANATURAL+INTERLUDE',
+          gradient: 'linear-gradient(135deg, #141414 0%, #202020 100%)'
+        },
+        {
+          id: 'evt-5',
+          title: 'La Superlative Invite Emma B',
+          date: '2024-11-09',
+          dateDisplay: 'SAM. 9 NOV. 2024',
+          time: '21:30 — 03:30',
+          venue: 'Salle des Fêtes Bordeaux Grand Parc',
+          city: 'Bordeaux',
+          genres: ['Breakbeat', 'Techno'],
+          lineup: ['Emma B', 'La Superlative Residents'],
+          price: 'Complet',
+          status: 'past',
+          ticketUrl: 'https://shotgun.live/fr/venues/lasuperlative',
+          ticketLabel: 'Voir l\'archive',
+          ecoNote: '50% des bénéfices reversés à Aux Arbres Citoyens ! Bordeaux Métropole',
+          description: "Une soirée engagée dans une salle emblématique subventionnée par la ville de Bordeaux, portée par le set incendiaire d'Emma B.",
+          imageUrl: 'https://placehold.co/800x600/161616/9E9E98?text=ARCHIVE+2024%0AEMMA+B',
+          gradient: 'linear-gradient(135deg, #141414 0%, #202020 100%)'
+        },
+        {
+          id: 'evt-6',
+          title: 'La Superlative Invite Djedjotronic',
+          date: '2023-09-29',
+          dateDisplay: 'VEN. 29 SEPT. 2023',
+          time: '21:00 — 02:00',
+          venue: 'Lieu Chéri / Bordeaux',
+          city: 'Bordeaux',
+          genres: ['Italo Disco', 'Deep House', 'Electro'],
+          lineup: ['Djedjotronic', 'Richard Stan', 'D-BOARD'],
+          price: 'Complet',
+          status: 'past',
+          ticketUrl: 'https://shotgun.live/fr/venues/lasuperlative',
+          ticketLabel: 'Voir l\'archive',
+          ecoNote: 'Édition fondatrice de notre identité sonore électro-italo',
+          description: "Soirée électrique avec Djedjotronic qui a marqué l'essor de La Superlative auprès du public bordelais.",
+          imageUrl: 'https://placehold.co/800x600/161616/9E9E98?text=ARCHIVE+2023%0ADJEDJOTRONIC',
+          gradient: 'linear-gradient(135deg, #141414 0%, #202020 100%)'
+        }
+      ],
+      history: {
+        introTitle: 'Né à Bordeaux, pensé comme un laboratoire sonore et citoyen.',
+        introText: "Fondée en 2022 à Bordeaux, La Superlative réunit DJs, scénographes, directeurs artistiques et activistes culturels autour d'une ambition commune : faire vibrer des lieux singuliers tout en défendant une fête plus douce, inclusive et respectueuse de son territoire.",
+        quote: "Chaque petit geste compte : la musique électronique est un formidable levier de rencontre pour mettre en lumière les lieux méconnus et les causes locales.",
+        quoteAuthor: "— L'équipe La Superlative, Bordeaux",
+        milestones: [
+          {
+            id: 'ms-1',
+            year: '2022',
+            title: 'Genèse & Premières Nuits Bordelaises',
+            description: "Lancement du collectif sur Shotgun et premières résidences groovy mêlant house, italo disco et découvertes locales."
+          },
+          {
+            id: 'ms-2',
+            year: '2023',
+            title: 'Affirmation Artistique · Djedjotronic',
+            description: "Programmation de têtes d'affiche françaises et internationales, avec un soin particulier porté à la scénographie."
+          },
+          {
+            id: 'ms-3',
+            year: '2024',
+            title: 'Tournant Éco-Conscient & Grand Parc',
+            description: "Investissement de la Salle des Fêtes du Grand Parc avec Emma B, partenariat associatif et reversement de bénéfices pour la biodiversité locale."
+          },
+          {
+            id: 'ms-4',
+            year: '2026',
+            title: 'Natural Interlude & Laboratoire Créatif',
+            description: "Déploiement d'open airs durables sur les berges de Garonne et création d'une plateforme digitale dédiée à la communauté."
+          }
+        ]
+      },
+      members: [
+        {
+          id: 'mem-1',
+          name: 'Alex M.',
+          role: 'Co-fondateur & Programmation',
+          specialty: 'Breakbeat · House · Éco-production',
+          bio: "Pilote la ligne artistique et les partenariats engagés du collectif avec les acteurs culturels et associatifs bordelais.",
+          socialHandle: '@lasuperlative.bdx',
+          socialUrl: 'https://instagram.com',
+          photoUrl: 'https://placehold.co/500x620/141414/E8E8E3?text=ALEX+M.',
+          credit: '© Archive LS'
+        },
+        {
+          id: 'mem-2',
+          name: 'Camille V.',
+          role: 'Direction Artistique & Scénographie',
+          specialty: 'Lumières · Identité visuelle',
+          bio: "Conçoit les installations visuelles basse consommation et l'esthétique graphique éditoriale de chaque événement.",
+          socialHandle: '@camille.scenolab',
+          socialUrl: 'https://instagram.com',
+          photoUrl: 'https://placehold.co/500x620/181818/E8E8E3?text=CAMILLE+V.',
+          credit: '© Studio LS'
+        },
+        {
+          id: 'mem-3',
+          name: 'Pastel',
+          role: 'DJ Résident & Sound Curator',
+          specialty: 'Minimal House · Italo Disco',
+          bio: "Diggeur passionné de vinyles rares, il façonne les warm-ups solaires et les closings hypnotiques de La Superlative.",
+          socialHandle: '@pastel.music',
+          socialUrl: 'https://instagram.com',
+          photoUrl: 'https://placehold.co/500x620/141414/E8E8E3?text=PASTEL',
+          credit: '© Studio LS'
+        },
+        {
+          id: 'mem-4',
+          name: 'Léo R.',
+          role: 'Production & Coordination Safe Space',
+          specialty: 'Logistique · Éco-charte · Accueil',
+          bio: "Veille au confort du public, à l'accessibilité PMR et à la réduction de l'empreinte carbone sur chaque lieu investi.",
+          socialHandle: '@leo.superlative',
+          socialUrl: 'https://instagram.com',
+          photoUrl: 'https://placehold.co/500x620/181818/E8E8E3?text=LEO+R.',
+          credit: '© Archive LS'
+        }
+      ],
+      partners: [
+        { id: 'par-1', name: 'Shotgun', category: 'Billetterie Officielle', description: 'Plateforme billetterie et communauté musique électronique.', url: 'https://shotgun.live/fr/venues/lasuperlative' },
+        { id: 'par-2', name: 'Aux Arbres Citoyens !', category: 'Engagement Éco', description: 'Association bordelaise de préservation et plantation urbaine.', url: 'https://lasuperlative.fr' },
+        { id: 'par-3', name: 'Greenpeace Bordeaux', category: 'Sensibilisation', description: 'Actions locales et sensibilisation écologique en événement.', url: 'https://lasuperlative.fr' },
+        { id: 'par-4', name: 'Salle des Fêtes Grand Parc', category: 'Lieu Culturel', description: 'Salle patrimoniale emblématique de la Ville de Bordeaux.', url: 'https://lasuperlative.fr' },
+        { id: 'par-5', name: 'Le Type', category: 'Média Culturel', description: 'Média indépendant dédié aux musiques et cultures à Bordeaux.', url: 'https://letype.fr' },
+        { id: 'par-6', name: 'Sound Lab Aquitaine', category: 'Technique & Son', description: 'Ingénierie acoustique et systèmes son haute précision.', url: 'https://lasuperlative.fr' }
+      ],
+      practicalInfo: [
+        {
+          id: 'inf-1',
+          category: 'Billetterie',
+          title: 'Comment acheter ou revendre son billet ?',
+          content: "Toutes nos préventes officielles passent par Shotgun. En cas d'imprévu, utilisez exclusivement la bourse d'échange sécurisée intégrée à l'application Shotgun afin d'éviter toute fraude. Des billets sur place sont parfois disponibles selon la jauge restante."
+        },
+        {
+          id: 'inf-2',
+          category: 'Mobilité Bordeaux',
+          title: 'Venir en transports TBM & mobilités douces',
+          content: "Nous choisissons des lieux facilement accessibles en Tram (lignes A, B, C, D) et en vélo (stations V3 à proximité immédiate). Le covoiturage et les bus de nuit TBM (TBNight) sont fortement encouragés."
+        },
+        {
+          id: 'inf-3',
+          category: 'Safe Space',
+          title: 'Charte bienveillance, respect & consentement',
+          content: "La Superlative défend une fête libre et bienveillante. Tout comportement oppressif, discriminant, raciste, sexiste, LGBTQIA+phobe ou irrespectueux entraîne une exclusion définitive. Notre équipe dédiée (gilets/brassards identifiables) est joignable à tout moment au bar ou à l'entrée."
+        },
+        {
+          id: 'inf-4',
+          category: 'Éco-engagement',
+          title: 'Nos engagements éco-responsables',
+          content: "Gobelets réutilisables consignés, tri sélectif renforcé, offre bar locale & circuit court, éclairages LED basse consommation et soutien régulier à des associations environnementales de Bordeaux Métropole."
+        },
+        {
+          id: 'inf-5',
+          category: 'Accessibilité & Objets',
+          title: 'Accessibilité PMR, vestiaire et objets trouvés',
+          content: "L'ensemble de nos lieux partenaires dispose d'un accès PMR de plain-pied et de sanitaires adaptés. Pour un accueil personnalisé ou déclarer un objet perdu, écrivez-nous à contact@lasuperlative.fr."
+        }
+      ],
+      socials: {
+        instagram: 'https://www.instagram.com/lasuperlative.bdx/',
+        tiktok: 'https://www.tiktok.com/@lasuperlative',
+        youtube: 'https://www.youtube.com/@lasuperlative',
+        facebook: 'https://www.facebook.com/lasuperlativebordeaux',
+        shotgun: 'https://shotgun.live/fr/venues/lasuperlative',
+        email: 'contact@lasuperlative.fr'
+      },
+      admin: {
+        username: 'admin',
+        password: 'superlative2026',
+        isAuthenticated: false
+      }
+    };
+
+    /* États d'interface */
+    let currentEventFilter = 'upcoming';
+    let currentGenreFilter = 'Tous';
+    let currentAdminTab = 'general';
+    let editingEventId = null;
+    let confirmCallback = null;
+
+    /* =========================================================================
+       2. UTILITAIRES SÉCURITÉ, COPIE, TOASTS & COULEURS
+    ========================================================================== */
+    function escapeHtml(str) {
+      if (str === null || str === undefined) return '';
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    }
+
+    function showToast(message, type = 'success') {
+      const container = document.getElementById('toast-container');
+      const toast = document.createElement('div');
+      const accentBorder = type === 'error' ? 'border-red-500/60 text-danger' : 'border-accent-dyn text-bone';
+      const dot = type === 'error' ? 'bg-red-500' : 'bg-accent-dyn';
+      toast.className = `pointer-events-auto flex items-center gap-3 px-4 py-3 rounded-2xl bg-surface/95 backdrop-blur-xl border ${accentBorder} shadow-2xl text-xs font-mono transition-all duration-300 translate-y-2 opacity-0`;
+      toast.innerHTML = `<span class="w-2 h-2 rounded-full ${dot} shrink-0"></span><span>${escapeHtml(message)}</span>`;
+      container.appendChild(toast);
+      requestAnimationFrame(() => {
+        toast.classList.remove('translate-y-2', 'opacity-0');
+      });
+      setTimeout(() => {
+        toast.classList.add('translate-y-2', 'opacity-0');
+        setTimeout(() => toast.remove(), 300);
+      }, 3200);
+    }
+
+    // Copie compatible iframe via document.execCommand('copy')
+    function copyToClipboard(text, successMsg) {
+      try {
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        ta.style.position = 'fixed';
+        ta.style.opacity = '0';
+        document.body.appendChild(ta);
+        ta.focus();
+        ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+        showToast(successMsg || 'Copié dans le presse-papiers');
+      } catch (err) {
+        showToast('Impossible de copier automatiquement', 'error');
+      }
+    }
+
+    function copyContactEmail() {
+      const email = siteState.socials.email || 'contact@lasuperlative.fr';
+      copyToClipboard(email, `Adresse copiée : ${email}`);
+    }
+
+    // Valide et normalise un code couleur hexadécimal (#RGB ou #RRGGBB)
+    function normalizeHexColor(value) {
+      if (!value) return null;
+      let cleaned = String(value).trim().toUpperCase();
+      if (!cleaned.startsWith('#')) cleaned = '#' + cleaned;
+      if (/^#[0-9A-F]{3}$/.test(cleaned)) {
+        cleaned = '#' + cleaned[1] + cleaned[1] + cleaned[2] + cleaned[2] + cleaned[3] + cleaned[3];
+      }
+      return /^#[0-9A-F]{6}$/.test(cleaned) ? cleaned : null;
+    }
+
+    // Détermine si le texte sur la couleur d'accent doit être noir ou blanc
+    function getContrastColor(hexColor) {
+      try {
+        const normalized = normalizeHexColor(hexColor) || '#111111';
+        const hex = normalized.replace('#', '');
+        const r = parseInt(hex.substring(0, 2), 16);
+        const g = parseInt(hex.substring(2, 4), 16);
+        const b = parseInt(hex.substring(4, 6), 16);
+        const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
+        return luminance > 0.58 ? '#0A0A0A' : '#F5F5F2';
+      } catch {
+        return '#F5F5F2';
+      }
+    }
+
+    // Bascule entre Mode Jour et Mode Sombre
+    function setTheme(mode) {
+      const target = mode === 'dark' ? 'dark' : 'light';
+      const currentHex = (siteState.branding.accentColor || '').toUpperCase();
+      // Adapte automatiquement l'accent monochrome par défaut pour préserver le contraste
+      if (target === 'light' && (currentHex === '#F5F5F2' || currentHex === '#FFFFFF')) {
+        siteState.branding.accentColor = '#111111';
+      } else if (target === 'dark' && (currentHex === '#111111' || currentHex === '#0A0A0A' || currentHex === '#000000')) {
+        siteState.branding.accentColor = '#F5F5F2';
+      }
+      siteState.branding.theme = target;
+      renderBrandingAndSEO();
+      if (!document.getElementById('admin-studio').classList.contains('hidden') && currentAdminTab === 'branding') {
+        renderAdminTab();
+      }
+    }
+
+    function toggleTheme() {
+      const next = siteState.branding.theme === 'light' ? 'dark' : 'light';
+      setTheme(next);
+      showToast(next === 'light' ? 'Mode jour activé' : 'Mode sombre activé');
+    }
+
+    // Modal de confirmation personnalisée (remplace confirm())
+    function openConfirmModal(title, message, onConfirm) {
+      document.getElementById('confirm-modal-title').textContent = title;
+      document.getElementById('confirm-modal-msg').textContent = message;
+      confirmCallback = onConfirm;
+      document.getElementById('confirm-modal').classList.remove('hidden');
+    }
+
+    function resolveConfirmModal(accepted) {
+      document.getElementById('confirm-modal').classList.add('hidden');
+      if (accepted && typeof confirmCallback === 'function') {
+        confirmCallback();
+      }
+      confirmCallback = null;
+    }
+
+    /* =========================================================================
+       3. RENDU COMPLET DU SITE PUBLIC (Réactif au Studio Admin)
+    ========================================================================== */
+    function renderAll() {
+      renderBrandingAndSEO();
+      renderHero();
+      renderEvents();
+      renderCollective();
+      renderPracticalInfo();
+      renderSocialsAndContact();
+      updateAdminSessionUI();
+    }
+
+    function renderBrandingAndSEO() {
+      const { branding, seo, hero } = siteState;
+      const isLight = branding.theme === 'light';
+
+      // Application du thème (Mode Jour / Mode Sombre)
+      document.documentElement.setAttribute('data-theme', isLight ? 'light' : 'dark');
+
+      // Mise à jour des boutons de bascule de thème
+      const toggleIcon = document.getElementById('theme-toggle-icon');
+      const toggleLabel = document.getElementById('theme-toggle-label');
+      const mobileThemeLabel = document.getElementById('mobile-theme-label');
+      if (toggleIcon) {
+        toggleIcon.innerHTML = isLight
+          ? `<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.9" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.72 9.72 0 0 1 18 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 0 0 3 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 0 0 9.002-5.998Z" /></svg>`
+          : `<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.9" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386-1.591 1.591M21 12h-2.25m-.386 6.364-1.591-1.591M12 18.75V21m-4.773-4.227-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z" /></svg>`;
+      }
+      if (toggleLabel) toggleLabel.textContent = isLight ? 'Sombre' : 'Jour';
+      if (mobileThemeLabel) mobileThemeLabel.textContent = isLight ? 'Passer en mode sombre' : 'Passer en mode jour';
+
+      // Couleurs CSS dynamiques
+      const safeAccent = normalizeHexColor(branding.accentColor) || (isLight ? '#111111' : '#F5F5F2');
+      document.documentElement.style.setProperty('--accent-color', safeAccent);
+      document.documentElement.style.setProperty('--accent-text', getContrastColor(safeAccent));
+
+      // Mise à jour des méta-données SEO
+      document.title = seo.metaTitle || branding.siteName;
+      const setMeta = (id, attr, val) => {
+        const el = document.getElementById(id);
+        if (el && val !== undefined) el.setAttribute(attr, val);
+      };
+      setMeta('meta-description', 'content', seo.metaDescription);
+      setMeta('meta-keywords', 'content', seo.keywords);
+      setMeta('og-title', 'content', seo.ogTitle || seo.metaTitle);
+      setMeta('og-description', 'content', seo.ogDescription || seo.metaDescription);
+      setMeta('og-image', 'content', seo.ogImage);
+
+      // Favicon dynamique (SVG généré avec couleur d'accent OU image personnalisée)
+      const favLink = document.getElementById('dynamic-favicon');
+      if (favLink) {
+        if (branding.faviconType === 'url' && branding.faviconUrl) {
+          favLink.href = branding.faviconUrl;
+        } else {
+          const mark = encodeURIComponent((branding.shortMark || 'LS').slice(0, 3));
+          const favBg = encodeURIComponent(isLight ? '#F7F7F4' : '#0A0A0A');
+          const acc = encodeURIComponent(safeAccent);
+          favLink.href = `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='${favBg}'/%3E%3Ctext x='50%25' y='56%25' dominant-baseline='middle' text-anchor='middle' font-family='sans-serif' font-weight='800' font-size='28' fill='${acc}'%3E${mark}%3C/text%3E%3C/svg%3E`;
+        }
+      }
+
+      // Logo Header (Image personnalisée ou monogramme typographique)
+      const logoContainer = document.getElementById('header-logo-container');
+      if (branding.logoType === 'image' && branding.logoUrl) {
+        logoContainer.innerHTML = `
+          <img src="${escapeHtml(branding.logoUrl)}" alt="${escapeHtml(branding.siteName)}" class="h-9 sm:h-11 w-auto max-w-[170px] object-contain rounded-lg" onerror="this.style.display='none'" />
+          <span class="font-display font-extrabold text-sm sm:text-base uppercase tracking-tight truncate hidden sm:inline">${escapeHtml(branding.siteName)}</span>
+        `;
+      } else {
+        logoContainer.innerHTML = `
+          <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-accent-dyn flex items-center justify-center font-display font-extrabold text-sm sm:text-base tracking-tighter shrink-0">
+            ${escapeHtml((branding.shortMark || 'LS').slice(0, 3))}
+          </div>
+          <div class="leading-tight truncate">
+            <div class="font-display font-extrabold text-sm sm:text-base uppercase tracking-tight truncate">${escapeHtml(branding.siteName)}</div>
+            <div class="font-mono text-[9px] sm:text-[10px] uppercase tracking-[0.18em] text-bone/50 truncate">${escapeHtml(branding.tagline)}</div>
+          </div>
+        `;
+      }
+
+      // Footer branding
+      document.getElementById('footer-brand-name').textContent = branding.siteName;
+      document.getElementById('footer-tagline').textContent = branding.tagline;
+      document.getElementById('footer-copy-name').textContent = branding.siteName;
+
+      // Boutons billetterie globaux
+      const ticketHref = hero.primaryCtaUrl || siteState.socials.shotgun;
+      ['header-ticket-btn', 'mobile-menu-ticket-btn', 'hero-primary-cta', 'bottom-bar-ticket', 'calendar-shotgun-cta'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.href = ticketHref;
+      });
+    }
+
+    function renderHero() {
+      const { hero, events } = siteState;
+      document.getElementById('hero-edition-badge').textContent = hero.editionBadge;
+      document.getElementById('hero-title-1').textContent = hero.headlinePart1;
+      document.getElementById('hero-title-italic').textContent = hero.headlineItalic;
+      document.getElementById('hero-title-2').textContent = hero.headlinePart2;
+      document.getElementById('hero-subheadline').textContent = hero.subheadline;
+      document.getElementById('hero-primary-cta-text').textContent = hero.primaryCtaText;
+      document.getElementById('hero-visual-caption').textContent = hero.heroVisualCaption;
+
+      // Visuel Hero
+      const img = document.getElementById('hero-visual-img');
+      const fallback = document.getElementById('hero-visual-fallback');
+      if (hero.heroVisualUrl) {
+        img.src = hero.heroVisualUrl;
+        img.style.display = 'block';
+        fallback.style.display = 'none';
+      } else {
+        img.style.display = 'none';
+        fallback.style.display = 'flex';
+      }
+
+      // Manifeste / Thème
+      document.getElementById('theme-label').textContent = hero.themeLabel;
+      document.getElementById('theme-title').textContent = hero.themeTitle;
+      document.getElementById('theme-text').textContent = hero.themeText;
+      document.getElementById('stat-events-count').textContent = String(events.length).padStart(2, '0') + '+';
+
+      // Prochain événement épinglé dans le Hero
+      const upcoming = events.filter(e => e.status === 'upcoming').sort((a, b) => a.date.localeCompare(b.date));
+      const nextEvt = upcoming[0] || events[0];
+      const pill = document.getElementById('hero-next-event-pill');
+      if (nextEvt) {
+        pill.innerHTML = `
+          <div class="flex items-center justify-between gap-2 mb-1">
+            <span class="font-mono text-[10px] uppercase tracking-widest text-accent-dyn">Prochain rendez-vous</span>
+            <span class="font-mono text-[10px] text-bone/65">${escapeHtml(nextEvt.dateDisplay)}</span>
+          </div>
+          <div class="flex items-center justify-between gap-3">
+            <div class="min-w-0">
+              <div class="font-display font-bold text-sm sm:text-base truncate">${escapeHtml(nextEvt.title)}</div>
+              <div class="text-xs text-bone/65 truncate">${escapeHtml(nextEvt.venue)}</div>
+            </div>
+            <button onclick="openEventDetail('${escapeHtml(nextEvt.id)}')" class="px-3 py-2 rounded-xl bg-bone text-obsidian font-mono text-[10px] font-bold uppercase shrink-0 hover:bg-accent-dyn transition">
+              Détails
+            </button>
+          </div>
+        `;
+      } else {
+        pill.innerHTML = `<div class="font-mono text-xs text-bone/70">Programmation 2026/2027 en cours d'annonce...</div>`;
+      }
+    }
+
+    function setEventFilter(filter) {
+      currentEventFilter = filter;
+      renderEvents();
+    }
+
+    function setGenreFilter(genre) {
+      currentGenreFilter = genre;
+      renderEvents();
+    }
+
+    function renderEvents() {
+      // Styles des boutons de filtre statut
+      document.querySelectorAll('.event-filter-btn').forEach(btn => {
+        const active = btn.dataset.filter === currentEventFilter;
+        btn.className = active
+          ? 'event-filter-btn px-4 py-2.5 rounded-full font-mono text-xs font-bold uppercase tracking-wider bg-accent-dyn transition'
+          : 'event-filter-btn px-4 py-2.5 rounded-full font-mono text-xs uppercase tracking-wider border hairline bg-surface text-bone/75 hover:border-bone/40 transition';
+      });
+
+      // Extraction des genres uniques
+      const allGenres = ['Tous', ...Array.from(new Set(siteState.events.flatMap(e => e.genres || [])))];
+      const genreContainer = document.getElementById('genre-filters');
+      genreContainer.innerHTML = allGenres.map(g => {
+        const active = g === currentGenreFilter;
+        return `
+          <button onclick="setGenreFilter('${escapeHtml(g)}')" class="px-3.5 py-1.5 rounded-full font-mono text-[11px] uppercase tracking-wider whitespace-nowrap transition ${active ? 'bg-bone text-obsidian font-bold' : 'border hairline text-bone/65 hover:text-bone'}">
+            ${escapeHtml(g)}
+          </button>
+        `;
+      }).join('');
+
+      // Filtrage
+      let filtered = siteState.events.filter(evt => {
+        const matchStatus = currentEventFilter === 'all'
+          ? true
+          : currentEventFilter === 'upcoming'
+            ? (evt.status === 'upcoming' || evt.status === 'soldout')
+            : evt.status === 'past';
+        const matchGenre = currentGenreFilter === 'Tous'
+          ? true
+          : (evt.genres || []).includes(currentGenreFilter);
+        return matchStatus && matchGenre;
+      });
+
+      // Tri chronologique (à venir croissant, passés décroissant)
+      filtered.sort((a, b) => currentEventFilter === 'past' ? b.date.localeCompare(a.date) : a.date.localeCompare(b.date));
+
+      const grid = document.getElementById('events-grid');
+      if (!filtered.length) {
+        grid.innerHTML = `
+          <div class="col-span-full p-10 rounded-3xl border hairline bg-surface text-center space-y-3">
+            <p class="font-serif italic text-3xl text-bone/80">Aucun événement pour ce filtre</p>
+            <p class="text-xs font-mono uppercase tracking-wider text-bone/50">Essayez un autre genre musical ou consultez toutes nos éditions.</p>
+            <button onclick="setEventFilter('all'); setGenreFilter('Tous');" class="mt-2 px-5 py-2.5 rounded-full bg-accent-dyn font-mono text-xs font-bold uppercase">Tout afficher</button>
+          </div>
+        `;
+        return;
+      }
+
+      grid.innerHTML = filtered.map((evt, idx) => {
+        const statusBadge = evt.status === 'upcoming'
+          ? `<span class="px-2.5 py-1 rounded-full bg-accent-dyn font-mono text-[10px] font-semibold uppercase tracking-wider">Ouvert</span>`
+          : evt.status === 'soldout'
+            ? `<span class="px-2.5 py-1 rounded-full bg-obsidian/90 border hairline text-bone/80 font-mono text-[10px] uppercase tracking-wider">Complet</span>`
+            : `<span class="px-2.5 py-1 rounded-full bg-obsidian/80 border hairline text-bone/60 font-mono text-[10px] uppercase tracking-wider">Archive</span>`;
+
+        const genresHtml = (evt.genres || []).slice(0, 3).map(g =>
+          `<span class="px-2 py-0.5 rounded-md border hairline font-mono text-[10px] uppercase text-bone/60">${escapeHtml(g)}</span>`
+        ).join('');
+
+        return `
+          <article class="editorial-card rounded-3xl border hairline bg-surface overflow-hidden flex flex-col justify-between">
+            <div>
+              <!-- Visuel Événement -->
+              <div class="relative aspect-[16/11] overflow-hidden cursor-pointer" style="background: ${evt.gradient || '#141414'};" onclick="openEventDetail('${escapeHtml(evt.id)}')">
+                ${evt.imageUrl ? `<img src="${escapeHtml(evt.imageUrl)}" alt="${escapeHtml(evt.title)}" class="w-full h-full object-cover grayscale opacity-90 hover:opacity-100 transition duration-500" onerror="this.style.display='none'" />` : ''}
+                <div class="absolute inset-0 bg-gradient-to-t from-surface via-transparent to-obsidian/35"></div>
+                <div class="absolute top-3.5 left-3.5 right-3.5 flex items-center justify-between gap-2">
+                  <span class="px-2.5 py-1 rounded-full bg-obsidian/85 backdrop-blur-md border hairline font-mono text-[10px] uppercase tracking-wider text-bone/85">
+                    ${escapeHtml(evt.dateDisplay)}
+                  </span>
+                  ${statusBadge}
+                </div>
+              </div>
+
+              <!-- Contenu Événement -->
+              <div class="p-5 space-y-3.5">
+                <div class="flex flex-wrap gap-1.5">${genresHtml}</div>
+                <h3 class="font-display font-bold text-xl leading-snug cursor-pointer hover:text-bone/80 transition" onclick="openEventDetail('${escapeHtml(evt.id)}')">
+                  ${escapeHtml(evt.title)}
+                </h3>
+                <div class="space-y-1 text-xs font-mono text-bone/55">
+                  <div class="truncate">${escapeHtml(evt.venue)} · ${escapeHtml(evt.city)}</div>
+                  <div>${escapeHtml(evt.time)} · ${escapeHtml(evt.price)}</div>
+                </div>
+                <p class="text-sm text-bone/65 line-clamp-2 leading-relaxed">
+                  ${escapeHtml(evt.description)}
+                </p>
+              </div>
+            </div>
+
+            <!-- Pied de carte avec actions -->
+            <div class="p-5 pt-0 flex items-center gap-2.5">
+              <a
+                href="${escapeHtml(evt.ticketUrl || siteState.socials.shotgun)}"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="flex-1 text-center py-3 px-4 rounded-2xl ${evt.status === 'past' ? 'border hairline bg-obsidian text-bone/75 hover:border-bone/40' : 'bg-accent-dyn font-semibold hover:opacity-90'} font-mono text-xs uppercase tracking-wider transition"
+              >
+                ${escapeHtml(evt.ticketLabel || 'Billetterie')} ↗
+              </a>
+              <button
+                onclick="openEventDetail('${escapeHtml(evt.id)}')"
+                class="py-3 px-4 rounded-2xl border hairline bg-obsidian/60 hover:border-bone/40 font-mono text-xs uppercase text-bone/80 transition"
+              >
+                Détails
+              </button>
+            </div>
+          </article>
+        `;
+      }).join('');
+    }
+
+    function openEventDetail(eventId) {
+      const evt = siteState.events.find(e => e.id === eventId);
+      if (!evt) return;
+      const modal = document.getElementById('event-detail-modal');
+      const content = document.getElementById('event-detail-content');
+
+      content.innerHTML = `
+        <div class="relative aspect-[16/9] overflow-hidden border-b hairline" style="background: ${evt.gradient || '#141414'};">
+          ${evt.imageUrl ? `<img src="${escapeHtml(evt.imageUrl)}" alt="${escapeHtml(evt.title)}" class="w-full h-full object-cover grayscale opacity-95" onerror="this.style.display='none'" />` : ''}
+          <button
+            onclick="closeEventDetail()"
+            aria-label="Fermer les détails de l'événement"
+            class="absolute top-3.5 right-3.5 z-10 w-10 h-10 rounded-full bg-surface/90 backdrop-blur-md border hairline text-bone hover:border-accent-dyn flex items-center justify-center shadow-sm transition"
+          >✕</button>
+        </div>
+        <div class="p-5 sm:p-6 space-y-6">
+          <div class="space-y-3">
+            <div class="flex flex-wrap items-center gap-2">
+              <span class="inline-block px-3 py-1 rounded-full bg-accent-dyn font-mono text-[10px] font-semibold uppercase tracking-wider">${escapeHtml(evt.dateDisplay)} · ${escapeHtml(evt.time)}</span>
+              ${(evt.genres || []).map(g => `<span class="px-2.5 py-1 rounded-full border hairline font-mono text-[10px] uppercase text-bone/60">${escapeHtml(g)}</span>`).join('')}
+            </div>
+            <h3 class="font-display font-bold text-2xl sm:text-3xl leading-tight tracking-tight text-bone">${escapeHtml(evt.title)}</h3>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 p-4 rounded-2xl bg-obsidian/70 border hairline text-xs font-mono">
+            <div><span class="text-bone/45 block">LIEU</span><span class="text-bone">${escapeHtml(evt.venue)}, ${escapeHtml(evt.city)}</span></div>
+            <div><span class="text-bone/45 block">TARIF</span><span class="text-bone font-medium">${escapeHtml(evt.price)}</span></div>
+          </div>
+
+          <div>
+            <h4 class="font-mono text-[11px] uppercase tracking-widest text-bone/50 mb-2">À propos de l'événement</h4>
+            <p class="text-sm sm:text-base text-bone/80 leading-relaxed">${escapeHtml(evt.description)}</p>
+          </div>
+
+          <div>
+            <h4 class="font-mono text-[11px] uppercase tracking-widest text-bone/50 mb-2.5">Line-up</h4>
+            <div class="flex flex-wrap gap-2">
+              ${(evt.lineup || []).map(a => `<span class="px-3.5 py-1.5 rounded-full border hairline bg-obsidian font-display font-semibold text-sm">${escapeHtml(a)}</span>`).join('')}
+            </div>
+          </div>
+
+          ${evt.ecoNote ? `
+            <div class="p-4 rounded-2xl border hairline bg-obsidian/70 text-xs text-bone/75 space-y-1">
+              <strong class="font-mono uppercase tracking-wider text-bone block">Dimension Éco-consciente</strong>
+              <p>${escapeHtml(evt.ecoNote)}</p>
+            </div>
+          ` : ''}
+
+          <div class="flex flex-col sm:flex-row gap-3 pt-2">
+            <a href="${escapeHtml(evt.ticketUrl || siteState.socials.shotgun)}" target="_blank" rel="noopener noreferrer" class="flex-1 text-center py-4 px-6 rounded-2xl bg-accent-dyn font-mono text-xs font-semibold uppercase tracking-wider hover:opacity-90 transition">
+              ${escapeHtml(evt.ticketLabel || 'Accéder à la billetterie')} ↗
+            </a>
+            <button onclick="closeEventDetail()" class="py-4 px-6 rounded-2xl border hairline font-mono text-xs uppercase text-bone/75 hover:text-bone">Fermer</button>
+          </div>
+        </div>
+      `;
+      modal.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeEventDetail() {
+      document.getElementById('event-detail-modal').classList.add('hidden');
+      document.body.style.overflow = '';
+    }
+
+    function renderCollective() {
+      const { history, members, partners } = siteState;
+
+      // Histoire
+      document.getElementById('history-title').textContent = history.introTitle;
+      document.getElementById('history-text').textContent = history.introText;
+      document.getElementById('history-quote').textContent = history.quote;
+      document.getElementById('history-quote-author').textContent = history.quoteAuthor;
+
+      document.getElementById('history-milestones').innerHTML = history.milestones.map(ms => `
+        <div class="py-5 grid grid-cols-12 gap-4 items-baseline">
+          <div class="col-span-3 sm:col-span-2 font-serif italic text-2xl sm:text-3xl text-accent-dyn">${escapeHtml(ms.year)}</div>
+          <div class="col-span-9 sm:col-span-10 space-y-1">
+            <h4 class="font-display font-bold text-base sm:text-lg">${escapeHtml(ms.title)}</h4>
+            <p class="text-sm text-bone/70 leading-relaxed">${escapeHtml(ms.description)}</p>
+          </div>
+        </div>
+      `).join('');
+
+      // Membres
+      document.getElementById('members-grid').innerHTML = members.map(m => `
+        <article class="editorial-card rounded-3xl border hairline bg-surface overflow-hidden flex flex-col">
+          <div class="relative aspect-[4/5] bg-surfaceLight overflow-hidden">
+            ${m.photoUrl ? `<img src="${escapeHtml(m.photoUrl)}" alt="${escapeHtml(m.name)}" class="w-full h-full object-cover grayscale opacity-90 hover:opacity-100 transition duration-500" onerror="this.style.display='none'" />` : ''}
+            <div class="absolute inset-0 bg-gradient-to-t from-surface via-transparent to-transparent"></div>
+            <span class="absolute bottom-3 right-3 font-mono text-[9px] uppercase tracking-widest text-bone/45 bg-obsidian/70 px-2 py-0.5 rounded">${escapeHtml(m.credit || '© LS')}</span>
+          </div>
+          <div class="p-5 flex-1 flex flex-col justify-between space-y-3">
+            <div>
+              <h4 class="font-display font-bold text-xl">${escapeHtml(m.name)}</h4>
+              <p class="font-mono text-[11px] uppercase tracking-wider text-bone/75 mt-0.5">${escapeHtml(m.role)}</p>
+              <p class="font-mono text-[10px] text-bone/45 mt-1">${escapeHtml(m.specialty)}</p>
+              <p class="text-xs sm:text-sm text-bone/65 mt-3 leading-relaxed">${escapeHtml(m.bio)}</p>
+            </div>
+            ${m.socialHandle ? `
+              <a href="${escapeHtml(m.socialUrl || '#')}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 font-mono text-[11px] text-bone/70 hover:text-bone pt-2 border-t hairline">
+                <span>${escapeHtml(m.socialHandle)}</span><span>↗</span>
+              </a>
+            ` : ''}
+          </div>
+        </article>
+      `).join('');
+
+      // Partenaires
+      document.getElementById('partners-grid').innerHTML = partners.map((p, idx) => `
+        <a href="${escapeHtml(p.url || '#')}" target="_blank" rel="noopener noreferrer" class="editorial-card p-5 rounded-3xl border hairline bg-surface hover:bg-surfaceLight flex flex-col justify-between gap-4 group">
+          <div class="flex items-start justify-between gap-3">
+            <span class="font-mono text-[10px] uppercase tracking-widest px-2.5 py-1 rounded-full border hairline text-bone/65">${escapeHtml(p.category)}</span>
+            <span class="font-mono text-xs text-bone/40 group-hover:text-accent-dyn transition">0${idx + 1} ↗</span>
+          </div>
+          <div>
+            <h4 class="font-display font-bold text-xl group-hover:text-accent-dyn transition">${escapeHtml(p.name)}</h4>
+            <p class="text-xs text-bone/65 mt-1 leading-relaxed">${escapeHtml(p.description)}</p>
+          </div>
+        </a>
+      `).join('');
+    }
+
+    function renderPracticalInfo() {
+      const container = document.getElementById('practical-accordion');
+      container.innerHTML = siteState.practicalInfo.map((info, idx) => `
+        <div class="rounded-2xl border hairline bg-obsidian/70 overflow-hidden">
+          <button
+            type="button"
+            onclick="togglePracticalItem('prac-body-${idx}', 'prac-icon-${idx}')"
+            class="w-full p-5 text-left flex items-center justify-between gap-4 hover:bg-surface/60 transition"
+          >
+            <div>
+              <span class="font-mono text-[10px] uppercase tracking-widest text-accent-dyn block mb-1">${escapeHtml(info.category)}</span>
+              <span class="font-display font-bold text-base sm:text-lg">${escapeHtml(info.title)}</span>
+            </div>
+            <span id="prac-icon-${idx}" class="w-8 h-8 rounded-full border hairline flex items-center justify-center font-mono text-sm shrink-0 transition-transform ${idx === 0 ? 'rotate-45 text-accent-dyn border-accent-dyn' : ''}">+</span>
+          </button>
+          <div id="prac-body-${idx}" class="${idx === 0 ? '' : 'hidden'} px-5 pb-5 text-sm text-bone/75 leading-relaxed border-t hairline pt-4">
+            ${escapeHtml(info.content)}
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function togglePracticalItem(bodyId, iconId) {
+      const body = document.getElementById(bodyId);
+      const icon = document.getElementById(iconId);
+      const isHidden = body.classList.contains('hidden');
+      body.classList.toggle('hidden');
+      if (isHidden) {
+        icon.classList.add('rotate-45', 'text-accent-dyn', 'border-accent-dyn');
+      } else {
+        icon.classList.remove('rotate-45', 'text-accent-dyn', 'border-accent-dyn');
+      }
+    }
+
+    function renderSocialsAndContact() {
+      const { socials } = siteState;
+      const email = socials.email || 'contact@lasuperlative.fr';
+
+      const mailLink = document.getElementById('contact-email-link');
+      mailLink.href = `mailto:${email}`;
+      mailLink.textContent = email;
+      document.getElementById('form-email-target').textContent = email;
+      document.getElementById('direct-mailto-fallback').href = `mailto:${email}`;
+
+      const networks = [
+        {
+          name: 'Instagram',
+          handle: 'Photos & Stories',
+          url: socials.instagram,
+          icon: `<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M7.75 2h8.5A5.75 5.75 0 0 1 22 7.75v8.5A5.75 5.75 0 0 1 16.25 22h-8.5A5.75 5.75 0 0 1 2 16.25v-8.5A5.75 5.75 0 0 1 7.75 2Zm0 1.8A3.95 3.95 0 0 0 3.8 7.75v8.5a3.95 3.95 0 0 0 3.95 3.95h8.5a3.95 3.95 0 0 0 3.95-3.95v-8.5a3.95 3.95 0 0 0-3.95-3.95h-8.5Zm9.65 1.5a1.15 1.15 0 1 1 0 2.3 1.15 1.15 0 0 1 0-2.3ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 1.8A3.2 3.2 0 1 0 12 15.2 3.2 3.2 0 0 0 12 8.8Z"/></svg>`
+        },
+        {
+          name: 'TikTok',
+          handle: 'Reels & Backstage',
+          url: socials.tiktok,
+          icon: `<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M16.6 5.82A4.28 4.28 0 0 1 15.54 3h-3.09v12.4a2.59 2.59 0 0 1-2.59 2.5c-1.42 0-2.6-1.16-2.6-2.6 0-1.72 1.66-3.01 3.37-2.48V9.66c-3.45-.46-6.47 2.22-6.47 5.64 0 3.33 2.76 5.7 5.69 5.7 3.14 0 5.69-2.55 5.69-5.7V9.01a7.35 7.35 0 0 0 4.3 1.38V7.3s-1.88.09-3.24-1.48Z"/></svg>`
+        },
+        {
+          name: 'YouTube',
+          handle: 'DJ Sets & Aftermovies',
+          url: socials.youtube,
+          icon: `<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M21.58 7.19a2.75 2.75 0 0 0-1.94-1.95C17.93 4.75 12 4.75 12 4.75s-5.93 0-7.64.49A2.75 2.75 0 0 0 2.42 7.2 28.9 28.9 0 0 0 1.93 12a28.9 28.9 0 0 0 .49 4.81 2.75 2.75 0 0 0 1.94 1.95c1.71.49 7.64.49 7.64.49s5.93 0 7.64-.49a2.75 2.75 0 0 0 1.94-1.95c.33-1.58.49-3.2.49-4.81s-.16-3.23-.49-4.81ZM10 15.15v-6.3L15.45 12 10 15.15Z"/></svg>`
+        },
+        {
+          name: 'Facebook',
+          handle: 'Événements & Communauté',
+          url: socials.facebook,
+          icon: `<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M13.5 21v-8.2h2.76l.41-3.2H13.5V7.55c0-.93.26-1.56 1.59-1.56h1.7V3.13A22.8 22.8 0 0 0 14.3 3c-2.46 0-4.14 1.5-4.14 4.26v2.34H7.4v3.2h2.76V21h3.34Z"/></svg>`
+        }
+      ];
+
+      document.getElementById('social-links-grid').innerHTML = networks.map(n => `
+        <a href="${escapeHtml(n.url || '#')}" target="_blank" rel="noopener noreferrer" class="editorial-card p-4 rounded-2xl border hairline bg-surface hover:border-accent-dyn flex items-center gap-3 group">
+          <div class="w-10 h-10 rounded-xl bg-obsidian border hairline flex items-center justify-center text-bone group-hover:text-accent-dyn transition shrink-0">
+            ${n.icon}
+          </div>
+          <div class="min-w-0">
+            <div class="font-display font-bold text-sm truncate group-hover:text-accent-dyn transition">${n.name} ↗</div>
+            <div class="font-mono text-[10px] text-bone/50 truncate">${n.handle}</div>
+          </div>
+        </a>
+      `).join('');
+    }
+
+    function handleContactSubmit(e) {
+      e.preventDefault();
+      const name = document.getElementById('contact-name').value.trim();
+      const reply = document.getElementById('contact-reply').value.trim();
+      const subject = document.getElementById('contact-subject').value;
+      const message = document.getElementById('contact-message').value.trim();
+      const targetEmail = siteState.socials.email || 'contact@lasuperlative.fr';
+
+      const fullSubject = `[La Superlative] ${subject} — ${name}`;
+      const fullBody = `Bonjour l'équipe La Superlative,\n\n${message}\n\n---\nExpéditeur : ${name}\nEmail de réponse : ${reply}`;
+      const mailtoUrl = `mailto:${encodeURIComponent(targetEmail)}?subject=${encodeURIComponent(fullSubject)}&body=${encodeURIComponent(fullBody)}`;
+
+      window.location.href = mailtoUrl;
+      showToast(`Messagerie prête vers ${targetEmail}`);
+    }
+
+    /* =========================================================================
+       4. NAVIGATION MOBILE & RECHERCHE GLOBALE INSTANTANÉE
+    ========================================================================== */
+    function toggleMobileMenu(forceState) {
+      const menu = document.getElementById('mobile-menu');
+      if (typeof forceState === 'boolean') {
+        menu.classList.toggle('hidden', !forceState);
+      } else {
+        menu.classList.toggle('hidden');
+      }
+    }
+
+    function openSearchModal() {
+      const modal = document.getElementById('search-modal');
+      modal.classList.remove('hidden');
+      const input = document.getElementById('global-search-input');
+      input.value = '';
+      performGlobalSearch('');
+      setTimeout(() => input.focus(), 50);
+    }
+
+    function closeSearchModal() {
+      document.getElementById('search-modal').classList.add('hidden');
+    }
+
+    function performGlobalSearch(rawQuery) {
+      const q = (rawQuery || '').trim().toLowerCase();
+      const resultsEl = document.getElementById('search-results');
+
+      if (!q) {
+        resultsEl.innerHTML = `
+          <div class="p-3 text-xs font-mono text-bone/50 uppercase tracking-wider">Suggestions rapides</div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+            ${siteState.events.slice(0, 2).map(e => `
+              <button onclick="closeSearchModal(); openEventDetail('${escapeHtml(e.id)}');" class="p-3.5 rounded-2xl border hairline bg-obsidian/70 hover:border-accent-dyn text-left transition">
+                <span class="font-mono text-[10px] text-accent-dyn uppercase">Événement · ${escapeHtml(e.dateDisplay)}</span>
+                <div class="font-display font-bold text-sm mt-0.5 truncate">${escapeHtml(e.title)}</div>
+              </button>
+            `).join('')}
+            <button onclick="closeSearchModal(); location.hash='#infos-pratiques';" class="p-3.5 rounded-2xl border hairline bg-obsidian/70 hover:border-accent-dyn text-left transition">
+              <span class="font-mono text-[10px] text-bone/50 uppercase">Pratique</span>
+              <div class="font-display font-bold text-sm mt-0.5">Accès TBM & Safe Space</div>
+            </button>
+            <button onclick="closeSearchModal(); location.hash='#contact';" class="p-3.5 rounded-2xl border hairline bg-obsidian/70 hover:border-accent-dyn text-left transition">
+              <span class="font-mono text-[10px] text-bone/50 uppercase">Contact</span>
+              <div class="font-display font-bold text-sm mt-0.5">${escapeHtml(siteState.socials.email)}</div>
+            </button>
+          </div>
+        `;
+        return;
+      }
+
+      const matches = [];
+
+      // Recherche dans les événements
+      siteState.events.forEach(evt => {
+        const hay = `${evt.title} ${evt.venue} ${evt.city} ${(evt.genres || []).join(' ')} ${(evt.lineup || []).join(' ')} ${evt.description}`.toLowerCase();
+        if (hay.includes(q)) {
+          matches.push({
+            type: 'Événement',
+            title: evt.title,
+            subtitle: `${evt.dateDisplay} · ${evt.venue}`,
+            action: `closeSearchModal(); openEventDetail('${escapeHtml(evt.id)}');`
+          });
+        }
+      });
+
+      // Recherche dans les membres
+      siteState.members.forEach(m => {
+        const hay = `${m.name} ${m.role} ${m.specialty} ${m.bio}`.toLowerCase();
+        if (hay.includes(q)) {
+          matches.push({
+            type: 'Membre',
+            title: m.name,
+            subtitle: `${m.role} · ${m.specialty}`,
+            action: `closeSearchModal(); document.getElementById('collectif').scrollIntoView({behavior:'smooth'});`
+          });
+        }
+      });
+
+      // Recherche dans les partenaires
+      siteState.partners.forEach(p => {
+        const hay = `${p.name} ${p.category} ${p.description}`.toLowerCase();
+        if (hay.includes(q)) {
+          matches.push({
+            type: 'Partenaire',
+            title: p.name,
+            subtitle: `${p.category} — ${p.description}`,
+            action: `closeSearchModal(); document.getElementById('collectif').scrollIntoView({behavior:'smooth'});`
+          });
+        }
+      });
+
+      // Recherche dans les infos pratiques
+      siteState.practicalInfo.forEach(i => {
+        const hay = `${i.category} ${i.title} ${i.content}`.toLowerCase();
+        if (hay.includes(q)) {
+          matches.push({
+            type: 'Info Pratique',
+            title: i.title,
+            subtitle: i.content.slice(0, 95) + '...',
+            action: `closeSearchModal(); document.getElementById('infos-pratiques').scrollIntoView({behavior:'smooth'});`
+          });
+        }
+      });
+
+      // Recherche dans l'histoire
+      siteState.history.milestones.forEach(ms => {
+        const hay = `${ms.year} ${ms.title} ${ms.description}`.toLowerCase();
+        if (hay.includes(q)) {
+          matches.push({
+            type: 'Histoire',
+            title: `${ms.year} — ${ms.title}`,
+            subtitle: ms.description,
+            action: `closeSearchModal(); document.getElementById('collectif').scrollIntoView({behavior:'smooth'});`
+          });
+        }
+      });
+
+      if (!matches.length) {
+        resultsEl.innerHTML = `
+          <div class="p-8 text-center space-y-2">
+            <p class="font-serif italic text-2xl text-bone/75">Aucun résultat pour « ${escapeHtml(rawQuery)} »</p>
+            <p class="font-mono text-xs text-bone/45">Essayez un nom d'artiste, un genre (House, Techno, Italo) ou « Shotgun ».</p>
+          </div>
+        `;
+        return;
+      }
+
+      resultsEl.innerHTML = matches.map(m => `
+        <button onclick="${m.action}" class="w-full p-3.5 rounded-2xl border hairline bg-obsidian/65 hover:border-accent-dyn text-left flex items-center justify-between gap-3 transition">
+          <div class="min-w-0">
+            <span class="font-mono text-[10px] uppercase tracking-widest text-accent-dyn">${escapeHtml(m.type)}</span>
+            <div class="font-display font-bold text-sm sm:text-base truncate">${escapeHtml(m.title)}</div>
+            <div class="text-xs text-bone/60 truncate">${escapeHtml(m.subtitle)}</div>
+          </div>
+          <span class="font-mono text-xs text-bone/40 shrink-0">→</span>
+        </button>
+      `).join('');
+    }
+
+    /* =========================================================================
+       5. AUTHENTIFICATION & GESTION DU STUDIO ADMIN
+    ========================================================================== */
+    function handleAdminAccess() {
+      if (siteState.admin.isAuthenticated) {
+        openAdminStudio();
+      } else {
+        document.getElementById('admin-pass-input').value = '';
+        document.getElementById('admin-login-error').classList.add('hidden');
+        document.getElementById('demo-pass-hint').textContent = siteState.admin.password;
+        document.getElementById('admin-login-modal').classList.remove('hidden');
+        setTimeout(() => document.getElementById('admin-pass-input').focus(), 60);
+      }
+    }
+
+    function closeAdminLoginModal() {
+      document.getElementById('admin-login-modal').classList.add('hidden');
+    }
+
+    function togglePasswordVisibility() {
+      const input = document.getElementById('admin-pass-input');
+      input.type = input.type === 'password' ? 'text' : 'password';
+    }
+
+    function submitAdminLogin(e) {
+      e.preventDefault();
+      const user = document.getElementById('admin-user-input').value.trim();
+      const pass = document.getElementById('admin-pass-input').value;
+
+      if (user === siteState.admin.username && pass === siteState.admin.password) {
+        siteState.admin.isAuthenticated = true;
+        closeAdminLoginModal();
+        updateAdminSessionUI();
+        openAdminStudio();
+        showToast('Bienvenue dans le Studio Admin La Superlative');
+      } else {
+        const box = document.getElementById('admin-login-box');
+        document.getElementById('admin-login-error').classList.remove('hidden');
+        box.classList.remove('shake');
+        void box.offsetWidth;
+        box.classList.add('shake');
+      }
+    }
+
+    function logoutAdmin() {
+      siteState.admin.isAuthenticated = false;
+      closeAdminStudio();
+      updateAdminSessionUI();
+      showToast('Session administrateur verrouillée');
+    }
+
+    function updateAdminSessionUI() {
+      const banner = document.getElementById('admin-session-banner');
+      banner.classList.toggle('hidden', !siteState.admin.isAuthenticated);
+    }
+
+    function openAdminStudio() {
+      if (!siteState.admin.isAuthenticated) {
+        handleAdminAccess();
+        return;
+      }
+      document.getElementById('admin-studio').classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+      switchAdminTab(currentAdminTab);
+    }
+
+    function closeAdminStudio() {
+      document.getElementById('admin-studio').classList.add('hidden');
+      document.body.style.overflow = '';
+    }
+
+    function switchAdminTab(tab) {
+      currentAdminTab = tab;
+      document.querySelectorAll('.admin-tab-btn').forEach(btn => {
+        const active = btn.dataset.adminTab === tab;
+        btn.className = active
+          ? 'admin-tab-btn px-4 py-2 rounded-xl font-mono text-xs font-bold uppercase tracking-wider whitespace-nowrap bg-accent-dyn transition'
+          : 'admin-tab-btn px-4 py-2 rounded-xl font-mono text-xs uppercase tracking-wider whitespace-nowrap border hairline bg-surface text-bone/70 hover:text-bone transition';
+      });
+      renderAdminTab();
+    }
+
+    // Lecture d'un fichier image local en mémoire (Object URL, sans base64)
+    function handleLocalImageUpload(inputEl, targetInputId, previewImgId) {
+      const file = inputEl.files && inputEl.files[0];
+      if (!file) return;
+      const objectUrl = URL.createObjectURL(file);
+      const urlInput = document.getElementById(targetInputId);
+      if (urlInput) urlInput.value = objectUrl;
+      if (previewImgId) {
+        const preview = document.getElementById(previewImgId);
+        if (preview) {
+          preview.src = objectUrl;
+          preview.classList.remove('hidden');
+        }
+      }
+      showToast(`Média chargé : ${file.name}`);
+    }
+
+    /* =========================================================================
+       6. RENDU DES 5 ONGLETS DU STUDIO ADMIN (ÉDITION COMPLÈTE)
+    ========================================================================== */
+    function renderAdminTab() {
+      const root = document.getElementById('admin-tab-content');
+      if (currentAdminTab === 'general') renderAdminGeneralTab(root);
+      else if (currentAdminTab === 'events') renderAdminEventsTab(root);
+      else if (currentAdminTab === 'collective') renderAdminCollectiveTab(root);
+      else if (currentAdminTab === 'practical') renderAdminPracticalTab(root);
+      else if (currentAdminTab === 'branding') renderAdminBrandingTab(root);
+    }
+
+    /* --- ONGLET 01 : GÉNÉRAL, HERO & MANIFESTE --- */
+    function renderAdminGeneralTab(root) {
+      const { hero } = siteState;
+      root.innerHTML = `
+        <form onsubmit="saveAdminGeneral(event)" class="space-y-6">
+          <div class="p-6 rounded-3xl border hairline bg-surface space-y-5">
+            <h3 class="font-display font-bold text-xl uppercase">Section Hero & Billetterie Globale</h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div class="sm:col-span-2">
+                <label class="block font-mono text-[11px] uppercase text-bone/60 mb-1.5">Mention de saison (en-tête)</label>
+                <input id="adm-hero-badge" value="${escapeHtml(hero.editionBadge)}" class="w-full px-3.5 py-2.5 rounded-xl bg-obsidian border hairline text-sm" />
+              </div>
+              <div>
+                <label class="block font-mono text-[11px] uppercase text-bone/60 mb-1.5">Titre ligne 1 (Sans-serif)</label>
+                <input id="adm-h1" value="${escapeHtml(hero.headlinePart1)}" class="w-full px-3.5 py-2.5 rounded-xl bg-obsidian border hairline text-sm" />
+              </div>
+              <div>
+                <label class="block font-mono text-[11px] uppercase text-bone/60 mb-1.5">Titre ligne 2 (Serif Italique)</label>
+                <input id="adm-h2" value="${escapeHtml(hero.headlineItalic)}" class="w-full px-3.5 py-2.5 rounded-xl bg-obsidian border hairline text-sm" />
+              </div>
+              <div class="sm:col-span-2">
+                <label class="block font-mono text-[11px] uppercase text-bone/60 mb-1.5">Titre ligne 3</label>
+                <input id="adm-h3" value="${escapeHtml(hero.headlinePart2)}" class="w-full px-3.5 py-2.5 rounded-xl bg-obsidian border hairline text-sm" />
+              </div>
+              <div class="sm:col-span-2">
+                <label class="block font-mono text-[11px] uppercase text-bone/60 mb-1.5">Description d'accroche</label>
+                <textarea id="adm-sub" rows="3" class="w-full px-3.5 py-2.5 rounded-xl bg-obsidian border hairline text-sm">${escapeHtml(hero.subheadline)}</textarea>
+              </div>
+              <div>
+                <label class="block font-mono text-[11px] uppercase text-bone/60 mb-1.5">Texte bouton billetterie</label>
+                <input id="adm-cta-text" value="${escapeHtml(hero.primaryCtaText)}" class="w-full px-3.5 py-2.5 rounded-xl bg-obsidian border hairline text-sm" />
+              </div>
+              <div>
+                <label class="block font-mono text-[11px] uppercase text-bone/60 mb-1.5">Lien billetterie (Shotgun ou autre)</label>
+                <input id="adm-cta-url" type="url" value="${escapeHtml(hero.primaryCtaUrl)}" class="w-full px-3.5 py-2.5 rounded-xl bg-obsidian border hairline text-sm" />
+              </div>
+              <div>
+                <label class="block font-mono text-[11px] uppercase text-bone/60 mb-1.5">Visuel Hero (URL ou Fichier local)</label>
+                <div class="flex gap-2">
+                  <input id="adm-hero-img" value="${escapeHtml(hero.heroVisualUrl)}" placeholder="https://..." class="flex-1 px-3.5 py-2.5 rounded-xl bg-obsidian border hairline text-sm" />
+                  <label class="px-3 py-2.5 rounded-xl border hairline bg-obsidian hover:border-accent-dyn font-mono text-xs cursor-pointer shrink-0">
+                    Upload
+                    <input type="file" accept="image/*" class="hidden" onchange="handleLocalImageUpload(this, 'adm-hero-img')" />
+                  </label>
+                </div>
+              </div>
+              <div>
+                <label class="block font-mono text-[11px] uppercase text-bone/60 mb-1.5">Crédit photo Hero</label>
+                <input id="adm-hero-cap" value="${escapeHtml(hero.heroVisualCaption)}" class="w-full px-3.5 py-2.5 rounded-xl bg-obsidian border hairline text-sm" />
+              </div>
+            </div>
+          </div>
+
+          <div class="p-6 rounded-3xl border hairline bg-surface space-y-4">
+            <h3 class="font-display font-bold text-xl uppercase text-accent-dyn">Bloc Manifeste (Style Éditorial Clair)</h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label class="block font-mono text-[11px] uppercase text-bone/60 mb-1.5">Sur-titre</label>
+                <input id="adm-theme-label" value="${escapeHtml(hero.themeLabel)}" class="w-full px-3.5 py-2.5 rounded-xl bg-obsidian border hairline text-sm" />
+              </div>
+              <div>
+                <label class="block font-mono text-[11px] uppercase text-bone/60 mb-1.5">Thème mis en avant</label>
+                <input id="adm-theme-title" value="${escapeHtml(hero.themeTitle)}" class="w-full px-3.5 py-2.5 rounded-xl bg-obsidian border hairline text-sm" />
+              </div>
+              <div class="sm:col-span-2">
+                <label class="block font-mono text-[11px] uppercase text-bone/60 mb-1.5">Texte Manifeste</label>
+                <textarea id="adm-theme-text" rows="3" class="w-full px-3.5 py-2.5 rounded-xl bg-obsidian border hairline text-sm">${escapeHtml(hero.themeText)}</textarea>
+              </div>
+            </div>
+          </div>
+
+          <button type="submit" class="px-7 py-3.5 rounded-2xl bg-accent-dyn font-mono text-xs font-bold uppercase tracking-wider hover:brightness-110 transition">
+            Enregistrer les modifications Général & Hero
+          </button>
+        </form>
+      `;
+    }
+
+    function saveAdminGeneral(e) {
+      e.preventDefault();
+      siteState.hero.editionBadge = document.getElementById('adm-hero-badge').value;
+      siteState.hero.headlinePart1 = document.getElementById('adm-h1').value;
+      siteState.hero.headlineItalic = document.getElementById('adm-h2').value;
+      siteState.hero.headlinePart2 = document.getElementById('adm-h3').value;
+      siteState.hero.subheadline = document.getElementById('adm-sub').value;
+      siteState.hero.primaryCtaText = document.getElementById('adm-cta-text').value;
+      siteState.hero.primaryCtaUrl = document.getElementById('adm-cta-url').value;
+      siteState.hero.heroVisualUrl = document.getElementById('adm-hero-img').value;
+      siteState.hero.heroVisualCaption = document.getElementById('adm-hero-cap').value;
+      siteState.hero.themeLabel = document.getElementById('adm-theme-label').value;
+      siteState.hero.themeTitle = document.getElementById('adm-theme-title').value;
+      siteState.hero.themeText = document.getElementById('adm-theme-text').value;
+
+      renderAll();
+      showToast('Section Hero & Manifeste mise à jour !');
+    }
+
+    /* --- ONGLET 02 : GESTION COMPLÈTE DES ÉVÉNEMENTS --- */
+    function renderAdminEventsTab(root) {
+      const evtToEdit = editingEventId ? siteState.events.find(e => e.id === editingEventId) : null;
+
+      root.innerHTML = `
+        <!-- Formulaire Création / Édition Événement -->
+        <form onsubmit="saveAdminEvent(event)" class="p-6 rounded-3xl border hairline bg-surface space-y-5">
+          <div class="flex items-center justify-between gap-2">
+            <h3 class="font-display font-bold text-xl uppercase text-accent-dyn">
+              ${evtToEdit ? 'Modifier l\'événement' : '+ Créer un nouvel événement'}
+            </h3>
+            ${evtToEdit ? `<button type="button" onclick="editingEventId=null; renderAdminTab();" class="px-3 py-1.5 rounded-xl border hairline text-xs font-mono">Annuler édition</button>` : ''}
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div class="sm:col-span-2">
+              <label class="block font-mono text-[11px] uppercase text-bone/60 mb-1.5">Titre de l'événement *</label>
+              <input id="ev-title" required value="${escapeHtml(evtToEdit ? evtToEdit.title : '')}" placeholder="Ex: La Superlative Open Air #07" class="w-full px-3.5 py-2.5 rounded-xl bg-obsidian border hairline text-sm" />
+            </div>
+            <div>
+              <label class="block font-mono text-[11px] uppercase text-bone/60 mb-1.5">Date (tri calendrier) *</label>
+              <input id="ev-date" type="date" required value="${escapeHtml(evtToEdit ? evtToEdit.date : '2027-02-20')}" class="w-full px-3.5 py-2.5 rounded-xl bg-obsidian border hairline text-sm" />
+            </div>
+            <div>
+              <label class="block font-mono text-[11px] uppercase text-bone/60 mb-1.5">Date affichée *</label>
+              <input id="ev-date-display" required value="${escapeHtml(evtToEdit ? evtToEdit.dateDisplay : 'SAM. 20 FÉV. 2027')}" placeholder="SAM. 20 FÉV. 2027" class="w-full px-3.5 py-2.5 rounded-xl bg-obsidian border hairline text-sm" />
+            </div>
+            <div>
+              <label class="block font-mono text-[11px] uppercase text-bone/60 mb-1.5">Horaires</label>
+              <input id="ev-time" value="${escapeHtml(evtToEdit ? evtToEdit.time : '22:00 — 04:00')}" class="w-full px-3.5 py-2.5 rounded-xl bg-obsidian border hairline text-sm" />
+            </div>
+            <div>
+              <label class="block font-mono text-[11px] uppercase text-bone/60 mb-1.5">Statut</label>
+              <select id="ev-status" class="w-full px-3.5 py-2.5 rounded-xl bg-obsidian border hairline text-sm">
+                <option value="upcoming" ${evtToEdit?.status === 'upcoming' ? 'selected' : ''}>À venir (Billetterie ouverte)</option>
+                <option value="soldout" ${evtToEdit?.status === 'soldout' ? 'selected' : ''}>Complet (Sold Out)</option>
+                <option value="past" ${evtToEdit?.status === 'past' ? 'selected' : ''}>Édition passée (Archive)</option>
+              </select>
+            </div>
+            <div>
+              <label class="block font-mono text-[11px] uppercase text-bone/60 mb-1.5">Lieu *</label>
+              <input id="ev-venue" required value="${escapeHtml(evtToEdit ? evtToEdit.venue : '')}" placeholder="Salle des Fêtes Grand Parc, IBOAT..." class="w-full px-3.5 py-2.5 rounded-xl bg-obsidian border hairline text-sm" />
+            </div>
+            <div>
+              <label class="block font-mono text-[11px] uppercase text-bone/60 mb-1.5">Ville & Tarif</label>
+              <div class="grid grid-cols-2 gap-2">
+                <input id="ev-city" value="${escapeHtml(evtToEdit ? evtToEdit.city : 'Bordeaux')}" placeholder="Bordeaux" class="w-full px-3 py-2.5 rounded-xl bg-obsidian border hairline text-sm" />
+                <input id="ev-price" value="${escapeHtml(evtToEdit ? evtToEdit.price : 'Dès 10€')}" placeholder="Dès 10€" class="w-full px-3 py-2.5 rounded-xl bg-obsidian border hairline text-sm" />
+              </div>
+            </div>
+            <div>
+              <label class="block font-mono text-[11px] uppercase text-bone/60 mb-1.5">Genres (séparés par virgule)</label>
+              <input id="ev-genres" value="${escapeHtml(evtToEdit ? (evtToEdit.genres || []).join(', ') : 'House, Italo Disco')}" class="w-full px-3.5 py-2.5 rounded-xl bg-obsidian border hairline text-sm" />
+            </div>
+            <div>
+              <label class="block font-mono text-[11px] uppercase text-bone/60 mb-1.5">Line-up (séparés par virgule)</label>
+              <input id="ev-lineup" value="${escapeHtml(evtToEdit ? (evtToEdit.lineup || []).join(', ') : 'Guest TBA, Pastel, Alex S.')}" class="w-full px-3.5 py-2.5 rounded-xl bg-obsidian border hairline text-sm" />
+            </div>
+            <div>
+              <label class="block font-mono text-[11px] uppercase text-bone/60 mb-1.5">Lien Billetterie (Shotgun ou autre)</label>
+              <input id="ev-ticket-url" type="url" value="${escapeHtml(evtToEdit ? evtToEdit.ticketUrl : siteState.socials.shotgun)}" class="w-full px-3.5 py-2.5 rounded-xl bg-obsidian border hairline text-sm" />
+            </div>
+            <div>
+              <label class="block font-mono text-[11px] uppercase text-bone/60 mb-1.5">Visuel (URL ou Upload local)</label>
+              <div class="flex gap-2">
+                <input id="ev-img" value="${escapeHtml(evtToEdit ? evtToEdit.imageUrl : '')}" placeholder="https://... ou upload" class="flex-1 px-3 py-2.5 rounded-xl bg-obsidian border hairline text-sm" />
+                <label class="px-3 py-2.5 rounded-xl border hairline bg-obsidian hover:border-accent-dyn font-mono text-xs cursor-pointer shrink-0">
+                  Upload
+                  <input type="file" accept="image/*" class="hidden" onchange="handleLocalImageUpload(this, 'ev-img')" />
+                </label>
+              </div>
+            </div>
+            <div class="sm:col-span-2">
+              <label class="block font-mono text-[11px] uppercase text-bone/60 mb-1.5">Note éco-responsable / Partenaire (optionnel)</label>
+              <input id="ev-eco" value="${escapeHtml(evtToEdit ? evtToEdit.ecoNote : '')}" placeholder="Ex: Gobelets consignés, accès Tram C..." class="w-full px-3.5 py-2.5 rounded-xl bg-obsidian border hairline text-sm" />
+            </div>
+            <div class="sm:col-span-2">
+              <label class="block font-mono text-[11px] uppercase text-bone/60 mb-1.5">Description complète *</label>
+              <textarea id="ev-desc" rows="3" required class="w-full px-3.5 py-2.5 rounded-xl bg-obsidian border hairline text-sm">${escapeHtml(evtToEdit ? evtToEdit.description : '')}</textarea>
+            </div>
+          </div>
+
+          <button type="submit" class="px-6 py-3.5 rounded-2xl bg-accent-dyn font-mono text-xs font-bold uppercase tracking-wider hover:brightness-110 transition">
+            ${evtToEdit ? 'Mettre à jour cet événement' : 'Publier l\'événement'}
+          </button>
+        </form>
+
+        <!-- Liste des Événements existants -->
+        <div class="space-y-3">
+          <h3 class="font-display font-bold text-lg uppercase">Événements enregistrés (${siteState.events.length})</h3>
+          <div class="space-y-2.5">
+            ${siteState.events.map(evt => `
+              <div class="p-4 rounded-2xl border hairline bg-surface flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                <div class="flex items-center gap-3.5 min-w-0">
+                  <div class="w-14 h-14 rounded-xl overflow-hidden border hairline shrink-0" style="background: ${evt.gradient || '#15161e'};">
+                    ${evt.imageUrl ? `<img src="${escapeHtml(evt.imageUrl)}" class="w-full h-full object-cover" onerror="this.style.display='none'" />` : ''}
+                  </div>
+                  <div class="min-w-0">
+                    <div class="font-mono text-[10px] uppercase text-accent-dyn">${escapeHtml(evt.dateDisplay)} · ${escapeHtml(evt.status)}</div>
+                    <div class="font-display font-bold text-base truncate">${escapeHtml(evt.title)}</div>
+                    <div class="text-xs text-bone/60 truncate">${escapeHtml(evt.venue)}</div>
+                  </div>
+                </div>
+                <div class="flex items-center gap-2 shrink-0">
+                  <button onclick="editingEventId='${escapeHtml(evt.id)}'; renderAdminTab();" class="px-3.5 py-2 rounded-xl border hairline hover:border-accent-dyn font-mono text-xs uppercase">Éditer</button>
+                  <button onclick="deleteAdminEvent('${escapeHtml(evt.id)}')" class="px-3.5 py-2 rounded-xl btn-danger font-mono text-xs uppercase">Suppr.</button>
+                </div>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      `;
+    }
+
+    function saveAdminEvent(e) {
+      e.preventDefault();
+      const payload = {
+        id: editingEventId || ('evt-' + Date.now()),
+        title: document.getElementById('ev-title').value.trim(),
+        date: document.getElementById('ev-date').value,
+        dateDisplay: document.getElementById('ev-date-display').value.trim(),
+        time: document.getElementById('ev-time').value.trim(),
+        status: document.getElementById('ev-status').value,
+        venue: document.getElementById('ev-venue').value.trim(),
+        city: document.getElementById('ev-city').value.trim() || 'Bordeaux',
+        price: document.getElementById('ev-price').value.trim() || 'TBA',
+        genres: document.getElementById('ev-genres').value.split(',').map(s => s.trim()).filter(Boolean),
+        lineup: document.getElementById('ev-lineup').value.split(',').map(s => s.trim()).filter(Boolean),
+        ticketUrl: document.getElementById('ev-ticket-url').value.trim() || siteState.socials.shotgun,
+        ticketLabel: document.getElementById('ev-status').value === 'past' ? 'Archive' : 'Billets Shotgun',
+        imageUrl: document.getElementById('ev-img').value.trim(),
+        ecoNote: document.getElementById('ev-eco').value.trim(),
+        description: document.getElementById('ev-desc').value.trim(),
+        gradient: 'linear-gradient(135deg, #111111 0%, #1D1D1D 100%)'
+      };
+
+      if (editingEventId) {
+        const idx = siteState.events.findIndex(ev => ev.id === editingEventId);
+        if (idx !== -1) siteState.events[idx] = payload;
+        showToast('Événement mis à jour !');
+      } else {
+        siteState.events.unshift(payload);
+        showToast('Nouvel événement publié !');
+      }
+
+      editingEventId = null;
+      renderAll();
+      renderAdminTab();
+    }
+
+    function deleteAdminEvent(id) {
+      openConfirmModal('Supprimer l\'événement ?', 'Cet événement sera retiré immédiatement du calendrier public.', () => {
+        siteState.events = siteState.events.filter(e => e.id !== id);
+        if (editingEventId === id) editingEventId = null;
+        renderAll();
+        renderAdminTab();
+        showToast('Événement supprimé');
+      });
+    }
+
+    /* --- ONGLET 03 : HISTOIRE, MEMBRES & PARTENAIRES --- */
+    function renderAdminCollectiveTab(root) {
+      const { history, members, partners } = siteState;
+      root.innerHTML = `
+        <!-- Histoire -->
+        <form onsubmit="saveAdminHistory(event)" class="p-6 rounded-3xl border hairline bg-surface space-y-4">
+          <h3 class="font-display font-bold text-xl uppercase text-accent-dyn">Histoire du Collectif</h3>
+          <div>
+            <label class="block font-mono text-[11px] uppercase text-bone/60 mb-1.5">Titre d'introduction</label>
+            <input id="adm-hist-title" value="${escapeHtml(history.introTitle)}" class="w-full px-3.5 py-2.5 rounded-xl bg-obsidian border hairline text-sm" />
+          </div>
+          <div>
+            <label class="block font-mono text-[11px] uppercase text-bone/60 mb-1.5">Texte Histoire</label>
+            <textarea id="adm-hist-text" rows="3" class="w-full px-3.5 py-2.5 rounded-xl bg-obsidian border hairline text-sm">${escapeHtml(history.introText)}</textarea>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block font-mono text-[11px] uppercase text-bone/60 mb-1.5">Citation mise en avant</label>
+              <input id="adm-hist-quote" value="${escapeHtml(history.quote)}" class="w-full px-3.5 py-2.5 rounded-xl bg-obsidian border hairline text-sm" />
+            </div>
+            <div>
+              <label class="block font-mono text-[11px] uppercase text-bone/60 mb-1.5">Auteur de la citation</label>
+              <input id="adm-hist-author" value="${escapeHtml(history.quoteAuthor)}" class="w-full px-3.5 py-2.5 rounded-xl bg-obsidian border hairline text-sm" />
+            </div>
+          </div>
+          <button type="submit" class="px-5 py-3 rounded-xl bg-accent-dyn font-mono text-xs font-bold uppercase">Enregistrer l'histoire</button>
+        </form>
+
+        <!-- Membres -->
+        <div class="p-6 rounded-3xl border hairline bg-surface space-y-5">
+          <h3 class="font-display font-bold text-xl uppercase text-accent-dyn">Membres du collectif (${members.length})</h3>
+          <form onsubmit="addAdminMember(event)" class="grid grid-cols-1 sm:grid-cols-2 gap-3 p-4 rounded-2xl bg-obsidian/70 border hairline">
+            <input id="mem-name" required placeholder="Nom / Pseudo DJ *" class="px-3.5 py-2.5 rounded-xl bg-surface border hairline text-sm" />
+            <input id="mem-role" required placeholder="Rôle (ex: DJ Résident, DA...) *" class="px-3.5 py-2.5 rounded-xl bg-surface border hairline text-sm" />
+            <input id="mem-spec" placeholder="Spécialités (ex: Minimal, Scéno)" class="px-3.5 py-2.5 rounded-xl bg-surface border hairline text-sm" />
+            <div class="flex gap-2">
+              <input id="mem-photo" placeholder="URL Photo ou Upload" class="flex-1 px-3 py-2.5 rounded-xl bg-surface border hairline text-sm" />
+              <label class="px-3 py-2.5 rounded-xl border hairline bg-surface font-mono text-xs cursor-pointer shrink-0">
+                Upload
+                <input type="file" accept="image/*" class="hidden" onchange="handleLocalImageUpload(this, 'mem-photo')" />
+              </label>
+            </div>
+            <input id="mem-handle" placeholder="@instagram" class="px-3.5 py-2.5 rounded-xl bg-surface border hairline text-sm" />
+            <input id="mem-bio" required placeholder="Courte bio *" class="px-3.5 py-2.5 rounded-xl bg-surface border hairline text-sm" />
+            <button type="submit" class="sm:col-span-2 py-2.5 rounded-xl bg-accent-dyn font-mono text-xs font-bold uppercase">+ Ajouter ce membre</button>
+          </form>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            ${members.map(m => `
+              <div class="p-3.5 rounded-2xl border hairline bg-obsidian/60 flex items-center justify-between gap-3">
+                <div class="min-w-0">
+                  <div class="font-display font-bold text-sm truncate">${escapeHtml(m.name)}</div>
+                  <div class="font-mono text-[10px] text-accent-dyn truncate">${escapeHtml(m.role)}</div>
+                </div>
+                <button onclick="deleteAdminMember('${escapeHtml(m.id)}')" class="px-3 py-1.5 rounded-xl btn-danger font-mono text-[10px] uppercase shrink-0">Suppr.</button>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+
+        <!-- Partenaires -->
+        <div class="p-6 rounded-3xl border hairline bg-surface space-y-5">
+          <h3 class="font-display font-bold text-xl uppercase text-accent-dyn">Partenaires (${partners.length})</h3>
+          <form onsubmit="addAdminPartner(event)" class="grid grid-cols-1 sm:grid-cols-2 gap-3 p-4 rounded-2xl bg-obsidian/70 border hairline">
+            <input id="par-name" required placeholder="Nom du partenaire *" class="px-3.5 py-2.5 rounded-xl bg-surface border hairline text-sm" />
+            <input id="par-cat" required placeholder="Catégorie (Lieu, Média, Asso...) *" class="px-3.5 py-2.5 rounded-xl bg-surface border hairline text-sm" />
+            <input id="par-url" type="url" placeholder="https://site-partenaire.fr" class="px-3.5 py-2.5 rounded-xl bg-surface border hairline text-sm" />
+            <input id="par-desc" required placeholder="Description rapide *" class="px-3.5 py-2.5 rounded-xl bg-surface border hairline text-sm" />
+            <button type="submit" class="sm:col-span-2 py-2.5 rounded-xl bg-accent-dyn font-mono text-xs font-bold uppercase">+ Ajouter ce partenaire</button>
+          </form>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            ${partners.map(p => `
+              <div class="p-3.5 rounded-2xl border hairline bg-obsidian/60 flex items-center justify-between gap-3">
+                <div class="min-w-0">
+                  <div class="font-display font-bold text-sm truncate">${escapeHtml(p.name)}</div>
+                  <div class="font-mono text-[10px] text-bone/55 truncate">${escapeHtml(p.category)}</div>
+                </div>
+                <button onclick="deleteAdminPartner('${escapeHtml(p.id)}')" class="px-3 py-1.5 rounded-xl btn-danger font-mono text-[10px] uppercase shrink-0">Suppr.</button>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      `;
+    }
+
+    function saveAdminHistory(e) {
+      e.preventDefault();
+      siteState.history.introTitle = document.getElementById('adm-hist-title').value;
+      siteState.history.introText = document.getElementById('adm-hist-text').value;
+      siteState.history.quote = document.getElementById('adm-hist-quote').value;
+      siteState.history.quoteAuthor = document.getElementById('adm-hist-author').value;
+      renderAll();
+      showToast('Histoire du collectif mise à jour !');
+    }
+
+    function addAdminMember(e) {
+      e.preventDefault();
+      const name = document.getElementById('mem-name').value.trim();
+      siteState.members.push({
+        id: 'mem-' + Date.now(),
+        name,
+        role: document.getElementById('mem-role').value.trim(),
+        specialty: document.getElementById('mem-spec').value.trim() || 'Collectif Bordeaux',
+        photoUrl: document.getElementById('mem-photo').value.trim() || `https://placehold.co/500x620/141414/E8E8E3?text=${encodeURIComponent(name)}`,
+        socialHandle: document.getElementById('mem-handle').value.trim(),
+        socialUrl: siteState.socials.instagram,
+        bio: document.getElementById('mem-bio').value.trim(),
+        credit: '© La Superlative'
+      });
+      renderAll();
+      renderAdminTab();
+      showToast(`${name} ajouté aux membres !`);
+    }
+
+    function deleteAdminMember(id) {
+      openConfirmModal('Retirer ce membre ?', 'Cette fiche membre sera supprimée de la section Collectif.', () => {
+        siteState.members = siteState.members.filter(m => m.id !== id);
+        renderAll();
+        renderAdminTab();
+        showToast('Membre retiré');
+      });
+    }
+
+    function addAdminPartner(e) {
+      e.preventDefault();
+      const name = document.getElementById('par-name').value.trim();
+      siteState.partners.push({
+        id: 'par-' + Date.now(),
+        name,
+        category: document.getElementById('par-cat').value.trim(),
+        url: document.getElementById('par-url').value.trim() || '#',
+        description: document.getElementById('par-desc').value.trim()
+      });
+      renderAll();
+      renderAdminTab();
+      showToast(`Partenaire ${name} ajouté !`);
+    }
+
+    function deleteAdminPartner(id) {
+      openConfirmModal('Supprimer ce partenaire ?', 'Le partenaire ne sera plus affiché sur le site.', () => {
+        siteState.partners = siteState.partners.filter(p => p.id !== id);
+        renderAll();
+        renderAdminTab();
+        showToast('Partenaire supprimé');
+      });
+    }
+
+    /* --- ONGLET 04 : INFOS PRATIQUES & RÉSEAUX SOCIAUX --- */
+    function renderAdminPracticalTab(root) {
+      const { socials, practicalInfo } = siteState;
+      root.innerHTML = `
+        <!-- Réseaux sociaux & Contact -->
+        <form onsubmit="saveAdminSocials(event)" class="p-6 rounded-3xl border hairline bg-surface space-y-4">
+          <h3 class="font-display font-bold text-xl uppercase text-accent-dyn">Réseaux Sociaux & Email Officiel</h3>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block font-mono text-[11px] uppercase text-bone/60 mb-1.5">Email de contact</label>
+              <input id="soc-email" type="email" value="${escapeHtml(socials.email)}" class="w-full px-3.5 py-2.5 rounded-xl bg-obsidian border hairline text-sm" />
+            </div>
+            <div>
+              <label class="block font-mono text-[11px] uppercase text-bone/60 mb-1.5">Page Shotgun</label>
+              <input id="soc-shotgun" type="url" value="${escapeHtml(socials.shotgun)}" class="w-full px-3.5 py-2.5 rounded-xl bg-obsidian border hairline text-sm" />
+            </div>
+            <div>
+              <label class="block font-mono text-[11px] uppercase text-bone/60 mb-1.5">Instagram</label>
+              <input id="soc-ig" type="url" value="${escapeHtml(socials.instagram)}" class="w-full px-3.5 py-2.5 rounded-xl bg-obsidian border hairline text-sm" />
+            </div>
+            <div>
+              <label class="block font-mono text-[11px] uppercase text-bone/60 mb-1.5">TikTok</label>
+              <input id="soc-tt" type="url" value="${escapeHtml(socials.tiktok)}" class="w-full px-3.5 py-2.5 rounded-xl bg-obsidian border hairline text-sm" />
+            </div>
+            <div>
+              <label class="block font-mono text-[11px] uppercase text-bone/60 mb-1.5">YouTube</label>
+              <input id="soc-yt" type="url" value="${escapeHtml(socials.youtube)}" class="w-full px-3.5 py-2.5 rounded-xl bg-obsidian border hairline text-sm" />
+            </div>
+            <div>
+              <label class="block font-mono text-[11px] uppercase text-bone/60 mb-1.5">Facebook</label>
+              <input id="soc-fb" type="url" value="${escapeHtml(socials.facebook)}" class="w-full px-3.5 py-2.5 rounded-xl bg-obsidian border hairline text-sm" />
+            </div>
+          </div>
+          <button type="submit" class="px-5 py-3 rounded-xl bg-accent-dyn font-mono text-xs font-bold uppercase">Enregistrer les liens</button>
+        </form>
+
+        <!-- Infos Pratiques CRUD -->
+        <div class="p-6 rounded-3xl border hairline bg-surface space-y-5">
+          <h3 class="font-display font-bold text-xl uppercase text-accent-dyn">Blocs Infos Pratiques (${practicalInfo.length})</h3>
+          <form onsubmit="addAdminPractical(event)" class="grid grid-cols-1 sm:grid-cols-2 gap-3 p-4 rounded-2xl bg-obsidian/70 border hairline">
+            <input id="inf-cat" required placeholder="Catégorie (ex: Accès, Cashless...)" class="px-3.5 py-2.5 rounded-xl bg-surface border hairline text-sm" />
+            <input id="inf-title" required placeholder="Question / Titre *" class="px-3.5 py-2.5 rounded-xl bg-surface border hairline text-sm" />
+            <textarea id="inf-content" required rows="2" placeholder="Réponse détaillée *" class="sm:col-span-2 px-3.5 py-2.5 rounded-xl bg-surface border hairline text-sm"></textarea>
+            <button type="submit" class="sm:col-span-2 py-2.5 rounded-xl bg-accent-dyn font-mono text-xs font-bold uppercase">+ Ajouter cette info pratique</button>
+          </form>
+
+          <div class="space-y-2.5">
+            ${practicalInfo.map(item => `
+              <div class="p-4 rounded-2xl border hairline bg-obsidian/60 flex items-start justify-between gap-3">
+                <div class="min-w-0">
+                  <span class="font-mono text-[10px] uppercase text-accent-dyn">${escapeHtml(item.category)}</span>
+                  <div class="font-display font-bold text-sm">${escapeHtml(item.title)}</div>
+                  <p class="text-xs text-bone/60 mt-1">${escapeHtml(item.content)}</p>
+                </div>
+                <button onclick="deleteAdminPractical('${escapeHtml(item.id)}')" class="px-3 py-1.5 rounded-xl btn-danger font-mono text-[10px] uppercase shrink-0">Suppr.</button>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      `;
+    }
+
+    function saveAdminSocials(e) {
+      e.preventDefault();
+      siteState.socials.email = document.getElementById('soc-email').value.trim() || 'contact@lasuperlative.fr';
+      siteState.socials.shotgun = document.getElementById('soc-shotgun').value.trim();
+      siteState.socials.instagram = document.getElementById('soc-ig').value.trim();
+      siteState.socials.tiktok = document.getElementById('soc-tt').value.trim();
+      siteState.socials.youtube = document.getElementById('soc-yt').value.trim();
+      siteState.socials.facebook = document.getElementById('soc-fb').value.trim();
+      renderAll();
+      showToast('Réseaux sociaux et adresse mail mis à jour !');
+    }
+
+    function addAdminPractical(e) {
+      e.preventDefault();
+      siteState.practicalInfo.push({
+        id: 'inf-' + Date.now(),
+        category: document.getElementById('inf-cat').value.trim(),
+        title: document.getElementById('inf-title').value.trim(),
+        content: document.getElementById('inf-content').value.trim()
+      });
+      renderAll();
+      renderAdminTab();
+      showToast('Info pratique ajoutée !');
+    }
+
+    function deleteAdminPractical(id) {
+      openConfirmModal('Supprimer cette info pratique ?', 'Ce bloc ne sera plus visible dans la section Infos Pratiques.', () => {
+        siteState.practicalInfo = siteState.practicalInfo.filter(i => i.id !== id);
+        renderAll();
+        renderAdminTab();
+        showToast('Info pratique supprimée');
+      });
+    }
+
+    /* --- ONGLET 05 : BRANDING (Logo, Favicon, Couleur Hex, Mode Jour/Sombre), SEO & SÉCURITÉ --- */
+    function updateHexPreview(val) {
+      const normalized = normalizeHexColor(val);
+      const swatch = document.getElementById('br-color-swatch');
+      const status = document.getElementById('br-color-status');
+      if (normalized) {
+        if (swatch) swatch.style.backgroundColor = normalized;
+        if (status) {
+          status.textContent = normalized;
+          status.className = 'font-mono text-[10px] text-bone/55 uppercase';
+        }
+      } else {
+        if (status) {
+          status.textContent = 'Format attendu : #RRGGBB';
+          status.className = 'font-mono text-[10px] text-danger';
+        }
+      }
+    }
+
+    function renderAdminBrandingTab(root) {
+      const { branding, seo } = siteState;
+      const safeHex = normalizeHexColor(branding.accentColor) || '#111111';
+
+      root.innerHTML = `
+        <form onsubmit="saveAdminBrandingAndSEO(event)" class="space-y-6">
+          <!-- Branding -->
+          <div class="p-6 rounded-3xl border hairline bg-surface space-y-5">
+            <h3 class="font-display font-bold text-xl uppercase">Identité Visuelle, Apparence, Logo & Favicon</h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label class="block font-mono text-[11px] uppercase text-bone/60 mb-1.5">Nom du collectif / site</label>
+                <input id="br-name" value="${escapeHtml(branding.siteName)}" class="w-full px-3.5 py-2.5 rounded-xl bg-obsidian border hairline text-sm" />
+              </div>
+              <div>
+                <label class="block font-mono text-[11px] uppercase text-bone/60 mb-1.5">Sous-titre (Tagline)</label>
+                <input id="br-tagline" value="${escapeHtml(branding.tagline)}" class="w-full px-3.5 py-2.5 rounded-xl bg-obsidian border hairline text-sm" />
+              </div>
+              <div>
+                <label class="block font-mono text-[11px] uppercase text-bone/60 mb-1.5">Monogramme (2-3 lettres)</label>
+                <input id="br-mark" maxlength="3" value="${escapeHtml(branding.shortMark)}" class="w-full px-3.5 py-2.5 rounded-xl bg-obsidian border hairline text-sm uppercase" />
+              </div>
+              <div>
+                <label for="br-theme" class="block font-mono text-[11px] uppercase text-bone/60 mb-1.5">Apparence du site</label>
+                <select id="br-theme" onchange="setTheme(this.value)" class="w-full px-3.5 py-2.5 rounded-xl bg-obsidian border hairline text-sm">
+                  <option value="light" ${branding.theme === 'light' ? 'selected' : ''}>Mode Jour (Clair)</option>
+                  <option value="dark" ${branding.theme === 'dark' ? 'selected' : ''}>Mode Sombre</option>
+                </select>
+              </div>
+              <div class="sm:col-span-2">
+                <div class="flex items-center justify-between mb-1.5">
+                  <label for="br-color" class="block font-mono text-[11px] uppercase text-bone/60">Couleur d'accentuation (code hex)</label>
+                  <span id="br-color-status" class="font-mono text-[10px] text-bone/55 uppercase">${escapeHtml(safeHex)}</span>
+                </div>
+                <div class="flex items-center gap-3">
+                  <span id="br-color-swatch" class="w-10 h-10 rounded-xl border hairline shrink-0" style="background-color: ${escapeHtml(safeHex)};"></span>
+                  <input
+                    id="br-color"
+                    type="text"
+                    maxlength="7"
+                    value="${escapeHtml(safeHex)}"
+                    placeholder="#111111"
+                    oninput="updateHexPreview(this.value)"
+                    class="w-full px-3.5 py-2.5 rounded-xl bg-obsidian border hairline font-mono text-sm uppercase tracking-wider focus:outline-none focus:border-accent-dyn"
+                  />
+                </div>
+              </div>
+
+              <!-- Logo -->
+              <div>
+                <label class="block font-mono text-[11px] uppercase text-bone/60 mb-1.5">Type de Logo</label>
+                <select id="br-logo-type" class="w-full px-3.5 py-2.5 rounded-xl bg-obsidian border hairline text-sm">
+                  <option value="text" ${branding.logoType === 'text' ? 'selected' : ''}>Monogramme typographique</option>
+                  <option value="image" ${branding.logoType === 'image' ? 'selected' : ''}>Image / Logo personnalisé</option>
+                </select>
+              </div>
+              <div>
+                <label class="block font-mono text-[11px] uppercase text-bone/60 mb-1.5">Fichier / URL du Logo</label>
+                <div class="flex gap-2">
+                  <input id="br-logo-url" value="${escapeHtml(branding.logoUrl)}" placeholder="https://... ou upload" class="flex-1 px-3 py-2.5 rounded-xl bg-obsidian border hairline text-sm" />
+                  <label class="px-3 py-2.5 rounded-xl border hairline bg-obsidian hover:border-accent-dyn font-mono text-xs cursor-pointer shrink-0">
+                    Upload
+                    <input type="file" accept="image/*" class="hidden" onchange="handleLocalImageUpload(this, 'br-logo-url'); document.getElementById('br-logo-type').value='image';" />
+                  </label>
+                </div>
+              </div>
+
+              <!-- Favicon -->
+              <div>
+                <label class="block font-mono text-[11px] uppercase text-bone/60 mb-1.5">Type de Favicon (onglet navigateur)</label>
+                <select id="br-fav-type" class="w-full px-3.5 py-2.5 rounded-xl bg-obsidian border hairline text-sm">
+                  <option value="svg" ${branding.faviconType === 'svg' ? 'selected' : ''}>SVG dynamique (Monogramme + Couleur)</option>
+                  <option value="url" ${branding.faviconType === 'url' ? 'selected' : ''}>Image personnalisée (.png / .svg / .ico)</option>
+                </select>
+              </div>
+              <div>
+                <label class="block font-mono text-[11px] uppercase text-bone/60 mb-1.5">Fichier / URL du Favicon</label>
+                <div class="flex gap-2">
+                  <input id="br-fav-url" value="${escapeHtml(branding.faviconUrl)}" placeholder="https://... ou upload" class="flex-1 px-3 py-2.5 rounded-xl bg-obsidian border hairline text-sm" />
+                  <label class="px-3 py-2.5 rounded-xl border hairline bg-obsidian hover:border-accent-dyn font-mono text-xs cursor-pointer shrink-0">
+                    Upload
+                    <input type="file" accept="image/*" class="hidden" onchange="handleLocalImageUpload(this, 'br-fav-url'); document.getElementById('br-fav-type').value='url';" />
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- SEO & Méta-données -->
+          <div class="p-6 rounded-3xl border hairline bg-surface space-y-4">
+            <h3 class="font-display font-bold text-xl uppercase text-accent-dyn">Méta-données & SEO (Google / Partage Social)</h3>
+            <div class="grid grid-cols-1 gap-4">
+              <div>
+                <label class="block font-mono text-[11px] uppercase text-bone/60 mb-1.5">Balise &lt;title&gt; (Titre navigateur & Google)</label>
+                <input id="seo-title" value="${escapeHtml(seo.metaTitle)}" class="w-full px-3.5 py-2.5 rounded-xl bg-obsidian border hairline text-sm" />
+              </div>
+              <div>
+                <label class="block font-mono text-[11px] uppercase text-bone/60 mb-1.5">Meta Description</label>
+                <textarea id="seo-desc" rows="2" class="w-full px-3.5 py-2.5 rounded-xl bg-obsidian border hairline text-sm">${escapeHtml(seo.metaDescription)}</textarea>
+              </div>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label class="block font-mono text-[11px] uppercase text-bone/60 mb-1.5">Mots-clés SEO</label>
+                  <input id="seo-keys" value="${escapeHtml(seo.keywords)}" class="w-full px-3.5 py-2.5 rounded-xl bg-obsidian border hairline text-sm" />
+                </div>
+                <div>
+                  <label class="block font-mono text-[11px] uppercase text-bone/60 mb-1.5">Image Open Graph (og:image)</label>
+                  <input id="seo-ogimg" value="${escapeHtml(seo.ogImage)}" class="w-full px-3.5 py-2.5 rounded-xl bg-obsidian border hairline text-sm" />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <button type="submit" class="px-7 py-3.5 rounded-2xl bg-accent-dyn font-mono text-xs font-bold uppercase tracking-wider hover:brightness-110 transition">
+            Appliquer le Branding & les Méta-données
+          </button>
+        </form>
+
+        <!-- Sécurité & Export/Import Configuration -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+          <form onsubmit="changeAdminPassword(event)" class="p-6 rounded-3xl border hairline bg-surface space-y-4">
+            <h3 class="font-display font-bold text-lg uppercase">Sécurité Admin</h3>
+            <div>
+              <label class="block font-mono text-[11px] uppercase text-bone/60 mb-1.5">Nouveau mot de passe</label>
+              <input id="new-admin-pass" type="password" minlength="6" required placeholder="Min. 6 caractères" class="w-full px-3.5 py-2.5 rounded-xl bg-obsidian border hairline text-sm" />
+            </div>
+            <button type="submit" class="px-5 py-2.5 rounded-xl border hairline bg-obsidian hover:border-accent-dyn font-mono text-xs uppercase">Mettre à jour le mot de passe</button>
+          </form>
+
+          <div class="p-6 rounded-3xl border hairline bg-surface space-y-4">
+            <h3 class="font-display font-bold text-lg uppercase">Sauvegarde JSON du site</h3>
+            <p class="text-xs text-bone/65">Copiez la configuration complète du site ou importez un fichier JSON.</p>
+            <div class="flex flex-wrap gap-2">
+              <button type="button" onclick="exportSiteConfig()" class="px-4 py-2.5 rounded-xl bg-obsidian border hairline hover:border-accent-dyn font-mono text-xs uppercase">Copier JSON</button>
+              <label class="px-4 py-2.5 rounded-xl bg-obsidian border hairline hover:border-accent-dyn font-mono text-xs uppercase cursor-pointer">
+                Importer JSON
+                <input type="file" accept="application/json" class="hidden" onchange="importSiteConfig(this)" />
+              </label>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function saveAdminBrandingAndSEO(e) {
+      e.preventDefault();
+      const rawHex = document.getElementById('br-color').value;
+      const validHex = normalizeHexColor(rawHex);
+      if (!validHex) {
+        showToast('Code couleur hex invalide (ex: #111111 ou #F5F5F2)', 'error');
+        return;
+      }
+
+      siteState.branding.siteName = document.getElementById('br-name').value.trim() || 'La Superlative';
+      siteState.branding.tagline = document.getElementById('br-tagline').value.trim();
+      siteState.branding.shortMark = document.getElementById('br-mark').value.trim().toUpperCase() || 'LS';
+      siteState.branding.theme = document.getElementById('br-theme').value === 'dark' ? 'dark' : 'light';
+      siteState.branding.accentColor = validHex;
+      siteState.branding.logoType = document.getElementById('br-logo-type').value;
+      siteState.branding.logoUrl = document.getElementById('br-logo-url').value.trim();
+      siteState.branding.faviconType = document.getElementById('br-fav-type').value;
+      siteState.branding.faviconUrl = document.getElementById('br-fav-url').value.trim();
+
+      siteState.seo.metaTitle = document.getElementById('seo-title').value.trim();
+      siteState.seo.metaDescription = document.getElementById('seo-desc').value.trim();
+      siteState.seo.keywords = document.getElementById('seo-keys').value.trim();
+      siteState.seo.ogTitle = siteState.seo.metaTitle;
+      siteState.seo.ogDescription = siteState.seo.metaDescription;
+      siteState.seo.ogImage = document.getElementById('seo-ogimg').value.trim();
+
+      renderAll();
+      showToast('Branding, favicon et méta-données mis à jour !');
+    }
+
+    function changeAdminPassword(e) {
+      e.preventDefault();
+      const newPass = document.getElementById('new-admin-pass').value;
+      if (newPass.length < 6) return;
+      siteState.admin.password = newPass;
+      document.getElementById('new-admin-pass').value = '';
+      showToast('Mot de passe administrateur modifié !');
+    }
+
+    function exportSiteConfig() {
+      const exportObj = { ...siteState, admin: { username: siteState.admin.username } };
+      copyToClipboard(JSON.stringify(exportObj, null, 2), 'Configuration JSON copiée dans le presse-papiers !');
+    }
+
+    function importSiteConfig(input) {
+      const file = input.files && input.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = () => {
+        try {
+          const parsed = JSON.parse(reader.result);
+          if (parsed && parsed.branding && parsed.events) {
+            const currentAdmin = siteState.admin;
+            siteState = { ...siteState, ...parsed, admin: currentAdmin };
+            renderAll();
+            renderAdminTab();
+            showToast('Configuration importée avec succès !');
+          } else {
+            showToast('Fichier JSON invalide.', 'error');
+          }
+        } catch {
+          showToast('Erreur de lecture du JSON.', 'error');
+        }
+      };
+      reader.readAsText(file);
+    }
+
+    /* =========================================================================
+       7. RACCOURCIS CLAVIER & INITIALISATION
+    ========================================================================== */
+    document.addEventListener('keydown', (e) => {
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+        e.preventDefault();
+        openSearchModal();
+      }
+      if (e.key === 'Escape') {
+        closeSearchModal();
+        closeEventDetail();
+        closeAdminLoginModal();
+      }
+    });
+
+    // Fermeture des modales au clic sur l'arrière-plan
+    ['search-modal', 'event-detail-modal', 'admin-login-modal'].forEach(id => {
+      document.getElementById(id).addEventListener('click', (e) => {
+        if (e.target.id === id) {
+          if (id === 'search-modal') closeSearchModal();
+          if (id === 'event-detail-modal') closeEventDetail();
+          if (id === 'admin-login-modal') closeAdminLoginModal();
+        }
+      });
+    });
+
+    window.addEventListener('DOMContentLoaded', () => {
+      renderAll();
+    });
+  </script>
+</body>
+</html>
