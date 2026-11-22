@@ -2,16 +2,26 @@
 <html lang="fr" data-theme="light" class="scroll-smooth">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title id="meta-title">La Superlative — Collectif de Musique Électronique · Bordeaux</title>
   <meta id="meta-description" name="description" content="La Superlative : collectif de musique électronique et laboratoire créatif éco-conscient à Bordeaux. Événements, billetterie Shotgun, lineups et culture club." />
   <meta id="meta-keywords" name="keywords" content="La Superlative, Bordeaux, musique électronique, collectif, techno, house, italo disco, open air, Shotgun" />
   <meta id="og-title" property="og:title" content="La Superlative — Collectif Électronique Bordeaux" />
   <meta id="og-description" property="og:description" content="À la croisée du collectif électronique et du laboratoire créatif à Bordeaux." />
   <meta id="og-image" property="og:image" content="https://placehold.co/1200x630/0A0A0A/F5F5F2?text=LA+SUPERLATIVE+BORDEAUX" />
+
+  <!-- Configuration Application Mobile Installable (PWA Android & iOS) -->
+  <meta name="application-name" content="La Superlative" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta id="meta-apple-status-bar" name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta id="meta-apple-title" name="apple-mobile-web-app-title" content="La Superlative" />
+  <meta id="meta-theme-color" name="theme-color" content="#F7F7F4" />
+  <link id="dynamic-manifest" rel="manifest" href="" />
+  <link id="apple-touch-icon" rel="apple-touch-icon" sizes="180x180" href="" />
   <link id="dynamic-favicon" rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230A0A0A'/%3E%3Ctext x='50%25' y='56%25' dominant-baseline='middle' text-anchor='middle' font-family='sans-serif' font-weight='700' font-size='28' fill='%23F5F5F2'%3ELS%3C/text%3E%3C/svg%3E" />
 
-  <!-- Polices éditoriales inspirées par l'esthétique Artefact AI Film Festival -->
+  <!-- Polices éditoriales -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Syne:wght@500;600;700;800&display=swap" rel="stylesheet" />
@@ -84,14 +94,16 @@
       transition: background-color 0.25s ease, color 0.25s ease;
     }
 
-    /* Barres de navigation à fort contraste sur sections claires et sombres */
+    /* Barres de navigation à fort contraste + gestion safe-area en mode app installée */
     .chrome-bar {
       background-color: rgb(var(--color-surface) / 0.96);
       box-shadow: 0 1px 12px rgba(0, 0, 0, 0.08);
+      padding-top: env(safe-area-inset-top, 0px);
     }
     .mobile-bottom-nav {
       background-color: rgb(var(--color-surface) / 0.97);
       box-shadow: 0 -6px 24px rgba(0, 0, 0, 0.14);
+      padding-bottom: max(0.5rem, env(safe-area-inset-bottom, 0px));
     }
 
     /* Filets architecturaux */
@@ -168,7 +180,7 @@
     }
   </style>
 </head>
-<body class="antialiased selection:bg-[var(--accent-color)] selection:text-[var(--accent-text)] pb-20 md:pb-0">
+<body class="antialiased selection:bg-[var(--accent-color)] selection:text-[var(--accent-text)] pb-24 md:pb-0">
   <!-- Bandeau indicateur si une session Admin est ouverte -->
   <div id="admin-session-banner" class="hidden sticky top-0 z-50 bg-accent-dyn px-4 py-2 text-xs font-mono font-medium tracking-wider uppercase flex items-center justify-between gap-2 border-b border-obsidian/15">
     <div class="truncate">
@@ -181,14 +193,14 @@
   </div>
 
   <!-- =========================================================
-       HEADER NAVIGATION (Mobile-First, Glass + Architectural)
+       HEADER NAVIGATION (Mobile-First, Architectural)
   ========================================================== -->
   <header class="sticky top-0 z-30 backdrop-blur-xl chrome-bar border-b hairline">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 h-16 sm:h-20 flex items-center justify-between gap-3">
       <!-- Logo dynamique -->
       <a href="#top" class="flex items-center gap-3 group min-w-0" aria-label="Accueil La Superlative">
         <div id="header-logo-container" class="flex items-center gap-2.5 min-w-0">
-          <!-- Injecté dynamiquement par renderBranding() -->
+          <!-- Injecté dynamiquement par renderBrandingAndSEO() -->
         </div>
       </a>
 
@@ -202,11 +214,25 @@
       </nav>
 
       <!-- Actions Header -->
-      <div class="flex items-center gap-2 sm:gap-3 shrink-0">
+      <div class="flex items-center gap-1.5 sm:gap-2.5 shrink-0">
+        <!-- Bouton Installer l'app (masqué si déjà lancée en mode app) -->
+        <button
+          id="header-install-btn"
+          onclick="triggerPwaInstall()"
+          class="pwa-install-trigger flex items-center gap-1.5 px-2.5 sm:px-3 py-2.5 rounded-full border hairline bg-surface/80 hover:border-bone/40 text-xs font-mono text-bone/80 transition"
+          aria-label="Installer l'application sur votre téléphone"
+          title="Installer l'application"
+        >
+          <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" stroke-width="1.9" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3" />
+          </svg>
+          <span class="hidden xl:inline uppercase tracking-wider text-[11px]">App</span>
+        </button>
+
         <!-- Bouton Recherche globale -->
         <button
           onclick="openSearchModal()"
-          class="flex items-center gap-2 px-3 py-2.5 rounded-full border hairline bg-surface/80 hover:border-bone/40 text-xs font-mono text-bone/80 transition"
+          class="flex items-center gap-2 px-2.5 sm:px-3 py-2.5 rounded-full border hairline bg-surface/80 hover:border-bone/40 text-xs font-mono text-bone/80 transition"
           aria-label="Rechercher sur le site"
           title="Rechercher (Ctrl+K)"
         >
@@ -221,7 +247,7 @@
         <button
           id="theme-toggle-btn"
           onclick="toggleTheme()"
-          class="flex items-center gap-1.5 px-3 py-2.5 rounded-full border hairline bg-surface/80 hover:border-bone/40 text-xs font-mono text-bone/75 transition"
+          class="flex items-center gap-1.5 px-2.5 sm:px-3 py-2.5 rounded-full border hairline bg-surface/80 hover:border-bone/40 text-xs font-mono text-bone/75 transition"
           aria-label="Basculer entre le mode jour et le mode sombre"
           title="Mode Jour / Mode Sombre"
         >
@@ -288,6 +314,12 @@
         </a>
       </div>
       <div class="pt-2 flex flex-col gap-2.5">
+        <button onclick="toggleMobileMenu(false); triggerPwaInstall();" class="pwa-install-trigger w-full py-3 rounded-2xl border hairline bg-obsidian/50 text-xs font-mono uppercase tracking-wider text-bone flex items-center justify-center gap-2">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.9" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3" />
+          </svg>
+          <span>Installer l'app sur mon téléphone</span>
+        </button>
         <button onclick="toggleTheme()" class="w-full py-3 rounded-2xl border hairline text-xs font-mono uppercase tracking-wider text-bone/80 flex items-center justify-center gap-2">
           <span id="mobile-theme-label">Passer en mode sombre</span>
         </button>
@@ -553,7 +585,7 @@
           </div>
         </div>
 
-        <!-- 3B. LES MEMBRES (Style "The Jury" sur Artefact) -->
+        <!-- 3B. LES MEMBRES -->
         <div>
           <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10">
             <div>
@@ -568,7 +600,7 @@
           </div>
 
           <div id="members-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-            <!-- Injecté dynamiquement par renderMembers() -->
+            <!-- Injecté dynamiquement par renderCollective() -->
           </div>
         </div>
 
@@ -587,7 +619,7 @@
           </div>
 
           <div id="partners-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            <!-- Injecté dynamiquement par renderPartners() -->
+            <!-- Injecté dynamiquement par renderCollective() -->
           </div>
         </div>
 
@@ -672,7 +704,7 @@
             <div class="space-y-3">
               <p class="font-mono text-[11px] uppercase tracking-widest text-bone/50">Suivre La Superlative</p>
               <div id="social-links-grid" class="grid grid-cols-2 gap-3">
-                <!-- Injecté dynamiquement par renderSocials() -->
+                <!-- Injecté dynamiquement par renderSocialsAndContact() -->
               </div>
             </div>
           </div>
@@ -744,11 +776,12 @@
           <a href="#collectif" class="hover:text-accent-dyn transition">Collectif</a>
           <a href="#infos-pratiques" class="hover:text-accent-dyn transition">Infos</a>
           <a href="#contact" class="hover:text-accent-dyn transition">Contact</a>
+          <button onclick="triggerPwaInstall()" class="pwa-install-trigger hover:text-accent-dyn transition">Installer l'app</button>
           <button onclick="handleAdminAccess()" class="text-accent-dyn hover:underline">Admin Studio</button>
         </div>
       </div>
       <div class="pt-6 flex flex-col sm:flex-row justify-between items-center gap-3 text-[11px] font-mono text-bone/45">
-        <p>© 2026 <span id="footer-copy-name">La Superlative</span> — Tous droits réservés. Design mobile-first éditorial.</p>
+        <p>© 2026 <span id="footer-copy-name">La Superlative</span> — Tous droits réservés. Application web mobile-first.</p>
         <p>Bordeaux · Musique électronique éco-consciente</p>
       </div>
     </div>
@@ -757,7 +790,7 @@
   <!-- =========================================================
        BARRE DE NAVIGATION RAPIDE MOBILE (Bottom Sticky Thumb-Friendly)
   ========================================================== -->
-  <nav class="md:hidden fixed bottom-0 left-0 right-0 z-30 mobile-bottom-nav backdrop-blur-xl border-t hairline px-2 py-2 flex items-center justify-around" aria-label="Navigation rapide mobile">
+  <nav class="md:hidden fixed bottom-0 left-0 right-0 z-30 mobile-bottom-nav backdrop-blur-xl border-t hairline px-2 pt-2 flex items-center justify-around" aria-label="Navigation rapide mobile">
     <a href="#calendrier" class="flex flex-col items-center gap-1 px-3 py-1 text-bone/85 hover:text-accent-dyn transition">
       <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5"/></svg>
       <span class="text-[10px] font-mono uppercase">Dates</span>
@@ -779,6 +812,76 @@
       <span class="text-[10px] font-mono uppercase">Admin</span>
     </button>
   </nav>
+
+  <!-- =========================================================
+       MODAL : INSTALLER L'APPLICATION SUR TÉLÉPHONE (PWA)
+  ========================================================== -->
+  <div id="pwa-install-modal" class="hidden fixed inset-0 z-50 bg-obsidian/85 backdrop-blur-xl p-4 flex items-center justify-center" role="dialog" aria-modal="true" aria-label="Installer l'application">
+    <div class="w-full max-w-md rounded-3xl border hairline bg-surface p-6 space-y-5 shadow-2xl max-h-[90vh] overflow-y-auto">
+      <div class="flex items-start justify-between gap-3">
+        <div class="flex items-center gap-3.5">
+          <img id="pwa-modal-icon-preview" src="" alt="Icône La Superlative" class="w-14 h-14 rounded-2xl border hairline shrink-0 bg-obsidian object-cover" />
+          <div>
+            <span class="font-mono text-[10px] uppercase tracking-widest text-bone/50 block">Application Mobile</span>
+            <h2 id="pwa-modal-app-name" class="font-display font-bold text-xl uppercase leading-tight">La Superlative</h2>
+          </div>
+        </div>
+        <button onclick="closePwaInstallModal()" aria-label="Fermer" class="w-9 h-9 rounded-full border hairline text-bone/70 hover:text-bone flex items-center justify-center shrink-0">✕</button>
+      </div>
+
+      <p class="text-sm text-bone/70 leading-relaxed">
+        Ajoutez l'application sur votre écran d'accueil pour l'ouvrir en plein écran, sans barre de navigateur, en un seul geste.
+      </p>
+
+      <!-- Bouton natif si disponible (Android Chrome / Edge) -->
+      <div id="pwa-native-install-wrap" class="hidden">
+        <button onclick="executeNativePwaInstall()" class="w-full py-3.5 rounded-2xl bg-accent-dyn font-mono text-xs font-bold uppercase tracking-wider hover:opacity-90 transition">
+          Installer maintenant
+        </button>
+      </div>
+
+      <!-- Sélecteur d'instructions Android / iPhone -->
+      <div class="space-y-3">
+        <div class="grid grid-cols-2 gap-2 p-1 rounded-2xl bg-obsidian border hairline">
+          <button type="button" id="pwa-tab-android" onclick="selectPwaGuidePlatform('android')" class="py-2 rounded-xl font-mono text-[11px] uppercase tracking-wider transition">
+            Android
+          </button>
+          <button type="button" id="pwa-tab-ios" onclick="selectPwaGuidePlatform('ios')" class="py-2 rounded-xl font-mono text-[11px] uppercase tracking-wider transition">
+            iPhone / iPad
+          </button>
+        </div>
+
+        <div id="pwa-steps-android" class="p-4 rounded-2xl bg-obsidian/70 border hairline space-y-3 text-xs text-bone/80">
+          <div class="flex items-start gap-3">
+            <span class="w-5 h-5 rounded-full bg-accent-dyn font-mono text-[10px] font-bold flex items-center justify-center shrink-0 mt-0.5">1</span>
+            <p>Dans <strong>Chrome</strong>, appuyez sur le menu <strong class="font-mono px-1.5 py-0.5 rounded bg-surface border hairline">⋮</strong> en haut à droite de votre écran.</p>
+          </div>
+          <div class="flex items-start gap-3">
+            <span class="w-5 h-5 rounded-full bg-accent-dyn font-mono text-[10px] font-bold flex items-center justify-center shrink-0 mt-0.5">2</span>
+            <p>Touchez <strong>« Ajouter à l'écran d'accueil »</strong> puis sélectionnez <strong>« Installer »</strong>.</p>
+          </div>
+          <div class="pt-2 border-t hairline text-[11px] text-bone/55">
+            Sur <strong>Samsung Internet</strong> : appuyez sur <strong class="font-mono">≡</strong> en bas à droite → <strong>Ajouter page à</strong> → <strong>Écran d'accueil</strong>.
+          </div>
+        </div>
+
+        <div id="pwa-steps-ios" class="hidden p-4 rounded-2xl bg-obsidian/70 border hairline space-y-3 text-xs text-bone/80">
+          <div class="flex items-start gap-3">
+            <span class="w-5 h-5 rounded-full bg-accent-dyn font-mono text-[10px] font-bold flex items-center justify-center shrink-0 mt-0.5">1</span>
+            <p>Ouvrez ce site dans <strong>Safari</strong> puis appuyez sur le bouton <strong>Partager</strong> <strong class="font-mono px-1.5 py-0.5 rounded bg-surface border hairline">↑</strong> en bas de l'écran.</p>
+          </div>
+          <div class="flex items-start gap-3">
+            <span class="w-5 h-5 rounded-full bg-accent-dyn font-mono text-[10px] font-bold flex items-center justify-center shrink-0 mt-0.5">2</span>
+            <p>Faites défiler et touchez <strong>« Sur l'écran d'accueil »</strong>, puis validez avec <strong>« Ajouter »</strong>.</p>
+          </div>
+        </div>
+      </div>
+
+      <button onclick="closePwaInstallModal()" class="w-full py-3 rounded-2xl border hairline font-mono text-xs uppercase tracking-wider text-bone/75 hover:text-bone transition">
+        Fermer
+      </button>
+    </div>
+  </div>
 
   <!-- =========================================================
        MODAL : RECHERCHE GLOBALE INSTANTANÉE
@@ -901,7 +1004,7 @@
   </div>
 
   <!-- =========================================================
-       MODAL DE CONFIRMATION PERSONNALISÉE (Jamais de confirm())
+       MODAL DE CONFIRMATION PERSONNALISÉE
   ========================================================== -->
   <div id="confirm-modal" class="hidden fixed inset-0 z-[60] bg-obsidian/85 backdrop-blur-md p-4 flex items-center justify-center">
     <div class="w-full max-w-sm rounded-3xl border hairline bg-surface p-6 space-y-5 shadow-2xl">
@@ -920,12 +1023,11 @@
   <div id="toast-container" class="fixed bottom-24 md:bottom-6 right-4 z-[70] flex flex-col gap-2 pointer-events-none max-w-xs sm:max-w-sm"></div>
 
   <!-- =========================================================
-       LOGIQUE APPLICATION & CMS COMPLET
+       LOGIQUE APPLICATION, PWA & CMS COMPLET
   ========================================================== -->
   <script>
     /* =========================================================================
        1. ÉTAT INITIAL DU SITE (In-Memory CMS State)
-       Données authentiquement ancrées dans la scène électronique bordelaise
     ========================================================================== */
     let siteState = {
       branding: {
@@ -959,7 +1061,7 @@
         heroVisualCaption: '© La Superlative — Scénographie & Culture Club Bordeaux',
         themeLabel: '01 // LE THÈME DE LA SAISON EST :',
         themeTitle: '(Éco)Connexion',
-        themeText: "À l'heure où la nuit se réinvente, la question n'est plus seulement le son, mais ce qu'il relie. La Superlative explore les passerelles entre culture club exigeante, lieux patrimoniaux bordelais et engagement environnemental concret."
+        themeText: "À l'heure où la fête se réinvente, la question n'est plus seulement le son, mais ce qu'il relie. La Superlative explore les passerelles entre culture club exigeante, espaces patrimoniaux bordelais et engagement environnemental concret."
       },
       events: [
         {
@@ -1217,6 +1319,11 @@
     let editingEventId = null;
     let confirmCallback = null;
 
+    /* États PWA (Installation mobile) */
+    let deferredInstallPrompt = null;
+    let currentManifestBlobUrl = null;
+    let cachedPwaIcon192 = '';
+
     /* =========================================================================
        2. UTILITAIRES SÉCURITÉ, COPIE, TOASTS & COULEURS
     ========================================================================== */
@@ -1247,7 +1354,6 @@
       }, 3200);
     }
 
-    // Copie compatible iframe via document.execCommand('copy')
     function copyToClipboard(text, successMsg) {
       try {
         const ta = document.createElement('textarea');
@@ -1270,7 +1376,6 @@
       copyToClipboard(email, `Adresse copiée : ${email}`);
     }
 
-    // Valide et normalise un code couleur hexadécimal (#RGB ou #RRGGBB)
     function normalizeHexColor(value) {
       if (!value) return null;
       let cleaned = String(value).trim().toUpperCase();
@@ -1281,7 +1386,6 @@
       return /^#[0-9A-F]{6}$/.test(cleaned) ? cleaned : null;
     }
 
-    // Détermine si le texte sur la couleur d'accent doit être noir ou blanc
     function getContrastColor(hexColor) {
       try {
         const normalized = normalizeHexColor(hexColor) || '#111111';
@@ -1296,11 +1400,9 @@
       }
     }
 
-    // Bascule entre Mode Jour et Mode Sombre
     function setTheme(mode) {
       const target = mode === 'dark' ? 'dark' : 'light';
       const currentHex = (siteState.branding.accentColor || '').toUpperCase();
-      // Adapte automatiquement l'accent monochrome par défaut pour préserver le contraste
       if (target === 'light' && (currentHex === '#F5F5F2' || currentHex === '#FFFFFF')) {
         siteState.branding.accentColor = '#111111';
       } else if (target === 'dark' && (currentHex === '#111111' || currentHex === '#0A0A0A' || currentHex === '#000000')) {
@@ -1319,7 +1421,6 @@
       showToast(next === 'light' ? 'Mode jour activé' : 'Mode sombre activé');
     }
 
-    // Modal de confirmation personnalisée (remplace confirm())
     function openConfirmModal(title, message, onConfirm) {
       document.getElementById('confirm-modal-title').textContent = title;
       document.getElementById('confirm-modal-msg').textContent = message;
@@ -1336,6 +1437,207 @@
     }
 
     /* =========================================================================
+       2B. PWA — ICÔNES PNG DYNAMIQUES, MANIFESTE & INSTALLATION MOBILE
+    ========================================================================== */
+    function isRunningStandalone() {
+      return window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
+    }
+
+    function updateInstallButtonsVisibility() {
+      const installed = isRunningStandalone();
+      document.querySelectorAll('.pwa-install-trigger').forEach(el => {
+        el.classList.toggle('hidden', installed);
+      });
+    }
+
+    // Génère une icône PNG nette (180, 192 ou 512 px) pour Android & iOS
+    function generatePwaIconDataUrl(size) {
+      try {
+        const canvas = document.createElement('canvas');
+        canvas.width = size;
+        canvas.height = size;
+        const ctx = canvas.getContext('2d');
+        const isLight = siteState.branding.theme === 'light';
+        const bg = isLight ? '#111111' : '#0A0A0A';
+        const fg = '#F5F5F2';
+        const mark = (siteState.branding.shortMark || 'LS').slice(0, 3).toUpperCase();
+
+        // Fond plein (compatible masque adaptatif Android & iOS)
+        ctx.fillStyle = bg;
+        ctx.fillRect(0, 0, size, size);
+
+        // Filet géométrique minimaliste
+        const inset = Math.round(size * 0.1);
+        ctx.strokeStyle = 'rgba(245, 245, 242, 0.22)';
+        ctx.lineWidth = Math.max(2, Math.round(size * 0.012));
+        ctx.strokeRect(inset, inset, size - inset * 2, size - inset * 2);
+
+        // Monogramme centré
+        ctx.fillStyle = fg;
+        ctx.font = `700 ${Math.round(size * (mark.length > 2 ? 0.34 : 0.42))}px "Syne", sans-serif`;
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText(mark, size / 2, size * 0.52);
+
+        return canvas.toDataURL('image/png');
+      } catch {
+        return '';
+      }
+    }
+
+    // Construit et injecte le Web App Manifest + Apple Touch Icon dynamiquement
+    function updatePwaManifest() {
+      const { branding, seo } = siteState;
+      const isLight = branding.theme === 'light';
+      const themeBg = isLight ? '#F7F7F4' : '#0A0A0A';
+
+      const themeMeta = document.getElementById('meta-theme-color');
+      if (themeMeta) themeMeta.setAttribute('content', themeBg);
+
+      const appleStatus = document.getElementById('meta-apple-status-bar');
+      if (appleStatus) appleStatus.setAttribute('content', isLight ? 'default' : 'black-translucent');
+
+      const appleTitle = document.getElementById('meta-apple-title');
+      if (appleTitle) appleTitle.setAttribute('content', branding.siteName);
+
+      const icon180 = generatePwaIconDataUrl(180);
+      const icon192 = generatePwaIconDataUrl(192);
+      const icon512 = generatePwaIconDataUrl(512);
+      cachedPwaIcon192 = icon192;
+
+      const appleIconEl = document.getElementById('apple-touch-icon');
+      if (appleIconEl && icon180) appleIconEl.href = icon180;
+
+      const modalPreview = document.getElementById('pwa-modal-icon-preview');
+      if (modalPreview && icon192) modalPreview.src = icon192;
+
+      const modalName = document.getElementById('pwa-modal-app-name');
+      if (modalName) modalName.textContent = branding.siteName;
+
+      // URLs absolues compatibles avec GitHub Pages (y compris sous-dossiers comme /Superlative-/)
+      const startUrl = window.location.href.split('#')[0];
+      const scopeUrl = startUrl.substring(0, startUrl.lastIndexOf('/') + 1) || window.location.origin + '/';
+
+      const manifest = {
+        name: branding.siteName,
+        short_name: branding.siteName.length > 15 ? branding.shortMark : branding.siteName,
+        description: seo.metaDescription,
+        start_url: startUrl,
+        scope: scopeUrl,
+        display: 'standalone',
+        orientation: 'portrait-primary',
+        background_color: themeBg,
+        theme_color: themeBg,
+        lang: 'fr',
+        icons: [
+          ...(icon192 ? [
+            { src: icon192, sizes: '192x192', type: 'image/png', purpose: 'any' },
+            { src: icon192, sizes: '192x192', type: 'image/png', purpose: 'maskable' }
+          ] : []),
+          ...(icon512 ? [
+            { src: icon512, sizes: '512x512', type: 'image/png', purpose: 'any' },
+            { src: icon512, sizes: '512x512', type: 'image/png', purpose: 'maskable' }
+          ] : [])
+        ]
+      };
+
+      try {
+        if (currentManifestBlobUrl) URL.revokeObjectURL(currentManifestBlobUrl);
+        const blob = new Blob([JSON.stringify(manifest)], { type: 'application/manifest+json' });
+        currentManifestBlobUrl = URL.createObjectURL(blob);
+        const manifestLink = document.getElementById('dynamic-manifest');
+        if (manifestLink) manifestLink.href = currentManifestBlobUrl;
+      } catch {
+        // Ignore si bloqué dans un environnement restreint
+      }
+    }
+
+    function detectMobilePlatform() {
+      const ua = navigator.userAgent || '';
+      if (/iPad|iPhone|iPod/.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)) {
+        return 'ios';
+      }
+      return 'android';
+    }
+
+    function selectPwaGuidePlatform(platform) {
+      const isIos = platform === 'ios';
+      const tabAndroid = document.getElementById('pwa-tab-android');
+      const tabIos = document.getElementById('pwa-tab-ios');
+      const stepsAndroid = document.getElementById('pwa-steps-android');
+      const stepsIos = document.getElementById('pwa-steps-ios');
+
+      tabAndroid.className = !isIos
+        ? 'py-2 rounded-xl font-mono text-[11px] font-bold uppercase tracking-wider bg-accent-dyn transition'
+        : 'py-2 rounded-xl font-mono text-[11px] uppercase tracking-wider text-bone/65 hover:text-bone transition';
+
+      tabIos.className = isIos
+        ? 'py-2 rounded-xl font-mono text-[11px] font-bold uppercase tracking-wider bg-accent-dyn transition'
+        : 'py-2 rounded-xl font-mono text-[11px] uppercase tracking-wider text-bone/65 hover:text-bone transition';
+
+      stepsAndroid.classList.toggle('hidden', isIos);
+      stepsIos.classList.toggle('hidden', !isIos);
+    }
+
+    function openPwaInstallModal() {
+      if (cachedPwaIcon192) {
+        document.getElementById('pwa-modal-icon-preview').src = cachedPwaIcon192;
+      }
+      document.getElementById('pwa-modal-app-name').textContent = siteState.branding.siteName;
+      document.getElementById('pwa-native-install-wrap').classList.toggle('hidden', !deferredInstallPrompt);
+      selectPwaGuidePlatform(detectMobilePlatform());
+      document.getElementById('pwa-install-modal').classList.remove('hidden');
+    }
+
+    function closePwaInstallModal() {
+      document.getElementById('pwa-install-modal').classList.add('hidden');
+    }
+
+    async function executeNativePwaInstall() {
+      if (!deferredInstallPrompt) {
+        openPwaInstallModal();
+        return;
+      }
+      try {
+        deferredInstallPrompt.prompt();
+        const { outcome } = await deferredInstallPrompt.userChoice;
+        deferredInstallPrompt = null;
+        document.getElementById('pwa-native-install-wrap').classList.add('hidden');
+        if (outcome === 'accepted') {
+          closePwaInstallModal();
+          showToast('Installation de La Superlative en cours...');
+        }
+      } catch {
+        openPwaInstallModal();
+      }
+    }
+
+    function triggerPwaInstall() {
+      if (isRunningStandalone()) {
+        showToast("L'application est déjà installée !");
+        return;
+      }
+      if (deferredInstallPrompt) {
+        executeNativePwaInstall();
+      } else {
+        openPwaInstallModal();
+      }
+    }
+
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredInstallPrompt = e;
+      updateInstallButtonsVisibility();
+    });
+
+    window.addEventListener('appinstalled', () => {
+      deferredInstallPrompt = null;
+      closePwaInstallModal();
+      updateInstallButtonsVisibility();
+      showToast('Application La Superlative installée !');
+    });
+
+    /* =========================================================================
        3. RENDU COMPLET DU SITE PUBLIC (Réactif au Studio Admin)
     ========================================================================== */
     function renderAll() {
@@ -1346,6 +1648,7 @@
       renderPracticalInfo();
       renderSocialsAndContact();
       updateAdminSessionUI();
+      updateInstallButtonsVisibility();
     }
 
     function renderBrandingAndSEO() {
@@ -1384,7 +1687,7 @@
       setMeta('og-description', 'content', seo.ogDescription || seo.metaDescription);
       setMeta('og-image', 'content', seo.ogImage);
 
-      // Favicon dynamique (SVG généré avec couleur d'accent OU image personnalisée)
+      // Favicon dynamique
       const favLink = document.getElementById('dynamic-favicon');
       if (favLink) {
         if (branding.faviconType === 'url' && branding.faviconUrl) {
@@ -1397,7 +1700,10 @@
         }
       }
 
-      // Logo Header (Image personnalisée ou monogramme typographique)
+      // Mise à jour du manifeste PWA & icônes mobiles
+      updatePwaManifest();
+
+      // Logo Header
       const logoContainer = document.getElementById('header-logo-container');
       if (branding.logoType === 'image' && branding.logoUrl) {
         logoContainer.innerHTML = `
@@ -1493,7 +1799,6 @@
     }
 
     function renderEvents() {
-      // Styles des boutons de filtre statut
       document.querySelectorAll('.event-filter-btn').forEach(btn => {
         const active = btn.dataset.filter === currentEventFilter;
         btn.className = active
@@ -1501,7 +1806,6 @@
           : 'event-filter-btn px-4 py-2.5 rounded-full font-mono text-xs uppercase tracking-wider border hairline bg-surface text-bone/75 hover:border-bone/40 transition';
       });
 
-      // Extraction des genres uniques
       const allGenres = ['Tous', ...Array.from(new Set(siteState.events.flatMap(e => e.genres || [])))];
       const genreContainer = document.getElementById('genre-filters');
       genreContainer.innerHTML = allGenres.map(g => {
@@ -1513,7 +1817,6 @@
         `;
       }).join('');
 
-      // Filtrage
       let filtered = siteState.events.filter(evt => {
         const matchStatus = currentEventFilter === 'all'
           ? true
@@ -1526,7 +1829,6 @@
         return matchStatus && matchGenre;
       });
 
-      // Tri chronologique (à venir croissant, passés décroissant)
       filtered.sort((a, b) => currentEventFilter === 'past' ? b.date.localeCompare(a.date) : a.date.localeCompare(b.date));
 
       const grid = document.getElementById('events-grid');
@@ -1541,7 +1843,7 @@
         return;
       }
 
-      grid.innerHTML = filtered.map((evt, idx) => {
+      grid.innerHTML = filtered.map(evt => {
         const statusBadge = evt.status === 'upcoming'
           ? `<span class="px-2.5 py-1 rounded-full bg-accent-dyn font-mono text-[10px] font-semibold uppercase tracking-wider">Ouvert</span>`
           : evt.status === 'soldout'
@@ -1555,7 +1857,6 @@
         return `
           <article class="editorial-card rounded-3xl border hairline bg-surface overflow-hidden flex flex-col justify-between">
             <div>
-              <!-- Visuel Événement -->
               <div class="relative aspect-[16/11] overflow-hidden cursor-pointer" style="background: ${evt.gradient || '#141414'};" onclick="openEventDetail('${escapeHtml(evt.id)}')">
                 ${evt.imageUrl ? `<img src="${escapeHtml(evt.imageUrl)}" alt="${escapeHtml(evt.title)}" class="w-full h-full object-cover grayscale opacity-90 hover:opacity-100 transition duration-500" onerror="this.style.display='none'" />` : ''}
                 <div class="absolute inset-0 bg-gradient-to-t from-surface via-transparent to-obsidian/35"></div>
@@ -1567,7 +1868,6 @@
                 </div>
               </div>
 
-              <!-- Contenu Événement -->
               <div class="p-5 space-y-3.5">
                 <div class="flex flex-wrap gap-1.5">${genresHtml}</div>
                 <h3 class="font-display font-bold text-xl leading-snug cursor-pointer hover:text-bone/80 transition" onclick="openEventDetail('${escapeHtml(evt.id)}')">
@@ -1583,7 +1883,6 @@
               </div>
             </div>
 
-            <!-- Pied de carte avec actions -->
             <div class="p-5 pt-0 flex items-center gap-2.5">
               <a
                 href="${escapeHtml(evt.ticketUrl || siteState.socials.shotgun)}"
@@ -1673,7 +1972,6 @@
     function renderCollective() {
       const { history, members, partners } = siteState;
 
-      // Histoire
       document.getElementById('history-title').textContent = history.introTitle;
       document.getElementById('history-text').textContent = history.introText;
       document.getElementById('history-quote').textContent = history.quote;
@@ -1689,7 +1987,6 @@
         </div>
       `).join('');
 
-      // Membres
       document.getElementById('members-grid').innerHTML = members.map(m => `
         <article class="editorial-card rounded-3xl border hairline bg-surface overflow-hidden flex flex-col">
           <div class="relative aspect-[4/5] bg-surfaceLight overflow-hidden">
@@ -1713,7 +2010,6 @@
         </article>
       `).join('');
 
-      // Partenaires
       document.getElementById('partners-grid').innerHTML = partners.map((p, idx) => `
         <a href="${escapeHtml(p.url || '#')}" target="_blank" rel="noopener noreferrer" class="editorial-card p-5 rounded-3xl border hairline bg-surface hover:bg-surfaceLight flex flex-col justify-between gap-4 group">
           <div class="flex items-start justify-between gap-3">
@@ -1882,7 +2178,6 @@
 
       const matches = [];
 
-      // Recherche dans les événements
       siteState.events.forEach(evt => {
         const hay = `${evt.title} ${evt.venue} ${evt.city} ${(evt.genres || []).join(' ')} ${(evt.lineup || []).join(' ')} ${evt.description}`.toLowerCase();
         if (hay.includes(q)) {
@@ -1895,7 +2190,6 @@
         }
       });
 
-      // Recherche dans les membres
       siteState.members.forEach(m => {
         const hay = `${m.name} ${m.role} ${m.specialty} ${m.bio}`.toLowerCase();
         if (hay.includes(q)) {
@@ -1908,7 +2202,6 @@
         }
       });
 
-      // Recherche dans les partenaires
       siteState.partners.forEach(p => {
         const hay = `${p.name} ${p.category} ${p.description}`.toLowerCase();
         if (hay.includes(q)) {
@@ -1921,7 +2214,6 @@
         }
       });
 
-      // Recherche dans les infos pratiques
       siteState.practicalInfo.forEach(i => {
         const hay = `${i.category} ${i.title} ${i.content}`.toLowerCase();
         if (hay.includes(q)) {
@@ -1934,7 +2226,6 @@
         }
       });
 
-      // Recherche dans l'histoire
       siteState.history.milestones.forEach(ms => {
         const hay = `${ms.year} ${ms.title} ${ms.description}`.toLowerCase();
         if (hay.includes(q)) {
@@ -2051,7 +2342,6 @@
       renderAdminTab();
     }
 
-    // Lecture d'un fichier image local en mémoire (Object URL, sans base64)
     function handleLocalImageUpload(inputEl, targetInputId, previewImgId) {
       const file = inputEl.files && inputEl.files[0];
       if (!file) return;
@@ -2080,7 +2370,6 @@
       else if (currentAdminTab === 'branding') renderAdminBrandingTab(root);
     }
 
-    /* --- ONGLET 01 : GÉNÉRAL, HERO & MANIFESTE --- */
     function renderAdminGeneralTab(root) {
       const { hero } = siteState;
       root.innerHTML = `
@@ -2134,7 +2423,7 @@
           </div>
 
           <div class="p-6 rounded-3xl border hairline bg-surface space-y-4">
-            <h3 class="font-display font-bold text-xl uppercase text-accent-dyn">Bloc Manifeste (Style Éditorial Clair)</h3>
+            <h3 class="font-display font-bold text-xl uppercase text-accent-dyn">Bloc Manifeste (Contraste Inversé)</h3>
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <label class="block font-mono text-[11px] uppercase text-bone/60 mb-1.5">Sur-titre</label>
@@ -2177,12 +2466,10 @@
       showToast('Section Hero & Manifeste mise à jour !');
     }
 
-    /* --- ONGLET 02 : GESTION COMPLÈTE DES ÉVÉNEMENTS --- */
     function renderAdminEventsTab(root) {
       const evtToEdit = editingEventId ? siteState.events.find(e => e.id === editingEventId) : null;
 
       root.innerHTML = `
-        <!-- Formulaire Création / Édition Événement -->
         <form onsubmit="saveAdminEvent(event)" class="p-6 rounded-3xl border hairline bg-surface space-y-5">
           <div class="flex items-center justify-between gap-2">
             <h3 class="font-display font-bold text-xl uppercase text-accent-dyn">
@@ -2223,8 +2510,8 @@
             <div>
               <label class="block font-mono text-[11px] uppercase text-bone/60 mb-1.5">Ville & Tarif</label>
               <div class="grid grid-cols-2 gap-2">
-                <input id="ev-city" value="${escapeHtml(evtToEdit ? evtToEdit.city : 'Bordeaux')}" placeholder="Bordeaux" class="w-full px-3 py-2.5 rounded-xl bg-obsidian border hairline text-sm" />
-                <input id="ev-price" value="${escapeHtml(evtToEdit ? evtToEdit.price : 'Dès 10€')}" placeholder="Dès 10€" class="w-full px-3 py-2.5 rounded-xl bg-obsidian border hairline text-sm" />
+                <input id="ev-city" value="${escapeHtml(evtToEdit ? evtToEdit.city : 'Bordeaux')}" placeholder="Bordeaux" class="w-full px-3.5 py-2.5 rounded-xl bg-obsidian border hairline text-sm" />
+                <input id="ev-price" value="${escapeHtml(evtToEdit ? evtToEdit.price : 'Dès 10€')}" placeholder="Dès 10€" class="w-full px-3.5 py-2.5 rounded-xl bg-obsidian border hairline text-sm" />
               </div>
             </div>
             <div>
@@ -2242,7 +2529,7 @@
             <div>
               <label class="block font-mono text-[11px] uppercase text-bone/60 mb-1.5">Visuel (URL ou Upload local)</label>
               <div class="flex gap-2">
-                <input id="ev-img" value="${escapeHtml(evtToEdit ? evtToEdit.imageUrl : '')}" placeholder="https://... ou upload" class="flex-1 px-3 py-2.5 rounded-xl bg-obsidian border hairline text-sm" />
+                <input id="ev-img" value="${escapeHtml(evtToEdit ? evtToEdit.imageUrl : '')}" placeholder="https://... ou upload" class="flex-1 px-3.5 py-2.5 rounded-xl bg-obsidian border hairline text-sm" />
                 <label class="px-3 py-2.5 rounded-xl border hairline bg-obsidian hover:border-accent-dyn font-mono text-xs cursor-pointer shrink-0">
                   Upload
                   <input type="file" accept="image/*" class="hidden" onchange="handleLocalImageUpload(this, 'ev-img')" />
@@ -2264,7 +2551,6 @@
           </button>
         </form>
 
-        <!-- Liste des Événements existants -->
         <div class="space-y-3">
           <h3 class="font-display font-bold text-lg uppercase">Événements enregistrés (${siteState.events.length})</h3>
           <div class="space-y-2.5">
@@ -2337,11 +2623,9 @@
       });
     }
 
-    /* --- ONGLET 03 : HISTOIRE, MEMBRES & PARTENAIRES --- */
     function renderAdminCollectiveTab(root) {
       const { history, members, partners } = siteState;
       root.innerHTML = `
-        <!-- Histoire -->
         <form onsubmit="saveAdminHistory(event)" class="p-6 rounded-3xl border hairline bg-surface space-y-4">
           <h3 class="font-display font-bold text-xl uppercase text-accent-dyn">Histoire du Collectif</h3>
           <div>
@@ -2365,7 +2649,6 @@
           <button type="submit" class="px-5 py-3 rounded-xl bg-accent-dyn font-mono text-xs font-bold uppercase">Enregistrer l'histoire</button>
         </form>
 
-        <!-- Membres -->
         <div class="p-6 rounded-3xl border hairline bg-surface space-y-5">
           <h3 class="font-display font-bold text-xl uppercase text-accent-dyn">Membres du collectif (${members.length})</h3>
           <form onsubmit="addAdminMember(event)" class="grid grid-cols-1 sm:grid-cols-2 gap-3 p-4 rounded-2xl bg-obsidian/70 border hairline">
@@ -2373,7 +2656,7 @@
             <input id="mem-role" required placeholder="Rôle (ex: DJ Résident, DA...) *" class="px-3.5 py-2.5 rounded-xl bg-surface border hairline text-sm" />
             <input id="mem-spec" placeholder="Spécialités (ex: Minimal, Scéno)" class="px-3.5 py-2.5 rounded-xl bg-surface border hairline text-sm" />
             <div class="flex gap-2">
-              <input id="mem-photo" placeholder="URL Photo ou Upload" class="flex-1 px-3 py-2.5 rounded-xl bg-surface border hairline text-sm" />
+              <input id="mem-photo" placeholder="URL Photo ou Upload" class="flex-1 px-3.5 py-2.5 rounded-xl bg-surface border hairline text-sm" />
               <label class="px-3 py-2.5 rounded-xl border hairline bg-surface font-mono text-xs cursor-pointer shrink-0">
                 Upload
                 <input type="file" accept="image/*" class="hidden" onchange="handleLocalImageUpload(this, 'mem-photo')" />
@@ -2397,7 +2680,6 @@
           </div>
         </div>
 
-        <!-- Partenaires -->
         <div class="p-6 rounded-3xl border hairline bg-surface space-y-5">
           <h3 class="font-display font-bold text-xl uppercase text-accent-dyn">Partenaires (${partners.length})</h3>
           <form onsubmit="addAdminPartner(event)" class="grid grid-cols-1 sm:grid-cols-2 gap-3 p-4 rounded-2xl bg-obsidian/70 border hairline">
@@ -2485,11 +2767,9 @@
       });
     }
 
-    /* --- ONGLET 04 : INFOS PRATIQUES & RÉSEAUX SOCIAUX --- */
     function renderAdminPracticalTab(root) {
       const { socials, practicalInfo } = siteState;
       root.innerHTML = `
-        <!-- Réseaux sociaux & Contact -->
         <form onsubmit="saveAdminSocials(event)" class="p-6 rounded-3xl border hairline bg-surface space-y-4">
           <h3 class="font-display font-bold text-xl uppercase text-accent-dyn">Réseaux Sociaux & Email Officiel</h3>
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -2521,7 +2801,6 @@
           <button type="submit" class="px-5 py-3 rounded-xl bg-accent-dyn font-mono text-xs font-bold uppercase">Enregistrer les liens</button>
         </form>
 
-        <!-- Infos Pratiques CRUD -->
         <div class="p-6 rounded-3xl border hairline bg-surface space-y-5">
           <h3 class="font-display font-bold text-xl uppercase text-accent-dyn">Blocs Infos Pratiques (${practicalInfo.length})</h3>
           <form onsubmit="addAdminPractical(event)" class="grid grid-cols-1 sm:grid-cols-2 gap-3 p-4 rounded-2xl bg-obsidian/70 border hairline">
@@ -2581,7 +2860,6 @@
       });
     }
 
-    /* --- ONGLET 05 : BRANDING (Logo, Favicon, Couleur Hex, Mode Jour/Sombre), SEO & SÉCURITÉ --- */
     function updateHexPreview(val) {
       const normalized = normalizeHexColor(val);
       const swatch = document.getElementById('br-color-swatch');
@@ -2606,7 +2884,6 @@
 
       root.innerHTML = `
         <form onsubmit="saveAdminBrandingAndSEO(event)" class="space-y-6">
-          <!-- Branding -->
           <div class="p-6 rounded-3xl border hairline bg-surface space-y-5">
             <h3 class="font-display font-bold text-xl uppercase">Identité Visuelle, Apparence, Logo & Favicon</h3>
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -2648,7 +2925,6 @@
                 </div>
               </div>
 
-              <!-- Logo -->
               <div>
                 <label class="block font-mono text-[11px] uppercase text-bone/60 mb-1.5">Type de Logo</label>
                 <select id="br-logo-type" class="w-full px-3.5 py-2.5 rounded-xl bg-obsidian border hairline text-sm">
@@ -2659,7 +2935,7 @@
               <div>
                 <label class="block font-mono text-[11px] uppercase text-bone/60 mb-1.5">Fichier / URL du Logo</label>
                 <div class="flex gap-2">
-                  <input id="br-logo-url" value="${escapeHtml(branding.logoUrl)}" placeholder="https://... ou upload" class="flex-1 px-3 py-2.5 rounded-xl bg-obsidian border hairline text-sm" />
+                  <input id="br-logo-url" value="${escapeHtml(branding.logoUrl)}" placeholder="https://... ou upload" class="flex-1 px-3.5 py-2.5 rounded-xl bg-obsidian border hairline text-sm" />
                   <label class="px-3 py-2.5 rounded-xl border hairline bg-obsidian hover:border-accent-dyn font-mono text-xs cursor-pointer shrink-0">
                     Upload
                     <input type="file" accept="image/*" class="hidden" onchange="handleLocalImageUpload(this, 'br-logo-url'); document.getElementById('br-logo-type').value='image';" />
@@ -2667,7 +2943,6 @@
                 </div>
               </div>
 
-              <!-- Favicon -->
               <div>
                 <label class="block font-mono text-[11px] uppercase text-bone/60 mb-1.5">Type de Favicon (onglet navigateur)</label>
                 <select id="br-fav-type" class="w-full px-3.5 py-2.5 rounded-xl bg-obsidian border hairline text-sm">
@@ -2678,7 +2953,7 @@
               <div>
                 <label class="block font-mono text-[11px] uppercase text-bone/60 mb-1.5">Fichier / URL du Favicon</label>
                 <div class="flex gap-2">
-                  <input id="br-fav-url" value="${escapeHtml(branding.faviconUrl)}" placeholder="https://... ou upload" class="flex-1 px-3 py-2.5 rounded-xl bg-obsidian border hairline text-sm" />
+                  <input id="br-fav-url" value="${escapeHtml(branding.faviconUrl)}" placeholder="https://... ou upload" class="flex-1 px-3.5 py-2.5 rounded-xl bg-obsidian border hairline text-sm" />
                   <label class="px-3 py-2.5 rounded-xl border hairline bg-obsidian hover:border-accent-dyn font-mono text-xs cursor-pointer shrink-0">
                     Upload
                     <input type="file" accept="image/*" class="hidden" onchange="handleLocalImageUpload(this, 'br-fav-url'); document.getElementById('br-fav-type').value='url';" />
@@ -2688,7 +2963,6 @@
             </div>
           </div>
 
-          <!-- SEO & Méta-données -->
           <div class="p-6 rounded-3xl border hairline bg-surface space-y-4">
             <h3 class="font-display font-bold text-xl uppercase text-accent-dyn">Méta-données & SEO (Google / Partage Social)</h3>
             <div class="grid grid-cols-1 gap-4">
@@ -2718,7 +2992,6 @@
           </button>
         </form>
 
-        <!-- Sécurité & Export/Import Configuration -->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
           <form onsubmit="changeAdminPassword(event)" class="p-6 rounded-3xl border hairline bg-surface space-y-4">
             <h3 class="font-display font-bold text-lg uppercase">Sécurité Admin</h3>
@@ -2823,16 +3096,17 @@
         closeSearchModal();
         closeEventDetail();
         closeAdminLoginModal();
+        closePwaInstallModal();
       }
     });
 
-    // Fermeture des modales au clic sur l'arrière-plan
-    ['search-modal', 'event-detail-modal', 'admin-login-modal'].forEach(id => {
+    ['search-modal', 'event-detail-modal', 'admin-login-modal', 'pwa-install-modal'].forEach(id => {
       document.getElementById(id).addEventListener('click', (e) => {
         if (e.target.id === id) {
           if (id === 'search-modal') closeSearchModal();
           if (id === 'event-detail-modal') closeEventDetail();
           if (id === 'admin-login-modal') closeAdminLoginModal();
+          if (id === 'pwa-install-modal') closePwaInstallModal();
         }
       });
     });
